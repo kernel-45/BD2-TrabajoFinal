@@ -16,7 +16,7 @@
         <button class="boton">Hola, vendedor <?php echo $idVendedor; ?></button>
       </div>
     </div>
-    <div class="contenedor-botones centrar">
+    <div class="contenedor-central centrar">
       <button
         class="boton"
         id="consultarProductos"
