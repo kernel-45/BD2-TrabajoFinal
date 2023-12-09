@@ -94,6 +94,9 @@ body {
 .contenedor-botones .boton:hover {
   background-color: rgb(80, 80, 80);
 }
+.contenedor-central .boton:hover {
+  background-color: rgb(80, 80, 80);
+}
 .boton:hover {
   background-color: rgb(161, 132, 132);
 }
