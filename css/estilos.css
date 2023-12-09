@@ -4,16 +4,36 @@ body {
   margin: 0;
 
 }
+.centrar {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+}
 
 .contenedor-botones {
   display: flex;
+  justify-content: center;
   flex-wrap: wrap;
   justify-content: center;
   gap: 20px;
   padding: 10px;
   max-width: 1024px;
+  margin: auto;
 
 }
+.contenedor-central{
+  display: flex;
+  justify-content: center;
+  flex-wrap: wrap;
+  gap: 20px;
+  padding: 10px;
+  max-width: 1024px;
+  margin: auto;
+  margin-top: 200px; 
+
+}
+
 .titulo {
   background-color: rgb(141, 112, 112); 
   color: black; 
@@ -56,7 +76,7 @@ body {
   cursor: pointer; 
   transition: background-color 0.3s;
 }
-.contenedor-botones .boton {
+.contenedor-central .boton {
   background-color: grey;
   color: black;
   border: none;

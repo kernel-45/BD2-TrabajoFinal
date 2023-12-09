@@ -16,7 +16,7 @@
         <button class="boton">Hola, vendedor <?php echo $idVendedor; ?></button>
       </div>
     </div>
-    <div class="contenedor-botones">
+    <div class="contenedor-botones centrar">
       <button
         class="boton"
         id="consultarProductos"
@@ -30,6 +30,7 @@
     <div id="listaProductos"></div>
 
     <script>
+    const correoVendedor = '<?php echo $correoVendedor; ?>';
       document
         .getElementById("consultarProductos")
         .addEventListener("click", function () {
@@ -40,7 +41,7 @@
             },
             body: JSON.stringify({
               
-              correo: "correo_del_vendedor@example.com",
+              correo: correoVendedor
             }),
           })
             .then((response) => {
