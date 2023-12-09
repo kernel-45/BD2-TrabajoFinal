@@ -69,7 +69,7 @@ function get_direccion($conn) {
         if ($n_zonas > 1) {
             echo "Error en la consulta: se han encontrado varias zonas idénticas";
         } elseif ($n_zonas == 0) {
-            array_push($datos, $value)
+            array_push($datos, $value);
             break;
         }
         $anterior = $fila['idZona'];
