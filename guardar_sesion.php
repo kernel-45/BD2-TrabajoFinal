@@ -41,6 +41,10 @@ if ($fila['contraseña'] != $contraseña) {
 session_start();
 $_SESSION['idUser'] = $fila['idPersona'];
 $_SESSION['tipoUser'] = $tipo;
+
+if ($tipo == "vendedor") {
+    $_SESSION['correoVendedor'] = $correo;
+}
 // session_write_close() <----------------------- si lo descomento da error
 // Enviar respuesta al cliente
 
