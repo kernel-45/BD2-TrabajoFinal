@@ -2,21 +2,38 @@
 body {
   background-color: rgb(181, 181, 181); 
   margin: 0;
+
+}
+.centrar {
   display: flex;
   justify-content: center;
   align-items: center;
-  height: 100vh; 
+  height: 100vh;
 }
 
 .contenedor-botones {
   display: flex;
+  justify-content: center;
   flex-wrap: wrap;
   justify-content: center;
   gap: 20px;
   padding: 10px;
   max-width: 1024px;
+  margin: auto;
 
 }
+.contenedor-central{
+  display: flex;
+  justify-content: center;
+  flex-wrap: wrap;
+  gap: 20px;
+  padding: 10px;
+  max-width: 1024px;
+  margin: auto;
+  margin-top: 200px; 
+
+}
+
 .titulo {
   background-color: rgb(141, 112, 112); 
   color: black; 
@@ -29,6 +46,13 @@ body {
   box-sizing: border-box;
   font-size: 30px;
   font-family: Arial, Helvetica, sans-serif;
+}
+.subtitulo {
+  text-align: center; 
+  margin-top: 120px; 
+  font-size: 20px;
+  font-family: Arial, Helvetica, sans-serif;
+
 }
 
 .botones {
@@ -52,7 +76,7 @@ body {
   cursor: pointer; 
   transition: background-color 0.3s;
 }
-.contenedor-botones .boton {
+.contenedor-central .boton {
   background-color: grey;
   color: black;
   border: none;
@@ -75,4 +99,25 @@ body {
   margin-right: 5px;
   width: 20px;
   height: 20px;
+}
+#listaProductos {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-around;
+  padding: 20px;
+}
+
+.producto {
+  flex: 0 1 calc(33% - 10px); 
+    margin: 5px;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.2);
+    padding: 10px;
+    text-align: center;
+}
+
+/* Estilo para tamaños de pantalla más pequeños */
+@media (max-width: 600px) {
+    .producto {
+        flex: 0 1 calc(50% - 10px); 
+    }
 }
