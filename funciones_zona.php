@@ -54,51 +54,36 @@ function get_direccion($conn) {
     );
     $datos = array_values($datos);
     $anterior = null;
-    $zona_nueva = false;
-    $value = array_pop($datos); // el código postal es imposible que sea NULL
-    $consulta = "SELECT zona.idZona, COUNT(*) AS total FROM zona WHERE zona.idZonaPadre IS NULL AND zona.nombreZona = '".$value."'";
-    $fila = mysqli_fetch_array(mysqli_query($conn, $consulta));
-    $n_zonas = $fila['total'];
-    if ($n_zonas > 1) {
-        echo "Error en la consulta: se han encontrado varias zonas idénticas";
-    } elseif ($n_zonas == 0) {
-        $zona_nueva = true;
-    }
-    $anterior = $fila['idZona'];
-    echo $anterior;
-    while (!empty($datos) && !$zona_nueva) {
+    while (!empty($datos)) {
         $value = array_pop($datos);
         if ($value == null) {
             continue;
         }
-        $consulta = "SELECT zona.idZona, COUNT(*) AS total FROM zona WHERE zona.idZonaPadre = ".$anterior." AND zona.nombreZona = '".$value."'";
+        if ($anterior == null) {
+            $consulta = "SELECT zona.idZona, COUNT(*) AS total FROM zona WHERE zona.idZonaPadre IS NULL AND zona.nombreZona = '".$value."'";
+        } else {
+            $consulta = "SELECT zona.idZona, COUNT(*) AS total FROM zona WHERE zona.idZonaPadre = ".$anterior." AND zona.nombreZona = '".$value."'";
+        }
         $fila = mysqli_fetch_array(mysqli_query($conn, $consulta));
         $n_zonas = $fila['total'];
         if ($n_zonas > 1) {
             echo "Error en la consulta: se han encontrado varias zonas idénticas";
         } elseif ($n_zonas == 0) {
-            $zona_nueva = true;
+            array_push($datos, $value)
             break;
         }
         $anterior = $fila['idZona'];
-    }
-    if ($zona_nueva) {
-        if ($anterior == null) {
-            $insert = "INSERT INTO zona (nombreZona) VALUES ('".$value."')";
-        } else {
-            $insert = "INSERT INTO zona (nombreZona, idZonaPadre) VALUES ('".$value."', ".$anterior.")";
-        }
-        if (!mysqli_query($conn, $insert)) {
-            echo "Error al insertar datos: ".mysqli_error($conn);
-        }
-        $anterior = mysqli_insert_id($conn);
     }
     while (!empty($datos)) {
         $value = array_pop($datos);
         if ($value == null) {
             continue;
         }
-        $insert = "INSERT INTO zona (nombreZona, idZonaPadre) VALUES ('".$value."', '".$anterior."')";
+        if ($anterior == null) {
+            $insert = "INSERT INTO zona (nombreZona) VALUES ('".$value."')";
+        } else {
+            $insert = "INSERT INTO zona (nombreZona, idZonaPadre) VALUES ('".$value."', ".$anterior.")";
+        }
         if (!mysqli_query($conn, $insert)) {
             echo "Error al insertar datos: ".mysqli_error($conn);
         }
