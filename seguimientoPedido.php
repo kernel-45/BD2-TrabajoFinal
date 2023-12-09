@@ -13,7 +13,11 @@ if ($conn->connect_error) {
     <title>Seguimiento del pedido</title>
     <link rel="stylesheet" type="text/css" href="css/estilos.css">
     <link rel="stylesheet" type="text/css" href="css/estilosSeguimiento.css">
-
+    <link rel="stylesheet" type="text/css" href="css/estilosSeguimiento.css">
+    <?php
+    include 'funcionesSeguimiento.php';
+    $id = $_SESSION['idUser']; 
+    ?>
 </head>
 <body>
     <div class="titulo">
@@ -26,12 +30,35 @@ if ($conn->connect_error) {
     </div>
     <div class="contenedor-principal">
       <div class="subtitulo">Bienvenido al seguimiento de tus pedidos</div>
-        <div class="pedido">
+            <?php
+            $result = obtenerPedidos($id, $conn);
+            if ($result->num_rows > 0) {
+              // Procesar cada fila de resultado
+              while ($row = $result->fetch_assoc()) {
+                  // Acceder a los atributos individuales
+                  $idPedido = $row["idPedido"];
+                  $estado = $row["estado"];
+                  $nombre = $row["nombre"];
+                  $descripcion = $row["descripcion"];
+          
+                  // Hacer algo con estos datos
+                  echo "<div class='pedido'>"; 
+                  echo "<div class='estado-pedido'>'$estado'</div>"; 
+                  echo "<div class='id-pedido'>'$idPedido'</div>"; 
+                  echo "<div class='nombre-produco'>'$nombre'</div>"; 
+                  echo "<div class='descripcion-producto'>'$descripcion'</div>"; 
+                  echo "</div>"; 
+              }
+          } else {
+              echo "No has hecho ningún pedido todavía";
+          }
+          ?>
+        <!-- <div class="pedido">
           <div class="estado-pedido">en proceso</div>
           <div class="id-pedido">2131</div>
           <div class="nombre-producto">pepino</div>
           <div class="descripcion-producto">delicioso pepino rebozado en nutella</div>
-        </div>
+        </div> -->
     <!-- Más elementos aquí -->
     </div>
 </body>
