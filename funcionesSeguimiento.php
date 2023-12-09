@@ -6,7 +6,7 @@ $sql = "SELECT pedido.idPedido, pedido.estado, producto.nombre, producto.descrip
                     ON pedido.idComprador = $idPersona
                     AND pedido.idPedido = propiedadesProducto.idPedido)
             ON propiedadesProducto.idFichaProducto = producto.idProducto;";
-$result = $conn->query($sql);
+$result = mysqli_query($conn, $sql);
 return $result; 
 }
 ?>

@@ -40,14 +40,14 @@ if ($conn->connect_error) {
                   $estado = $row["estado"];
                   $nombre = $row["nombre"];
                   $descripcion = $row["descripcion"];
-          
+                
                   // Hacer algo con estos datos
                   echo "<div class='pedido'>"; 
-                  echo "<div class='estado-pedido'>'$estado'</div>"; 
-                  echo "<div class='id-pedido'>'$idPedido'</div>"; 
-                  echo "<div class='nombre-produco'>'$nombre'</div>"; 
-                  echo "<div class='descripcion-producto'>'$descripcion'</div>"; 
-                  echo "</div>"; 
+                  echo "<div class='estado-pedido'>$estado</div>"; 
+                  echo "<div class='id-pedido'>$idPedido</div>"; 
+                  echo "<div class='nombre-producto'>$nombre</div>"; 
+                  echo "<div class='descripcion-producto'>$descripcion</div>"; 
+                  echo "</div>";
               }
           } else {
               echo "<div class='pedido'>"; 
