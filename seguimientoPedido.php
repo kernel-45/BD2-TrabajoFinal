@@ -2,7 +2,9 @@
 <?php
 // Crear conexión
 $conn = new mysqli("localhost", "root", "", "Estimazon");
-
+include ('funcionesSeguimiento.php');
+session_start(); 
+$id = $_SESSION['idUser']; 
 // Verificar conexión
 if ($conn->connect_error) {
     die("Conexión fallida: " . $conn->connect_error);
@@ -14,10 +16,6 @@ if ($conn->connect_error) {
     <link rel="stylesheet" type="text/css" href="css/estilos.css">
     <link rel="stylesheet" type="text/css" href="css/estilosSeguimiento.css">
     <link rel="stylesheet" type="text/css" href="css/estilosSeguimiento.css">
-    <?php
-    include 'funcionesSeguimiento.php';
-    $id = $_SESSION['idUser']; 
-    ?>
 </head>
 <body>
     <div class="titulo">
@@ -34,7 +32,7 @@ if ($conn->connect_error) {
             $result = obtenerPedidos($id, $conn);
             if ($result->num_rows > 0) {
               // Procesar cada fila de resultado
-              while ($row = $result->fetch_assoc()) {
+              while ($row = mysqli_fetch_array($result)) {
                   // Acceder a los atributos individuales
                   $idPedido = $row["idPedido"];
                   $estado = $row["estado"];
