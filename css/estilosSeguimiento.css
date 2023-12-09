@@ -1,0 +1,54 @@
+.contenedor-principal {
+  justify-items: center;
+  margin-top: auto;
+  align-items: center;  
+  display: grid;
+  grid-template-columns: auto; 
+  grid-template-rows: repeat(auto-fit, minmax(100px, 1fr));
+  gap: 10px; /* Espacio entre filas y columnas */
+}
+
+.subtitulo{
+  margin-top: auto;
+    grid-row: span 1; 
+    grid-column: span 6; 
+    color: black; 
+    background-color: rgb(181, 181, 181); 
+    font-size: 20px;
+    font-family: Arial, Helvetica, sans-serif;
+    justify-self: center; /* Centra horizontalmente en la celda */
+    align-self: center; /* Centra verticalmente en la celda */
+  }      
+.pedido{
+  display:grid; 
+  justify-items: center;
+  align-items: center;
+  margin-top: auto;
+    grid-row: span 2; 
+    grid-column: span 6; 
+    grid-template-columns: 76px 76px 76px 76px 76px 76px 76px 76px; 
+    grid-template-rows: 41px 41px 41px 41px; 
+    border: 1px solid #ccc;
+    padding: 10px;
+    margin: 10px;
+  }
+
+  .estado-pedido {
+    grid-column: 1 / 5; /* Ocupa las primeras 4 columnas */
+    grid-row: 1; /* Primera fila */
+}
+
+.id-pedido {
+    grid-column: 5 / -1; /* Desde la columna 5 hasta el final */
+    grid-row: 1; /* Primera fila */
+}
+
+.nombre-producto {
+    grid-column: 1 / -1; /* Todas las columnas */
+    grid-row: 2; /* Segunda fila */
+}
+
+.descripcion-producto {
+    grid-column: 1 / -1; /* Todas las columnas */
+    grid-row: 3 / 5; /* Desde la tercera fila hasta la cuarta */
+}
