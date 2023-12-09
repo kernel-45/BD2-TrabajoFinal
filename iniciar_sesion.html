@@ -1,0 +1,159 @@
+<!DOCTYPE html>
+<html lang="es">
+  <head>
+    <meta charset="UTF-8">
+    <title>Estimazon - Iniciar Sesión</title>
+    <style>
+      body {
+        background-color: rgb(181, 181, 181);
+        margin: 0;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        height: 100vh;
+      }
+
+      .contenedor-inicio-sesion {
+        max-width: 400px;
+        background-color: rgb(255, 255, 255);
+        border-radius: 10px;
+        padding: 20px;
+        box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.5);
+      }
+
+      .titulo {
+        text-align: center;
+        font-size: 24px;
+        font-family: Arial, Helvetica, sans-serif;
+        margin-bottom: 20px;
+      }
+
+      .opciones-inicio-sesion {
+        display: flex;
+        justify-content: center;
+        margin-bottom: 20px;
+      }
+
+      .boton-inicio-sesion {
+        background-color: rgb(141, 112, 112);
+        color: black;
+        border: none;
+        padding: 10px 20px;
+        margin: 0 10px;
+        cursor: pointer;
+        transition: background-color 0.3s;
+        flex: 1;
+      }
+
+      /*.boton-inicio-sesion:hover,*/
+      .boton-inicio-sesion.seleccionado {
+        background-color: rgb(161, 132, 132);
+        border: 3px solid black;
+      }
+
+      .campos-inicio-sesion {
+        margin-bottom: 20px;
+      }
+
+      input {
+        width: 100%;
+        padding: 10px;
+        margin-bottom: 10px;
+        box-sizing: border-box;
+      }
+
+      .boton-enviar {
+        background-color: rgb(141, 112, 112);
+        color: black;
+        border: none;
+        padding: 10px 20px;
+        cursor: pointer;
+        transition: background-color 0.3s;
+        width: 100%;
+      }
+
+      .boton-enviar:hover {
+        background-color: rgb(161, 132, 132);
+      }
+    </style>
+  </head>
+  <body>
+    <div class="contenedor-inicio-sesion">
+      <div class="titulo">ESTIMAZON - Iniciar Sesión</div>
+      <div class="opciones-inicio-sesion">
+        <button class="boton-inicio-sesion" onclick="seleccionarTipo(this, 'vendedor')">Vendedor</button>
+        <button class="boton-inicio-sesion" onclick="seleccionarTipo(this, 'comprador')">Comprador</button>
+        <button class="boton-inicio-sesion" onclick="seleccionarTipo(this, 'controlador')">Controlador</button>
+      </div>
+      <div class="campos-inicio-sesion">
+        <input type="text" placeholder="Correo de usuario" id="correoUsuario" />
+        <input type="password" placeholder="Contraseña" id="contrasenya" />
+      </div>
+      <button class="boton-enviar" onclick=enviarFormulario()>Enviar</button>
+    </div>
+
+    <script>
+      let tipoSeleccionado = '';
+
+      function seleccionarTipo(boton, tipo) {
+        tipoSeleccionado = tipo;
+        // Eliminar la clase "seleccionado" de todos los botones
+        document.querySelectorAll('.boton-inicio-sesion').forEach(b => b.classList.remove('seleccionado'));
+        // Aplicar la clase "seleccionado" al botón clicado
+        boton.classList.add('seleccionado');
+      }
+
+      function enviarFormulario() {
+        // Obtener los valores del formulario
+        let correoUsuario = document.getElementById('correoUsuario').value;
+        let contrasenya = document.getElementById('contrasenya').value;
+        let tipoUsuario = tipoSeleccionado;
+        console.log('Correo Usuario:', correoUsuario);
+        console.log('Contrasenya:', contrasenya);
+        console.log('Tipo Usuario:', tipoUsuario);
+        // Verificar que los campos no estén vacíos
+        if (!correoUsuario || !contrasenya || !tipoUsuario) {
+            alert('Por favor, completa todos los campos.');
+            return;
+        }
+
+        // Realizar la solicitud AJAX
+        fetch('guardar_sesion.php', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+            },
+            body: JSON.stringify({
+                correo: correoUsuario,
+                contrasenya: contrasenya,
+                tipo: tipoUsuario,
+            }),
+        })
+        .then(response => {
+          //console.log(response.json());
+            if (!response.ok) {
+                throw new Error('Network response was not ok');
+            }
+            return response.json();
+        })
+        .then(data => {
+          console.log(data);
+          console.log('Después después después después después de la llamada fetch');
+            // Manejar la respuesta del servidor aquí
+            if (data.success) {
+                alert('Inicio de sesión exitoso.');
+                // Redirigir o realizar otras acciones según sea necesario
+                window.location.href = 'estimazon.html';
+            } else {
+                alert('Error al iniciar sesión: ' + data.message);
+            }
+        })
+        .catch(error => {
+          console.log("catch :()");
+            console.error('Error:', error);
+            alert('Hubo un problema al procesar la solicitud. Por favor, inténtalo de nuevo más tarde.');
+        });
+    }
+    </script>
+</body>
+</html>
