@@ -30,7 +30,7 @@ if ($conn->connect_error) {
     </div>
     <div class="contenedor-principal">
       <div class="subtitulo">Bienvenido al seguimiento de tus pedidos</div>
-            <?php
+      <?php
             $result = obtenerPedidos($id, $conn);
             if ($result->num_rows > 0) {
               // Procesar cada fila de resultado
@@ -50,15 +50,11 @@ if ($conn->connect_error) {
                   echo "</div>"; 
               }
           } else {
+              echo "<div class='pedido'>"; 
               echo "No has hecho ningún pedido todavía";
+              echo "</div>"; 
           }
-          ?>
-        <!-- <div class="pedido">
-          <div class="estado-pedido">en proceso</div>
-          <div class="id-pedido">2131</div>
-          <div class="nombre-producto">pepino</div>
-          <div class="descripcion-producto">delicioso pepino rebozado en nutella</div>
-        </div> -->
+          ?>  
     <!-- Más elementos aquí -->
     </div>
 </body>
