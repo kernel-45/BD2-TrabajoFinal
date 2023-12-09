@@ -1,86 +1,8 @@
 <html>
   <head>
+    <link rel="stylesheet" type="text/css" href="css/estilos.css">
     <meta charset="UTF-8">
     <title>Estimazon</title>
-    <style>
-      body {
-        background-color: rgb(181, 181, 181); 
-        margin: 0;
-        display: flex;
-        justify-content: center;
-        align-items: center;
-        height: 100vh; 
-      }
-
-      .contenedor-botones {
-        display: flex;
-        flex-wrap: wrap;
-        justify-content: center;
-        gap: 20px;
-        padding: 10px;
-        max-width: 1024px;
-
-      }
-      .titulo {
-        background-color: rgb(141, 112, 112); 
-        color: black; 
-        text-align: center; 
-        padding: 20px; 
-        position: fixed;
-        left: 0;
-        top: 0;
-        width: 100%; 
-        box-sizing: border-box;
-        font-size: 30px;
-        font-family: Arial, Helvetica, sans-serif;
-      }
-     
-      .botones {
-        position: absolute; 
-        right: 20px;
-        top: 50%; 
-        transform: translateY(
-          -50%
-        ); 
-      }
-      .boton {
-        background-color: rgb(
-          141,
-          112,
-          112
-        ); 
-        color: black;
-        border: white;
-        padding: 10px 20px; 
-        margin-left: 10px; 
-        cursor: pointer; 
-        transition: background-color 0.3s;
-      }
-      .contenedor-botones .boton {
-        background-color: grey;
-        color: black;
-        border: none;
-        padding: 20px 40px;
-        margin: 10px;
-        cursor: pointer;
-        transition: background-color 0.3s;
-        width: 200px; 
-        height: 200px; 
-        font-size: 16px; 
-      }
-      .contenedor-botones .boton:hover {
-        background-color: rgb(80, 80, 80);
-      }
-      .boton:hover {
-        background-color: rgb(161, 132, 132);
-      }
-      .icono-carrito {
-        vertical-align: middle; 
-        margin-right: 5px;
-        width: 20px;
-        height: 20px;
-      }
-    </style>
   </head>
   <body>
     <div class="titulo">
@@ -101,7 +23,6 @@
       <button class="boton">Juguetes</button>
       <button class="boton">Libros</button>
       <button class="boton">Oficina y Papelería</button>
-
     </div>
   </body>
 </html>
