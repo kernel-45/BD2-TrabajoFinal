@@ -20,7 +20,13 @@
     <?php
     // Tu consulta SQL
 // Asegúrate de usar declaraciones preparadas para prevenir inyecciones SQL
+
     $sql = "SELECT * FROM tuTabla WHERE idUser = ? AND tipoBusqueda = ?";
+    if ($tipoBusqueda == "ult5d") {
+        $sql = "SELECT * FROM tuTabla WHERE idUser = ? AND tipoBusqueda = ?";
+    } elseif ($tipoBusqueda == "siempre") {
+        $sql = "SELECT * FROM tuTabla WHERE idUser = ? AND tipoBusqueda = ?";
+    }
     $stmt = $conexion->prepare($sql);
     $stmt->bind_param("ss", $idUser, $tipoBusqueda);
     $stmt->execute();
