@@ -10,6 +10,12 @@ body {
   align-items: center;
   height: 100vh;
 }
+.contenedor-formVendedor{
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+}
 
 .contenedor-botones {
   display: flex;
