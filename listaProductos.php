@@ -10,7 +10,7 @@ $correoVendedor = $_SESSION['correoVendedor'] ?? ''; // Obtener el correo del ve
     <title>Mis Productos - Estimazon</title>
 </head>
 <body>
-<?php
+
     session_start(); 
     $idVendedor = $_SESSION['idUser'] ?? ''; 
     ?>

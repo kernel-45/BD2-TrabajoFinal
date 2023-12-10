@@ -21,7 +21,7 @@ while($filaProducto = mysqli_fetch_assoc($resultadoProductos)) {
 
 // Cerrar la conexión
 mysqli_close($conn);
-
+,
 // Enviar los productos como respuesta en JSON
 echo json_encode($productos);
 ?>

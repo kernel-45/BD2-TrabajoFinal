@@ -13,7 +13,11 @@
     <div class="titulo">
       ESTIMAZON
       <div class="botones">
-        <button class="boton">Hola, vendedor <?php echo $idVendedor; ?></button>
+        <button 
+        class="boton"
+        id="perfilVendedor"
+        onclick="window.location.href='perfilVendedor.php'"
+        >Hola, vendedor <?php echo $idVendedor; ?></button>
       </div>
     </div>
     <div class="contenedor-central centrar">
