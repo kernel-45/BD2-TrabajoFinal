@@ -20,9 +20,7 @@ $conn = mysqli_connect("localhost", "root", "") or die("error a conexión con el
 $db = mysqli_select_db($conn, "estimazon") or die("error a conexión con la base de datos");
 
 $consulta = "SELECT " . $tipo . ".idPersona, " . $tipo . ".contraseña FROM " . $tipo . " WHERE " . $tipo . ".correo = '$correo'";
-
 $result = mysqli_query($conn, $consulta);
-
 
 if (!$result) {
     echo json_encode(['success' => false, 'message' => 'Error en la consulta: ' . mysqli_error($conn)]);

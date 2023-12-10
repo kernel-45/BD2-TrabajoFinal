@@ -1,4 +1,7 @@
 <?php
+
+// Capturar el cuerpo de la solicitud
+$categoria = $_GET['categoria'];
 $servername = "localhost";
 $username = "root";
 $password = "";
@@ -12,7 +15,13 @@ if ($conn->connect_error) {
 }
 
 // Seleccionas los productos
-$sql = "SELECT nombre, descripcion, precio, stock FROM producto WHERE nombreCategoria = 'Libros'";
+if ($categoria == "Catálogo") {
+    $sql = "SELECT nombre, descripcion, precio, stock FROM producto";
+} else {
+    $sql = "SELECT nombre, descripcion, precio, stock FROM producto WHERE nombreCategoria = '".$categoria."'";
+}
+
+echo $sql;
 $result = $conn->query($sql);
 
 // Verificar si hay resultados
@@ -22,11 +31,14 @@ if ($result->num_rows > 0) {
 } else {
     $productos = array(); // Si no hay resultados, inicializar un array vacío
 }
+
+$conn->close();
+
 ?>
 <!DOCTYPE html>
 <html lang="es">
 <head>
-    <link rel="stylesheet" type="text/css" href="../../css/estilos.css">
+    <link rel="stylesheet" type="text/css" href="../css/estilos.css">
     <meta charset="UTF-8">
     <title>Estimazon</title>
 </head>
@@ -34,16 +46,16 @@ if ($result->num_rows > 0) {
 <div class="titulo">
       <div class="botones-ocultos" id="botones-comprador">
         <button class="boton" onclick=resetAllCookies()>Cerrar sesión</button>
-        <button class="boton" onclick="location.href='../../zonas/anyadir_domicilio.html'">Añadir domicilio</button>
-        <button class="boton" onclick="location.href='../../zonas/indicar_entrega.html'">Indicar zona de entrega</button>
+        <button class="boton" onclick="location.href='../zonas/anyadir_domicilio.html'">Añadir domicilio</button>
+        <button class="boton" onclick="location.href='../zonas/indicar_entrega.html'">Indicar zona de entrega</button>
         <button class="boton" onclick="location.href='mis_pedidos.html'">Mis pedidos</button>
         <button class="boton" onclick="location.href='tarjeta-credito/indicar_tarjeta_credito.html'">Indicar tarjeta de crédito</button>
       </div>
-      LIBROS
+      <?php echo strtoupper($categoria); ?>
       <div class="botones">
-        <button class="boton" onclick="location.href='../../inicio-sesion/iniciar_sesion.html'">Identifícate</button>
+        <button class="boton" onclick="location.href='../inicio-sesion/iniciar_sesion.html'">Identifícate</button>
         <button class="boton">
-          <img src="../../carrito.png" alt="Carrito" class="icono-carrito" />Cesta
+          <img src="../carrito.png" alt="Carrito" class="icono-carrito" />Cesta
         </button>
       </div>
     </div>
@@ -62,8 +74,7 @@ if ($result->num_rows > 0) {
         <?php endforeach; ?>
     </ul>
 
-    <a href="../../estimazon.html" id="volverButton">Volver a la lista de categorías</a>
+    <a href="../estimazon.html" id="volverButton">Volver a la lista de categorías</a>
 
-    <?php $conn->close(); ?>
 </body>
 </html>
