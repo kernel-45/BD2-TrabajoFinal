@@ -13,8 +13,8 @@
         die("Conexión fallida: " . $conexion->connect_error);
     }
 
-    echo $idUser = $_POST['idUser'];
-    echo $tipoBusqueda = $_POST['tipoBusqueda'];
+    $idUser = $_POST['idUser'];
+    $tipoBusqueda = $_POST['tipoBusqueda'];
     ?>
 </head>
 <div class="titulo">
@@ -22,8 +22,6 @@
   </div>
 <body>
     <?php
-    
-    $sql = "SELECT * FROM tuTabla WHERE idUser = ? AND tipoBusqueda = ?";
     if ($tipoBusqueda == "ult5d") {
         $sql = "SELECT * FROM tuTabla WHERE idUser = ? AND tipoBusqueda = ?";
     } elseif ($tipoBusqueda == "siempre") {
