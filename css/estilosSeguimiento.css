@@ -32,7 +32,6 @@
     padding: 10px;
     margin: 10px;
   }
-
   .estado-pedido {
     grid-column: 1 / 5; /* Ocupa las primeras 4 columnas */
     grid-row: 1; /* Primera fila */
