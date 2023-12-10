@@ -25,7 +25,7 @@ if ($conn->connect_error) {
       </div>
     </div>
     <div class="contenedor-principal">
-      <div class="subtitulo">Bienvenido, controlador</div>
+      <div class="subtitulo">Bienvenido, controlador <?php echo $id ?></div>
         
     <!-- Más elementos aquí -->
     </div>
