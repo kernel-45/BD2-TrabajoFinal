@@ -1,7 +1,5 @@
-<?php
-session_start(); 
-$correoVendedor = $_SESSION['correoVendedor'] ?? ''; // Obtener el correo del vendedor
-?>
+
+
 <!DOCTYPE html>
 <html lang="es">
 <head>
@@ -11,59 +9,85 @@ $correoVendedor = $_SESSION['correoVendedor'] ?? ''; // Obtener el correo del ve
 </head>
 <body>
 <?php
-    session_start(); 
-    $idVendedor = $_SESSION['idUser'] ?? ''; 
-    ?>
-    <div class="titulo">
-      ESTIMAZON
-      <div class="botones">
-        <button class="boton">Hola, vendedor <?php echo $idVendedor; ?></button>
-      </div>
-    </div>
+session_start(); 
+$idVendedor = $_SESSION['idUser'] ?? ''; 
+?>
+<div class="titulo">
+  ESTIMAZON
+  <div class="botones">
+    <button class="boton">Hola, vendedor <?php echo $idVendedor; ?></button>
+  </div>
+</div>
     <h1 class="subtitulo">Subir Producto</h1>
-    <div id="subirProducto"></div>
-
+    <div class="centrar">
+        <div id="formularioSubirProducto">
+             <form id="formSubirProducto" action="procesarProducto.php" method="POST">
+                <p>
+                    <label for="nombreProducto">Nombre del Producto:</label>
+                    <input type="text" id="nombreProducto" name="nombreProducto" required>
+                </p>
+                <p>
+                    <label for="precioProducto">Precio:</label>
+                    <input type="number" id="precioProducto" name="precioProducto" required>
+                </p>
+                <p>
+                    <label for="descripcionProducto">Descripción:</label>
+                    <textarea id="descripcionProducto" name="descripcionProducto" required></textarea>
+                </p>
+                <p>
+                    <label for="stockProducto">Stock:</label>
+                    <input type="number" id="stockProducto" name="stockProducto" required>
+                </p>
+                <p>
+                    <label for="nombreCategoria">Categoría:</label>
+                    <select id="nombreCategoria" name="nombreCategoria" required>
+                        <option value="">Seleccione una categoría</option>
+                        <option value="Alimentos">Alimentos</option>
+                        <option value="Arte y manualidades">Arte y Manualidades</option>
+                        <option value="Artículos para el hogar">Hogar</option>
+                        <option value="Electrónica">Electrónica</option>
+                        <option value="Instrumentos musicales">Instrumentos Musicales</option>
+                        <option value="Juguetes">Juguetes</option>
+                        <option value="Libros">Libros</option>
+                        <option value="Oficina y papelería">Oficina y Papelería</option>
+                    </select>
+                </p>
+                <p>
+                    <input type="submit" value="Subir Producto">
+                </p>
+            </form>
+        </div>
+    </div>
     <script>
-    const correoVendedor = '<?php echo $correoVendedor; ?>';
-    document.addEventListener('DOMContentLoaded', (event) => {
-        fetch('gestCatalogo_vendedor.php', {
-            method: 'POST',
-            headers: {
-                'Content-Type': 'application/json',
-            },
-            body: JSON.stringify({
-                correo: correoVendedor
-            }),
-        })
-        .then(response => {
-            if (!response.ok) {
-                throw new Error('Network response was not ok');
-            }
-            return response.json();
-        })
-        .then(data => {
-            mostrarProductos(data);
-        })
-        .catch(error => {
-            console.error('Error:', error);
-            alert('Hubo un problema al obtener los productos: ' + error.message);
-        });
+        document.getElementById('formSubirProducto').addEventListener('submit', function(e) {
+            e.preventDefault(); // Evita el envío normal del formulario
 
-        function mostrarProductos(productos) {
-            const contenedor = document.getElementById('subirProducto');
-            contenedor.innerHTML = '';
+            // Recoger los datos del formulario
+            var formData = new FormData(this);
 
-            productos.forEach(producto => {
-                const div = document.createElement('div');
-                div.classList.add('producto');
-                div.innerHTML = `<h3>${producto.nombre}</h3>
-                                 <p>Precio: ${producto.precio}</p>
-                                 <p>Descripción: ${producto.descripcion}</p>
-                                 <p>Stock: ${producto.stock}</p>`;
-                contenedor.appendChild(div);
+            // Realizar la solicitud AJAX
+            fetch('procesarProducto.php', {
+                method: 'POST',
+                body: formData
+            })
+            .then(response => {
+                if (!response.ok) {
+                    throw new Error('La respuesta de la red no fue ok');
+                }
+                return response.json();
+            })
+            .then(data => {
+    if (data.success) {
+        window.location.href = 'interfaz_vendedor.php';
+    } else {
+        alert('Error: ' + data.message);
+    }
+})
+            .catch(error => {
+                console.error('Error:', error);
+                alert('Hubo un problema al procesar la solicitud: ' + error.message);
             });
-        }
-    });
+        });
     </script>
 </body>
 </html>
