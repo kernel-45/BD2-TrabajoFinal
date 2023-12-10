@@ -27,7 +27,7 @@ if ($conn->connect_error) {
       <?php echo $id ?>
     </div>
     <div class="subtitulo">De qué usuario quieres consultar productos?</div>
-    <div class="contenedor-formulario">
+    <div class="miFormulario">
       <form id="formBuscarPedidos" action="busquedaControlador.php" method="POST">
         <p>
           <label for="IDUser">ID usuario:</label>
