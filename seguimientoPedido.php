@@ -15,7 +15,6 @@ if ($conn->connect_error) {
     <title>Seguimiento del pedido</title>
     <link rel="stylesheet" type="text/css" href="css/estilos.css">
     <link rel="stylesheet" type="text/css" href="css/estilosSeguimiento.css">
-    <link rel="stylesheet" type="text/css" href="css/estilosSeguimiento.css">
 </head>
 <body>
     <div class="titulo">
