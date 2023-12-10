@@ -21,36 +21,63 @@
     ESTIMAZON
   </div>
 <body>
+<div class="contenedor-principal">
+      <div class="subtitulo">Bienvenido al seguimiento de tus pedidos</div>
     <?php
     if ($tipoBusqueda == "ult5d") {
-        $sql = "SELECT * FROM tuTabla WHERE idUser = ? AND tipoBusqueda = ?";
+        $sql = "SELECT pedido.idPedido, vendedor.idPersona, pedido.fechaConfirmacion FROM 
+        (vendedor JOIN
+            (producto JOIN
+                (propiedadesproducto JOIN
+                    (comprador JOIN pedido
+                    ON idComprador = 111)
+                ON pedido.idPedido = propiedadesproducto.idPedido)
+            ON propiedadesproducto.idFichaProducto = pedido.idPedido)
+        ON vendedor.idPersona = producto.idVendedor)
+    WHERE (DATEDIFF(CURDATE(), pedido.fechaConfirmacion) >= 5 AND propiedadesproducto.fechaDeLlegada IS NULL);";
+
     } elseif ($tipoBusqueda == "siempre") {
-        $sql = "SELECT * FROM tuTabla WHERE idUser = ? AND tipoBusqueda = ?";
+        $sql = "SELECT pedido.idPedido, vendedor.idPersona, pedido.fechaConfirmacion FROM 
+                    vendedor JOIN
+                        (producto JOIN
+                            (propiedadesproducto JOIN
+                                (comprador JOIN pedido
+                                ON idComprador = $idUser)
+                            ON pedido.idPedido = propiedadesproducto.idPedido)
+                        ON propiedadesproducto.idFichaProducto = pedido.idPedido)
+                    ON vendedor.idPersona = producto.idVendedor";
     }
-    $stmt = $conexion->prepare($sql);
-    $stmt->bind_param("ss", $idUser, $tipoBusqueda);
-    $stmt->execute();
-    $result = $stmt->get_result();
+    $result = mysqli_query($conn, $sql);
+    if ($result->num_rows > 0) {
+        // Procesar cada fila de resultado
+        while ($row = mysqli_fetch_array($result)) {
+            // Acceder a los atributos individuales
+            $idPedido = $row["idPedido"];
+            $idVendedor = $row["idPersona"];
+            $fechaConfirmacion = $row["fechaConfirmacion"];
+          
+            // Hacer algo con estos datos
+            echo "<div class=subtitulo>"; 
+            echo "<div class='pedido'>"; 
+            echo "<div class='estado-pedido'>$estado</div>"; 
+            echo "<div class='id-pedido'>$idPedido</div>"; 
+            echo "<div class='nombre-producto'>$nombre</div>"; 
+            echo "<div class='descripcion-producto'>$descripcion</div>"; 
+            echo "</div>";
+            echo "</div>"; 
+        }
+    } else {
+        echo "<div class='subtituloS'>"; 
+        echo "<br><br><br><br>El usuario no ha hecho ningún pedido todavía. <br><br> 
+              Cuando empiece a pedir productos de Estimazon sus productos aparecerán aquí";
+        echo "</div>"; 
+    }
 
     // Enviar los resultados de vuelta al cliente
-    echo json_encode($result->fetch_all(MYSQLI_ASSOC));
-
     $conexion->close();
     ?>
-    <?php
-    function obtenerPedidos($idPersona, $conn)
-    {
-        $sql = "SELECT pedido.idPedido, pedido.estado, producto.nombre, producto.descripcion FROM
-            producto JOIN 
-                (propiedadesProducto JOIN pedido 
-                    ON pedido.idComprador = $idPersona
-                    AND pedido.idPedido = propiedadesProducto.idPedido)
-            ON propiedadesProducto.idFichaProducto = producto.idProducto;";
-        $result = mysqli_query($conn, $sql);
-        return $result;
-    }
-    ?>
-
+</div>
+</div>
     <body>
 
 </html>
