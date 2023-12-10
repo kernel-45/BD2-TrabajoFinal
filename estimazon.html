@@ -6,12 +6,13 @@
   </head>
   <body>
     <div class="titulo">
+      <div class="botones-ocultos" id="botones-comprador" style="display:none;">
+        <button class="boton" onclick=resetAllCookies()>Cerrar sesión</button>
+        <button class="boton" onclick="location.href='zonas/anyadir_domicilio.html'">Añadir domicilio</button>
+        <button class="boton" onclick="location.href='zonas/indicar_entrega.html'">Indicar zona de entrega</button>
+      </div>
       ESTIMAZON
       <div class="botones">
-        <div class="botones-ocultos" id="botones-comprador" style="display:none;">
-          <button class="boton" onclick="location.href='zonas/anyadir_domicilio.html'">Añadir domicilio</button>
-          <button class="boton" onclick="location.href='zonas/indicar_entrega.html'">Indicar zona de entrega</button>
-        </div>
         <button class="boton" onclick="location.href='iniciar_sesion.html'">Identifícate</button>
         <button class="boton">
           <img src="carrito.png" alt="Carrito" class="icono-carrito" />Cesta
@@ -30,15 +31,37 @@
     </div>
   </body>
   <script>
-    document.addEventListener('DOMContentLoaded', function() {
-            // Verificar si el usuario es un comprador y mostrar los botones correspondientes
-            var tipoUsuario = "<?php echo isset($_SESSION['tipoUser']) ? $_SESSION['tipoUser'] : ''; ?>";
-            
-            if (tipoUsuario !== 'comprador') {
-                document.getElementById('botones-comprador').style.display = 'none';
-            } else {
-                document.getElementById('botones-no-comprador').style.display = 'block';
-            }
-        });
+    document.addEventListener('DOMContentLoaded', actualizarBotones);
+
+    function actualizarBotones() {
+      // Realizar una solicitud Ajax al servidor para obtener el tipo de usuario
+      var xhr = new XMLHttpRequest();
+      xhr.onreadystatechange = function() {
+          if (xhr.readyState === 4 && xhr.status === 200) {
+              var tipoUsuario = xhr.responseText;
+
+              // Verificar y ajustar la visibilidad de los elementos según el tipo de usuario
+              if (tipoUsuario !== 'comprador') {
+                  document.getElementById('botones-comprador').style.display = 'none';
+              } else {
+                  document.getElementById('botones-comprador').style.display = 'block';
+              }
+          }
+      };
+      // Realizar la solicitud al archivo PHP que obtiene el tipo de usuario
+      xhr.open('GET', 'get_tipoUser.php', true);
+      xhr.send();
+    };
+
+    function resetAllCookies() {
+      var cookies = document.cookie.split(";");
+      for (var i = 0; i < cookies.length; i++) {
+        var cookie = cookies[i];
+        var eqPos = cookie.indexOf("=");
+        var name = eqPos > -1 ? cookie.substr(0, eqPos) : cookie;
+        document.cookie = name + "=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/;";
+      }
+      actualizarBotones();
+    }
 </script>
 </html>
