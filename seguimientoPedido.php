@@ -48,8 +48,9 @@ if ($conn->connect_error) {
                   echo "</div>";
               }
           } else {
-              echo "<div class='pedido'>"; 
-              echo "No has hecho ningún pedido todavía";
+              echo "<div class='subtitulo'>"; 
+              echo "<br><br><br><br>No has hecho ningún pedido todavía. <br><br> 
+                    Cuando empieces a pedir productos de Estimazon tus productos aparecerán aquí";
               echo "</div>"; 
           }
           ?>  
