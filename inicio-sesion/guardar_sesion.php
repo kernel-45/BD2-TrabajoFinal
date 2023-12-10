@@ -5,6 +5,10 @@ $data = json_decode(file_get_contents('php://input'), true);
 $correo = $data['correo'];
 $contraseña = $data['contrasenya'];
 $tipo = $data['tipo'];
+$nombre = $data['nombre'];
+$apellido1 = $data['apellido1'];
+$apellido2 = $data['apellido2'];
+$registro = $data['nombre'] != '';
 
 if ($tipo != "vendedor" && $tipo != "comprador" && $tipo != "controlador") {
     echo json_encode(['success' => false, 'message' => 'Tipo de usuario no válido.']);
@@ -27,19 +31,33 @@ if (!$result) {
 
 $fila = mysqli_fetch_array($result);
 
-if (!$fila) {
-    echo json_encode(['success' => false, 'message' => 'No se encontró ningún usuario con ese correo electrónico y tipo.']);
-    exit;
-}
-
-if ($fila['contraseña'] != $contraseña) {
-    echo json_encode(['success' => false, 'message' => 'Contraseña incorrecta.']);
-    exit;
+if ($registro) {
+    if ($fila) {
+        echo json_encode(['success' => false, 'message' => 'Ya hay un usuario con ese correo electrónico y tipo.']);
+        exit;
+    }
+    $insert = "INSERT INTO ".$tipo." (nombre, apellido1, apellido2, correo, contraseña) VALUES ('".$nombre."', '".$apellido1."', '".$apellido2."', '".$correo."', '".$contraseña."')";
+    $result = mysqli_query($conn, $insert);
+    if (!$result) {
+        echo json_encode(['success' => false, 'message' => "Error en la consulta: ".mysqli_error($conn)]);
+        exit;
+    }
+    $idPersona = mysqli_insert_id($conn);
+} else {
+    if (!$fila) {
+        echo json_encode(['success' => false, 'message' => 'No se encontró ningún usuario con ese correo electrónico y tipo.']);
+        exit;
+    }
+    if ($fila['contraseña'] != $contraseña) {
+        echo json_encode(['success' => false, 'message' => 'Contraseña incorrecta.']);
+        exit;
+    }
+    $idPersona = $fila['idPersona'];
 }
 
 // Iniciar sesión
 session_start();
-$_SESSION['idUser'] = $fila['idPersona'];
+$_SESSION['idUser'] = $idPersona;
 $_SESSION['tipoUser'] = $tipo;
 $_SESSION['correoUser'] = $correo;
 

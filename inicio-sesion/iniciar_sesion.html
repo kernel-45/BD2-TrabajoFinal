@@ -1,29 +1,25 @@
 <!DOCTYPE html>
 <html lang="es">
-  <head>
-    <link rel="stylesheet" type="text/css" href="../css/estilosIniciarSesion.css">
-    <meta charset="UTF-8" />
-    <title>Estimazon - Iniciar Sesión</title>
-  </head>
-  <body>
-    <div class="contenedor-inicio-sesion">
-      <div class="titulo">ESTIMAZON - Iniciar Sesión</div>
-      <div class="opciones-inicio-sesion">
-        <button class="boton-inicio-sesion" onclick="seleccionarTipo(this, 'vendedor')">Vendedor</button>
-        <button class="boton-inicio-sesion" onclick="seleccionarTipo(this, 'comprador')">Comprador</button>
-        <button class="boton-inicio-sesion" onclick="seleccionarTipo(this, 'controlador')">Controlador</button>
-      </div>
-      <div class="campos-inicio-sesion">
-        <input type="email" placeholder="Correo de usuario" id="correoUsuario" />
-        <input type="password" placeholder="Contraseña" id="contrasenya" />
-      </div>
-      <button class="boton-enviar" onclick=enviarFormulario()>Enviar</button>
+<head>
+  <link rel="stylesheet" type="text/css" href="../css/estilosIniciarSesion.css">
+  <meta charset="UTF-8" />
+  <title>Estimazon - Iniciar Sesión</title>
+</head>
+<body>
+  <div class="contenedor-inicio-sesion" id="contenedorInicioSesion">
+    <div class="titulo">ESTIMAZON - Iniciar Sesión</div>
+    <div class="opciones-inicio-sesion">
+      <button class="boton-inicio-sesion" onclick="mostrarFormulario('iniciar-sesion')">Iniciar Sesión</button>
+      <button class="boton-inicio-sesion" onclick="mostrarFormulario('registrarse')">Registrarse</button>
     </div>
+    <div class="campos-inicio-sesion"></div>
+    
+  </div>
 
-    <script>
-      let tipoSeleccionado = '';
+  <script>
+    let tipoSeleccionado = '';
 
-      function seleccionarTipo(boton, tipo) {
+    function seleccionarTipo(boton, tipo) {
         tipoSeleccionado = tipo;
         // Eliminar la clase "seleccionado" de todos los botones
         document.querySelectorAll('.boton-inicio-sesion').forEach(b => b.classList.remove('seleccionado'));
@@ -31,55 +27,86 @@
         boton.classList.add('seleccionado');
       }
 
-      function enviarFormulario() {
-        // Obtener los valores del formulario
-        let correoUsuario = document.getElementById('correoUsuario').value;
-        let contrasenya = document.getElementById('contrasenya').value;
-        let tipoUsuario = tipoSeleccionado;
+    function mostrarFormulario(tipoFormulario) {
+      const contenedorInicioSesion = document.getElementById('contenedorInicioSesion');
+      const camposInicioSesion = contenedorInicioSesion.querySelector('.campos-inicio-sesion');
+      camposInicioSesion.innerHTML = `<div class="opciones-inicio-sesion">
+        <button class="boton-inicio-sesion" onclick="seleccionarTipo(this, 'vendedor')">Vendedor</button>
+        <button class="boton-inicio-sesion" onclick="seleccionarTipo(this, 'comprador')">Comprador</button>
+        <button class="boton-inicio-sesion" onclick="seleccionarTipo(this, 'controlador')">Controlador</button>
+      </div>`;
+      if (tipoFormulario === 'registrarse') {
+        // Mostrar campos adicionales para el formulario de registro
+        camposInicioSesion.innerHTML = camposInicioSesion.innerHTML + `
+          <input type="text" placeholder="Nombre" id="nombre"/>
+          <input type="text" placeholder="Primer apellido" id="apellido1"/>
+          <input type="text" placeholder="Segundo apellido" id="apellido2"/>
+        `;
+      } 
+      camposInicioSesion.innerHTML = camposInicioSesion.innerHTML + `
+          <input type="email" placeholder="Correo de usuario" id="correoUsuario"/>
+          <input type="password" placeholder="Contraseña" id="contrasenya" />
+          <button class="boton-enviar" onclick="enviarFormulario()">Enviar</button>
+        `;
+      tipoSeleccionado = tipoFormulario;
+    }
 
-        // Verificar que los campos no estén vacíos
-        if (!correoUsuario || !contrasenya || !tipoUsuario) {
-            alert('Por favor, completa todos los campos.');
-            return;
-        }
+    function enviarFormulario() {
+      // Obtener los valores del formulario
+      let nombre = document.getElementById('nombre') ? document.getElementById('nombre').value : '';
+      let apellido1 = document.getElementById('apellido1') ? document.getElementById('apellido1').value : '';
+      let apellido2 = document.getElementById('apellido2') ? document.getElementById('apellido2').value : '';
+      let correoUsuario = document.getElementById('correoUsuario').value;
+      let contrasenya = document.getElementById('contrasenya').value;
+      let tipoUsuario = tipoSeleccionado;
 
-        // Realizar la solicitud AJAX
-        fetch('guardar_sesion.php', {
-            method: 'POST',
-            headers: {
-                'Content-Type': 'application/json',
-            },
-            body: JSON.stringify({
-                correo: correoUsuario,
-                contrasenya: contrasenya,
-                tipo: tipoUsuario,
-            }),
-        })
+      // Verificar que los campos no estén vacíos
+      if (!correoUsuario || !contrasenya || (tipoUsuario === 'registrarse' && (!nombre || !apellido1 || !apellido2))) {
+        alert('Por favor, completa todos los campos.');
+        return;
+      }
+
+      // Realizar la solicitud AJAX
+      fetch('guardar_sesion.php', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({
+          nombre: nombre,
+          apellido1: apellido1,
+          apellido2: apellido2,
+          correo: correoUsuario,
+          contrasenya: contrasenya,
+          tipo: tipoUsuario,
+        }),
+      })
         .then(response => {
-            if (!response.ok) {
-                throw new Error('Network response was not ok');
-            }
-            return response.json();
+          if (!response.ok) {
+            throw new Error('Network response was not ok');
+          }
+          return response.json();
         })
         .then(data => {
-            // Manejar la respuesta del servidor aquí
-            if (data.success) {
-                //alert('Inicio de sesión exitoso.');
-                // Redirigir o realizar otras acciones según sea necesario
-                if (tipoUsuario == "vendedor" || tipoUsuario == "controlador") {
-                  window.location.href = "../" + tipoUsuario + "/interfaz_" + tipoUsuario + ".php";
-                } else { // comprador
-                  window.location.href = '../estimazon.html';
-                }
+          // Manejar la respuesta del servidor aquí
+          if (data.success) {
+            //alert('Inicio de sesión exitoso.');
+            // Redirigir o realizar otras acciones según sea necesario
+            if (tipoUsuario === 'vendedor' || tipoUsuario === 'controlador') {
+              window.location.href = `../${tipoUsuario}/interfaz_${tipoUsuario}.php`;
             } else {
-                alert('Error al iniciar sesión: ' + data.message);
+              // comprador
+              window.location.href = '../estimazon.html';
             }
+          } else {
+            alert('Error al iniciar sesión: ' + data.message);
+          }
         })
         .catch(error => {
-            console.error('Error:', error);
-            alert('Hubo un problema al procesar la solicitud. Por favor, inténtalo de nuevo más tarde.');
+          console.error('Error:', error);
+          alert('Hubo un problema al procesar la solicitud. Por favor, inténtalo de nuevo más tarde.');
         });
     }
-    </script>
+  </script>
 </body>
 </html>
