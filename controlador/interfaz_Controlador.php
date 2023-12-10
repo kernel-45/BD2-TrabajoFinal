@@ -39,10 +39,38 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     <div class="contenedor-principal">
       <div class="subtitulo">Bienvenido, controlador <?php echo $id ?></div>
       <div class="subtitulo">De qué usuario quieres consultar productos?</div>
-              
+              <form class="miFormulario" method="POST" action="">
+            <!-- Etiqueta y campo para un input de ejemplo -->
+            <label for="ID del usuario">ID:</label>
+            <input type="number" id="idUsuarioBuscado" name="idUsuarioBuscado">
+
+            <!-- Etiqueta y campo de selección -->
+            <label for="opciones">Opciones:</label>
+            <select id="opciones" name="opciones">
+                <option value="opcion1">Ver todos los pedidos</option>
+                <option value="opcion2">Ver pedidos con más de 5 días</option>
+                <!-- Más opciones según sea necesario -->
+            </select>
+
+            <!-- Botón para enviar el formulario -->
+            <button type="submit" id="miBoton" class="miFormulario-button">Enviar</button>  
+        </form>
 
     <!-- Más elementos aquí -->
     </div>
+    <script>
+document.addEventListener("DOMContentLoaded", function() {
+    // Selecciona el botón por su ID
+    var boton = document.getElementById("miBoton");
+
+    // Agrega un controlador de eventos para el clic del botón
+    boton.addEventListener("click", function() {
+        // Coloca aquí la funcionalidad que deseas que ocurra cuando se haga clic en el botón
+        alert("¡El botón fue clickeado!");
+    });
+});
+</script>
+
 </body>
 <script>function enviarFormulario(formulario) {
     // Obtener los valores del formulario
