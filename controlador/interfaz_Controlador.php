@@ -2,7 +2,7 @@
 <?php
 // Crear conexión
 $conn = new mysqli("localhost", "root", "", "Estimazon");
-include ('funcionesSeguimiento.php');
+include ('../comprador/funcionesSeguimiento.php');
 session_start(); 
 $id = $_SESSION['idUser']; 
 // Verificar conexión
@@ -13,15 +13,15 @@ if ($conn->connect_error) {
 <html>
 <head>
     <title>Seguimiento del pedido</title>
-    <link rel="stylesheet" type="text/css" href="css/estilos.css">
-    <link rel="stylesheet" type="text/css" href="css/estilosControlador.css">
+    <link rel="stylesheet" type="text/css" href="../css/estilos.css">
+    <link rel="stylesheet" type="text/css" href="../css/estilosControlador.css">
 </head>
 <body>
     <div class="titulo">
       ESTIMAZON
       <div class="botones">
         <button class="boton">
-          <img src="carrito.png" alt="Carrito" class="icono-carrito" />Cesta
+          <img src="carrito.png" alt="Carrito" class="../icono-carrito" />Cesta
         </button>
       </div>
     </div>

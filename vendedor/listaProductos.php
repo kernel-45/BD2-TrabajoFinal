@@ -5,7 +5,7 @@ $correoVendedor = $_SESSION['correoUser'] ?? ''; // Obtener el correo del vended
 <!DOCTYPE html>
 <html lang="es">
 <head>
-    <link rel="stylesheet" type="text/css" href="css/estilos.css">
+    <link rel="stylesheet" type="text/css" href="../css/estilos.css">
     <meta charset="UTF-8">
     <title>Mis Productos - Estimazon</title>
 </head>
