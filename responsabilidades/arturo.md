@@ -1,5 +1,7 @@
 JAUME:
-Com a dades importants, el comprador/a ha d’indicar el
+· A més de l’anterior, el manteniment complet del comprador, que inclou
+tota la problemàtica dels domicilis, poblacions, zones.
+· Com a dades importants, el comprador/a ha d’indicar el
 domicili i població. Aquestes dades són importants a l’hora de triar l’empresa distribuïdora
 que farà el repartiment. Un comprador pot tenir varis domicilis, i a cada operació de compra
 ha d’especificar el domicili on s’ha de portar la comanda.
