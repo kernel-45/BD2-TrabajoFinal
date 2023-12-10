@@ -90,7 +90,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     })
     .catch(error => {
         console.error('Error:', error);
-        alert('Hubo un problema al procesar la solicitud. Por favor, inténtalo de nuevo más tarde.!!!!!');
+        alert('Hubo un problema al procesar la solicitud. Por favor, inténtalo de nuevo más tarde.');
     });
 }
 </script>
