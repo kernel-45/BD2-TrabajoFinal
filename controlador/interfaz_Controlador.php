@@ -67,7 +67,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
             var formData = new FormData(this);
 
             // Realizar la solicitud AJAX
-            fetch('busquedaControlador.php', {
+            fetch('interfaz_controlador_2.php', {
                 method: 'POST',
                 body: formData
             })
