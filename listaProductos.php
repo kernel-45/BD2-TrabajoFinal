@@ -1,6 +1,6 @@
 <?php
 session_start(); 
-$correoVendedor = $_SESSION['correoVendedor'] ?? ''; // Obtener el correo del vendedor
+$correoVendedor = $_SESSION['correoUser'] ?? ''; // Obtener el correo del vendedor
 ?>
 <!DOCTYPE html>
 <html lang="es">
