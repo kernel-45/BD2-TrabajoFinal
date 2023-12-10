@@ -2,7 +2,7 @@
 $servername = "localhost";
 $username = "root";
 $password = "";
-$dbname = "estimazon-3";
+$dbname = "estimazon";
 
 $conn = new mysqli($servername, $username, $password, $dbname);
 
@@ -47,7 +47,7 @@ if ($result->num_rows > 0) {
         </button>
       </div>
     </div>
-    <h1>Catálogo</h1>
+    <h1>Cesta</h1>
 
     <ul>
         <?php foreach ($productos as $producto): ?>
@@ -57,13 +57,15 @@ if ($result->num_rows > 0) {
                 <p><strong>Precio:</strong> $<?php echo $producto['precio']; ?></p>
                 <p><strong>Stock:</strong> <?php echo $producto['stock']; ?></p>
                 <!-- Botón "Añadir al Carrito" -->
-                <button onclick=>Añadir al Carrito</button>
+                <button onclick="location.href='../cesta/cesta.php'">Añadir al Carrito</button>
             </li>
         <?php endforeach; ?>
     </ul>
 
     <a href="../../estimazon.html" id="volverButton">Volver a la lista de categorías</a>
 
-    <?php $conn->close(); ?>
+    <?php 
+    $conn->close(); 
+    ?>
 </body>
 </html>
