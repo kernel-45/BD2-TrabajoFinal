@@ -46,7 +46,8 @@ $conn->close();
 <div class="titulo">
       <div class="botones-ocultos" id="botones-comprador">
         <button class="boton" onclick=resetAllCookies()>Cerrar sesión</button>
-        <button class="boton" onclick="location.href='perfil.html'">Perfil</button></div>
+        <button class="boton" onclick="location.href='perfil.html'">Perfil</button>
+    </div>
       <?php echo strtoupper($categoria); ?>
       <div class="botones">
         <button class="boton" onclick="location.href='../inicio-sesion/iniciar_sesion.html'">Identifícate</button>
