@@ -11,7 +11,11 @@ function get_direccion($conn, $datos) {
         } else {
             $consulta = "SELECT zona.idZona, COUNT(*) AS total FROM zona WHERE zona.idZonaPadre = ".$anterior." AND zona.nombreZona = '".$value."'";
         }
-        $fila = mysqli_fetch_array(mysqli_query($conn, $consulta));
+        $result = mysqli_query($conn, $consulta);
+        if (!$result) {
+            echo "Error en la consulta: ".mysqli_error($conn);
+        }
+        $fila = mysqli_fetch_array($result);
         $n_zonas = $fila['total'];
         if ($n_zonas > 1) {
             echo "Error en la consulta: se han encontrado varias zonas idénticas";
