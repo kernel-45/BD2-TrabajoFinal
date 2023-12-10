@@ -1,6 +1,8 @@
 <html>
 
 <head>
+<link rel="stylesheet" type="text/css" href="../css/estilos.css">
+  <link rel="stylesheet" type="text/css" href="../css/estilosControlador.css">
     <?php
     // Conectar a la base de datos
 // Asegúrate de reemplazar con tus propios detalles de conexión
@@ -15,12 +17,12 @@
     echo $tipoBusqueda = $_POST['tipoBusqueda'];
     ?>
 </head>
-
+<div class="titulo">
+    ESTIMAZON
+  </div>
 <body>
     <?php
-    // Tu consulta SQL
-// Asegúrate de usar declaraciones preparadas para prevenir inyecciones SQL
-
+    
     $sql = "SELECT * FROM tuTabla WHERE idUser = ? AND tipoBusqueda = ?";
     if ($tipoBusqueda == "ult5d") {
         $sql = "SELECT * FROM tuTabla WHERE idUser = ? AND tipoBusqueda = ?";
