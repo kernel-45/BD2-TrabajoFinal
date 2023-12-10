@@ -39,6 +39,26 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     <div class="contenedor-principal">
       <div class="subtitulo">Bienvenido, controlador <?php echo $id ?></div>
       <div class="subtitulo">De qué usuario quieres consultar productos?</div>
-      
+      <form id="formBuscarPedidos" action="busquedaControlador.php" method="POST">
+                <p>
+                    <label for="IDUser">ID usuario:</label>
+                    <input type="number" id="idUser" name="idUser" required>
+                </p>
+                <p>
+                    <label for="tipoBusqueda">¿Qué tipo de busqueda deseas realizar?:</label>
+                    <select id="tipoBusqueda" name="tipoBusqueda" required>
+                        <option value="">Selecciona busqueda</option>
+                        <option value="siempre">Todos los pedidos</option>
+                        <option value="ult5d">Pedidos no llegados en 5 dias</option>
+                    </select>
+                </p>
+                <p>
+                    <input type="submit" value="Realizar búsqueda">
+                </p>
+            </form>
+        </div>
+        </div>
+    </div>
+    
      </body>
 </html>
