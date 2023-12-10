@@ -50,33 +50,9 @@ function mostrarFormulario(scriptEjecutable) {
             }
         </style>
         <form id="miFormulario" method="post" action="${scriptEjecutable}">
-            CP: <input type="number" name="cp" required><br>
-            Localidad: <input type="text" name="localidad" required><br>
-            Tipo vía: <select name="tipo_via" required>
-                <option value="Calle">Calle</option>
-                <option value="Avenida">Avenida</option>
-                <option value="Plaza">Plaza</option>
-                <option value="Carretera">Carretera</option>
-                <option value="Camino">Camino</option>
-                <option value="Paseo">Paseo</option>
-                <option value="Glorieta">Glorieta</option>
-                <option value="Bulevar">Bulevar</option>
-                <option value="Travesía">Travesía</option>
-                <option value="Rambla">Rambla</option>
-                <option value="Paseo Marítimo">Paseo Marítimo</option>
-                <option value="Carrera">Carrera</option>
-                <option value="Alameda">Alameda</option>
-                <option value="Ronda">Ronda</option>
-                <option value="Cuesta">Cuesta</option>
-                <option value="Plazoleta">Plazoleta</option>
-                <option value="Pasaje">Pasaje</option>
-            </select>
-            Vía: <input type="text" name="via" required><br>
-            Número: <input type="number" name="numero" required><br>
-            Portal: <input type="text" name="portal"><br>
-            Escalera: <input type="text" name="escalera"><br>
-            Piso: <input type="number" name="piso"><br>
-            Puerta: <input type="text" name="puerta"><br>
+            Número de tarjeta: <input type="number" name="tjc" pattern="[0-9]{16}" required><br>
+            Fecha de caducidad: <input type="date" name="fcad" required><br>
+            CVC: <input type="password" name="cvc" required><br>
             <button class="boton-enviar">Enviar</button>
         </form>
     `;

@@ -142,3 +142,23 @@ body {
         flex: 0 1 calc(50% - 10px); 
     }
 }
+
+/* Estilos del catálogo */
+
+ul {
+  list-style: none;
+  padding: 0;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-around;
+}
+
+li {
+  width: 30%;
+  margin: 10px;
+  padding: 10px;
+  border: 1px solid #ddd;
+  border-radius: 5px;
+  box-shadow: 0 0 5px rgba(0, 0, 0, 0.1);
+  background-color:rgb(141, 112, 112);
+}
