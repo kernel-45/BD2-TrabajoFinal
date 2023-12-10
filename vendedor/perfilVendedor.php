@@ -9,6 +9,7 @@
     <?php
     session_start();
     $idVendedor = $_SESSION['idUser'] ?? ''; 
+    $correoVendedor = $_SESSION['correoUser'] ?? ''; 
     ?>
     <div class="titulo">
       ESTIMAZON
@@ -19,8 +20,41 @@
 </div>
     </div>
     <h1 class="subtitulo">Mi perfil</h1>
-    <div class="contenedor-central centrar">
+    <div id="perfilVendedor"></div>
      
     </div>
+    <script>
+    document.addEventListener('DOMContentLoaded', () => {
+        fetch('fetchPerfil.php', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+            },
+            body: JSON.stringify({
+                correo: '<?php echo $correoVendedor; ?>' // Usando PHP para inyectar la variable
+            }),
+        })
+        .then(response => response.json())
+        .then(vendedor => {
+            mostrarPerfil(vendedor);
+        })
+        .catch(error => {
+            console.error('Error:', error);
+            alert('Hubo un problema al obtener los datos del vendedor: ' + error.message);
+        });
+
+        function mostrarPerfil(vendedor) {
+            const contenedor = document.getElementById('perfilVendedor');
+            contenedor.innerHTML = `
+                <img src="usuarioAnon.jpeg" alt="User" class="icono-user" />
+                <p>Nombre: ${vendedor.nombre}</p>
+                <p>Apellido1: ${vendedor.apellido1}</p>
+                <p>Apellido2: ${vendedor.apellido2}</p>
+                <p>ID Persona: ${vendedor.idPersona}</p>
+                <p>Correo: ${vendedor.correo}</p>
+                <p>Num Avisos: ${vendedor.numAvisos}</p>`;
+        }
+    });
+    </script>
   </body>
 </html>
