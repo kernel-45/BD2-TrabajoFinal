@@ -39,15 +39,17 @@ if ($conn->connect_error) {
                   $descripcion = $row["descripcion"];
                 
                   // Hacer algo con estos datos
+                  echo "<div class=subtitulo>"; 
                   echo "<div class='pedido'>"; 
                   echo "<div class='estado-pedido'>$estado</div>"; 
                   echo "<div class='id-pedido'>$idPedido</div>"; 
                   echo "<div class='nombre-producto'>$nombre</div>"; 
                   echo "<div class='descripcion-producto'>$descripcion</div>"; 
                   echo "</div>";
+                  echo "</div>"; 
               }
           } else {
-              echo "<div class='subtitulo'>"; 
+              echo "<div class='subtituloS'>"; 
               echo "<br><br><br><br>No has hecho ningún pedido todavía. <br><br> 
                     Cuando empieces a pedir productos de Estimazon tus productos aparecerán aquí";
               echo "</div>"; 

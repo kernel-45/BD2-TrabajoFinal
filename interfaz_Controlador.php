@@ -14,6 +14,7 @@ if ($conn->connect_error) {
 <head>
     <title>Seguimiento del pedido</title>
     <link rel="stylesheet" type="text/css" href="css/estilos.css">
+    <link rel="stylesheet" type="text/css" href="css/estilosControlador.css">
 </head>
 <body>
     <div class="titulo">
@@ -25,8 +26,8 @@ if ($conn->connect_error) {
       </div>
     </div>
     <div class="contenedor-principal">
-      <div class="subtitulo">Bienvenido, controlador</div>
-        
+      <div class="subtitulo">Bienvenido, controlador <?php echo $id ?></div>
+      <div class="subtitulo">De qué usuario quieres consultar productos?</div>
     <!-- Más elementos aquí -->
     </div>
 </body>

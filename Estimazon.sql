@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: localhost
--- Generation Time: Dec 10, 2023 at 02:08 PM
+-- Generation Time: Dec 10, 2023 at 02:50 PM
 -- Server version: 10.4.28-MariaDB
 -- PHP Version: 8.2.4
 
@@ -1131,15 +1131,6 @@ CREATE TABLE `propiedadesProducto` (
   `idFichaProducto` int(11) DEFAULT NULL,
   `qtt` int(11) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
-
---
--- Dumping data for table `propiedadesProducto`
---
-
-INSERT INTO `propiedadesProducto` (`fechaDeLlegada`, `idPedido`, `idFichaProducto`, `qtt`) VALUES
-(NULL, 3, 5, 2),
-(NULL, 3, 2, 7),
-(NULL, 3, 2, 2);
 
 -- --------------------------------------------------------
 
