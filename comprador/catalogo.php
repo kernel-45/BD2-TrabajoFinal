@@ -46,11 +46,7 @@ $conn->close();
 <div class="titulo">
       <div class="botones-ocultos" id="botones-comprador">
         <button class="boton" onclick=resetAllCookies()>Cerrar sesión</button>
-        <button class="boton" onclick="location.href='../zonas/anyadir_domicilio.html'">Añadir domicilio</button>
-        <button class="boton" onclick="location.href='../zonas/indicar_entrega.html'">Indicar zona de entrega</button>
-        <button class="boton" onclick="location.href='mis_pedidos.html'">Mis pedidos</button>
-        <button class="boton" onclick="location.href='tarjeta-credito/indicar_tarjeta_credito.html'">Indicar tarjeta de crédito</button>
-      </div>
+        <button class="boton" onclick="location.href='perfil.html'">Perfil</button></div>
       <?php echo strtoupper($categoria); ?>
       <div class="botones">
         <button class="boton" onclick="location.href='../inicio-sesion/iniciar_sesion.html'">Identifícate</button>
