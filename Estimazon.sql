@@ -2,10 +2,10 @@
 -- version 5.2.1
 -- https://www.phpmyadmin.net/
 --
--- Host: localhost
--- Generation Time: Dec 10, 2023 at 02:50 PM
--- Server version: 10.4.28-MariaDB
--- PHP Version: 8.2.4
+-- Servidor: 127.0.0.1
+-- Tiempo de generación: 10-12-2023 a las 16:25:34
+-- Versión del servidor: 10.4.28-MariaDB
+-- Versión de PHP: 8.2.4
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 START TRANSACTION;
@@ -18,13 +18,13 @@ SET time_zone = "+00:00";
 /*!40101 SET NAMES utf8mb4 */;
 
 --
--- Database: `Estimazon`
+-- Base de datos: `estimazon`
 --
 
 -- --------------------------------------------------------
 
 --
--- Table structure for table `categoria`
+-- Estructura de tabla para la tabla `categoria`
 --
 
 CREATE TABLE `categoria` (
@@ -32,7 +32,7 @@ CREATE TABLE `categoria` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
--- Dumping data for table `categoria`
+-- Volcado de datos para la tabla `categoria`
 --
 
 INSERT INTO `categoria` (`nombreCategoria`) VALUES
@@ -48,7 +48,7 @@ INSERT INTO `categoria` (`nombreCategoria`) VALUES
 -- --------------------------------------------------------
 
 --
--- Table structure for table `comprador`
+-- Estructura de tabla para la tabla `comprador`
 --
 
 CREATE TABLE `comprador` (
@@ -61,7 +61,7 @@ CREATE TABLE `comprador` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
--- Dumping data for table `comprador`
+-- Volcado de datos para la tabla `comprador`
 --
 
 INSERT INTO `comprador` (`idPersona`, `correo`, `contraseña`, `nombre`, `apellido1`, `apellido2`) VALUES
@@ -831,7 +831,7 @@ INSERT INTO `comprador` (`idPersona`, `correo`, `contraseña`, `nombre`, `apelli
 -- --------------------------------------------------------
 
 --
--- Table structure for table `controlador`
+-- Estructura de tabla para la tabla `controlador`
 --
 
 CREATE TABLE `controlador` (
@@ -844,7 +844,7 @@ CREATE TABLE `controlador` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
--- Dumping data for table `controlador`
+-- Volcado de datos para la tabla `controlador`
 --
 
 INSERT INTO `controlador` (`idPersona`, `correo`, `contraseña`, `nombre`, `apellido1`, `apellido2`) VALUES
@@ -903,7 +903,7 @@ INSERT INTO `controlador` (`idPersona`, `correo`, `contraseña`, `nombre`, `apel
 -- --------------------------------------------------------
 
 --
--- Table structure for table `empresadistribuidora`
+-- Estructura de tabla para la tabla `empresadistribuidora`
 --
 
 CREATE TABLE `empresadistribuidora` (
@@ -912,7 +912,7 @@ CREATE TABLE `empresadistribuidora` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
--- Dumping data for table `empresadistribuidora`
+-- Volcado de datos para la tabla `empresadistribuidora`
 --
 
 INSERT INTO `empresadistribuidora` (`idEmpresa`, `nombreEmpresa`) VALUES
@@ -976,7 +976,7 @@ INSERT INTO `empresadistribuidora` (`idEmpresa`, `nombreEmpresa`) VALUES
 -- --------------------------------------------------------
 
 --
--- Table structure for table `incidencia`
+-- Estructura de tabla para la tabla `incidencia`
 --
 
 CREATE TABLE `incidencia` (
@@ -989,7 +989,7 @@ CREATE TABLE `incidencia` (
 -- --------------------------------------------------------
 
 --
--- Table structure for table `pedido`
+-- Estructura de tabla para la tabla `pedido`
 --
 
 CREATE TABLE `pedido` (
@@ -1001,17 +1001,10 @@ CREATE TABLE `pedido` (
   `estado` varchar(50) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
---
--- Dumping data for table `pedido`
---
-
-INSERT INTO `pedido` (`idPedido`, `fechaConfirmacion`, `idZona`, `idComprador`, `idRepartidor`, `estado`) VALUES
-(3, '2023-12-09', 1, 90, 900, 'enviando a estimazon');
-
 -- --------------------------------------------------------
 
 --
--- Table structure for table `producto`
+-- Estructura de tabla para la tabla `producto`
 --
 
 CREATE TABLE `producto` (
@@ -1025,7 +1018,7 @@ CREATE TABLE `producto` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
--- Dumping data for table `producto`
+-- Volcado de datos para la tabla `producto`
 --
 
 INSERT INTO `producto` (`idProducto`, `nombre`, `precio`, `descripcion`, `stock`, `idVendedor`, `nombreCategoria`) VALUES
@@ -1122,10 +1115,10 @@ INSERT INTO `producto` (`idProducto`, `nombre`, `precio`, `descripcion`, `stock`
 -- --------------------------------------------------------
 
 --
--- Table structure for table `propiedadesProducto`
+-- Estructura de tabla para la tabla `propiedadesproducto`
 --
 
-CREATE TABLE `propiedadesProducto` (
+CREATE TABLE `propiedadesproducto` (
   `fechaDeLlegada` date DEFAULT NULL,
   `idPedido` int(11) DEFAULT NULL,
   `idFichaProducto` int(11) DEFAULT NULL,
@@ -1135,7 +1128,7 @@ CREATE TABLE `propiedadesProducto` (
 -- --------------------------------------------------------
 
 --
--- Table structure for table `repartidor`
+-- Estructura de tabla para la tabla `repartidor`
 --
 
 CREATE TABLE `repartidor` (
@@ -1149,7 +1142,7 @@ CREATE TABLE `repartidor` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
--- Dumping data for table `repartidor`
+-- Volcado de datos para la tabla `repartidor`
 --
 
 INSERT INTO `repartidor` (`idPersona`, `idEmpresa`, `correo`, `contraseña`, `nombre`, `apellido1`, `apellido2`) VALUES
@@ -1258,7 +1251,7 @@ INSERT INTO `repartidor` (`idPersona`, `idEmpresa`, `correo`, `contraseña`, `no
 -- --------------------------------------------------------
 
 --
--- Table structure for table `r_comprador_tarjetadecredito`
+-- Estructura de tabla para la tabla `r_comprador_tarjetadecredito`
 --
 
 CREATE TABLE `r_comprador_tarjetadecredito` (
@@ -1269,7 +1262,7 @@ CREATE TABLE `r_comprador_tarjetadecredito` (
 -- --------------------------------------------------------
 
 --
--- Table structure for table `r_repartea`
+-- Estructura de tabla para la tabla `r_repartea`
 --
 
 CREATE TABLE `r_repartea` (
@@ -1280,7 +1273,7 @@ CREATE TABLE `r_repartea` (
 -- --------------------------------------------------------
 
 --
--- Table structure for table `r_tienedomicilioen`
+-- Estructura de tabla para la tabla `r_tienedomicilioen`
 --
 
 CREATE TABLE `r_tienedomicilioen` (
@@ -1291,7 +1284,7 @@ CREATE TABLE `r_tienedomicilioen` (
 -- --------------------------------------------------------
 
 --
--- Table structure for table `r_tieneedificiosen`
+-- Estructura de tabla para la tabla `r_tieneedificiosen`
 --
 
 CREATE TABLE `r_tieneedificiosen` (
@@ -1302,7 +1295,7 @@ CREATE TABLE `r_tieneedificiosen` (
 -- --------------------------------------------------------
 
 --
--- Table structure for table `tarjetacredito`
+-- Estructura de tabla para la tabla `tarjetacredito`
 --
 
 CREATE TABLE `tarjetacredito` (
@@ -1314,7 +1307,7 @@ CREATE TABLE `tarjetacredito` (
 -- --------------------------------------------------------
 
 --
--- Table structure for table `tipoincidencia`
+-- Estructura de tabla para la tabla `tipoincidencia`
 --
 
 CREATE TABLE `tipoincidencia` (
@@ -1322,7 +1315,7 @@ CREATE TABLE `tipoincidencia` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
--- Dumping data for table `tipoincidencia`
+-- Volcado de datos para la tabla `tipoincidencia`
 --
 
 INSERT INTO `tipoincidencia` (`tipo`) VALUES
@@ -1335,7 +1328,7 @@ INSERT INTO `tipoincidencia` (`tipo`) VALUES
 -- --------------------------------------------------------
 
 --
--- Table structure for table `vendedor`
+-- Estructura de tabla para la tabla `vendedor`
 --
 
 CREATE TABLE `vendedor` (
@@ -1349,7 +1342,7 @@ CREATE TABLE `vendedor` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
--- Dumping data for table `vendedor`
+-- Volcado de datos para la tabla `vendedor`
 --
 
 INSERT INTO `vendedor` (`idPersona`, `numAvisos`, `correo`, `contraseña`, `nombre`, `apellido1`, `apellido2`) VALUES
@@ -1457,7 +1450,7 @@ INSERT INTO `vendedor` (`idPersona`, `numAvisos`, `correo`, `contraseña`, `nomb
 -- --------------------------------------------------------
 
 --
--- Table structure for table `zona`
+-- Estructura de tabla para la tabla `zona`
 --
 
 CREATE TABLE `zona` (
@@ -1467,45 +1460,37 @@ CREATE TABLE `zona` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
--- Dumping data for table `zona`
---
-
-INSERT INTO `zona` (`idZona`, `nombreZona`, `idZonaPadre`) VALUES
-(1, 'Zaragoza', 2),
-(2, 'España\r\n                 ', NULL);
-
---
--- Indexes for dumped tables
+-- Índices para tablas volcadas
 --
 
 --
--- Indexes for table `categoria`
+-- Indices de la tabla `categoria`
 --
 ALTER TABLE `categoria`
   ADD PRIMARY KEY (`nombreCategoria`);
 
 --
--- Indexes for table `comprador`
+-- Indices de la tabla `comprador`
 --
 ALTER TABLE `comprador`
   ADD PRIMARY KEY (`idPersona`),
   ADD UNIQUE KEY `correo` (`correo`);
 
 --
--- Indexes for table `controlador`
+-- Indices de la tabla `controlador`
 --
 ALTER TABLE `controlador`
   ADD PRIMARY KEY (`idPersona`),
   ADD UNIQUE KEY `correo` (`correo`);
 
 --
--- Indexes for table `empresadistribuidora`
+-- Indices de la tabla `empresadistribuidora`
 --
 ALTER TABLE `empresadistribuidora`
   ADD PRIMARY KEY (`idEmpresa`);
 
 --
--- Indexes for table `incidencia`
+-- Indices de la tabla `incidencia`
 --
 ALTER TABLE `incidencia`
   ADD PRIMARY KEY (`idIncidencia`),
@@ -1513,7 +1498,7 @@ ALTER TABLE `incidencia`
   ADD KEY `tipo` (`tipo`);
 
 --
--- Indexes for table `pedido`
+-- Indices de la tabla `pedido`
 --
 ALTER TABLE `pedido`
   ADD PRIMARY KEY (`idPedido`),
@@ -1522,7 +1507,7 @@ ALTER TABLE `pedido`
   ADD KEY `idRepartidor` (`idRepartidor`);
 
 --
--- Indexes for table `producto`
+-- Indices de la tabla `producto`
 --
 ALTER TABLE `producto`
   ADD PRIMARY KEY (`idProducto`),
@@ -1530,14 +1515,14 @@ ALTER TABLE `producto`
   ADD KEY `nombreCategoria` (`nombreCategoria`);
 
 --
--- Indexes for table `propiedadesProducto`
+-- Indices de la tabla `propiedadesproducto`
 --
-ALTER TABLE `propiedadesProducto`
+ALTER TABLE `propiedadesproducto`
   ADD KEY `idPedido` (`idPedido`),
   ADD KEY `idFichaProducto` (`idFichaProducto`);
 
 --
--- Indexes for table `repartidor`
+-- Indices de la tabla `repartidor`
 --
 ALTER TABLE `repartidor`
   ADD PRIMARY KEY (`idPersona`),
@@ -1545,124 +1530,130 @@ ALTER TABLE `repartidor`
   ADD KEY `idEmpresa` (`idEmpresa`);
 
 --
--- Indexes for table `r_comprador_tarjetadecredito`
+-- Indices de la tabla `r_comprador_tarjetadecredito`
 --
 ALTER TABLE `r_comprador_tarjetadecredito`
   ADD PRIMARY KEY (`idComprador`,`numTarjeta`),
   ADD KEY `numTarjeta` (`numTarjeta`);
 
 --
--- Indexes for table `r_repartea`
+-- Indices de la tabla `r_repartea`
 --
 ALTER TABLE `r_repartea`
   ADD PRIMARY KEY (`idEmpresa`,`idZona`),
   ADD KEY `idZona` (`idZona`);
 
 --
--- Indexes for table `r_tienedomicilioen`
+-- Indices de la tabla `r_tienedomicilioen`
 --
 ALTER TABLE `r_tienedomicilioen`
   ADD PRIMARY KEY (`idComprador`,`idZona`),
   ADD KEY `idZona` (`idZona`);
 
 --
--- Indexes for table `r_tieneedificiosen`
+-- Indices de la tabla `r_tieneedificiosen`
 --
 ALTER TABLE `r_tieneedificiosen`
   ADD PRIMARY KEY (`idZona`),
   ADD KEY `idEmpresa` (`idEmpresa`);
 
 --
--- Indexes for table `tarjetacredito`
+-- Indices de la tabla `tarjetacredito`
 --
 ALTER TABLE `tarjetacredito`
   ADD PRIMARY KEY (`numTarjeta`);
 
 --
--- Indexes for table `tipoincidencia`
+-- Indices de la tabla `tipoincidencia`
 --
 ALTER TABLE `tipoincidencia`
   ADD PRIMARY KEY (`tipo`);
 
 --
--- Indexes for table `vendedor`
+-- Indices de la tabla `vendedor`
 --
 ALTER TABLE `vendedor`
   ADD PRIMARY KEY (`idPersona`),
   ADD UNIQUE KEY `correo` (`correo`);
 
 --
--- Indexes for table `zona`
+-- Indices de la tabla `zona`
 --
 ALTER TABLE `zona`
   ADD PRIMARY KEY (`idZona`),
   ADD KEY `idZonaPadre` (`idZonaPadre`);
 
 --
--- AUTO_INCREMENT for dumped tables
+-- AUTO_INCREMENT de las tablas volcadas
 --
 
 --
--- AUTO_INCREMENT for table `comprador`
+-- AUTO_INCREMENT de la tabla `comprador`
 --
 ALTER TABLE `comprador`
   MODIFY `idPersona` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=851;
 
 --
--- AUTO_INCREMENT for table `empresadistribuidora`
+-- AUTO_INCREMENT de la tabla `controlador`
+--
+ALTER TABLE `controlador`
+  MODIFY `idPersona` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=901;
+
+--
+-- AUTO_INCREMENT de la tabla `empresadistribuidora`
 --
 ALTER TABLE `empresadistribuidora`
   MODIFY `idEmpresa` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=58;
 
 --
--- AUTO_INCREMENT for table `incidencia`
+-- AUTO_INCREMENT de la tabla `incidencia`
 --
 ALTER TABLE `incidencia`
   MODIFY `idIncidencia` int(11) NOT NULL AUTO_INCREMENT;
 
 --
--- AUTO_INCREMENT for table `pedido`
+-- AUTO_INCREMENT de la tabla `pedido`
 --
 ALTER TABLE `pedido`
   MODIFY `idPedido` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
 
 --
--- AUTO_INCREMENT for table `repartidor`
+-- AUTO_INCREMENT de la tabla `producto`
+--
+ALTER TABLE `producto`
+  MODIFY `idProducto` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=90;
+
+--
+-- AUTO_INCREMENT de la tabla `repartidor`
 --
 ALTER TABLE `repartidor`
   MODIFY `idPersona` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=1001;
 
 --
--- AUTO_INCREMENT for table `r_tieneedificiosen`
---
-ALTER TABLE `r_tieneedificiosen`
-  MODIFY `idZona` int(11) NOT NULL AUTO_INCREMENT;
-
---
--- AUTO_INCREMENT for table `vendedor`
+-- AUTO_INCREMENT de la tabla `vendedor`
 --
 ALTER TABLE `vendedor`
   MODIFY `idPersona` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=101;
 
 --
--- AUTO_INCREMENT for table `zona`
+-- AUTO_INCREMENT de la tabla `zona`
 --
 ALTER TABLE `zona`
-  MODIFY `idZona` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+  MODIFY `idZona` int(11) NOT NULL AUTO_INCREMENT;
 
 --
--- Constraints for dumped tables
+-- Restricciones para tablas volcadas
 --
 
 --
--- Constraints for table `incidencia`
+-- Filtros para la tabla `incidencia`
 --
 ALTER TABLE `incidencia`
   ADD CONSTRAINT `incidencia_ibfk_1` FOREIGN KEY (`idPedido`) REFERENCES `pedido` (`idPedido`),
   ADD CONSTRAINT `incidencia_ibfk_2` FOREIGN KEY (`tipo`) REFERENCES `tipoincidencia` (`tipo`);
 
 --
--- Constraints for table `pedido`
+-- Filtros para la tabla `pedido`
 --
 ALTER TABLE `pedido`
   ADD CONSTRAINT `pedido_ibfk_1` FOREIGN KEY (`idZona`) REFERENCES `zona` (`idZona`),
@@ -1670,54 +1661,54 @@ ALTER TABLE `pedido`
   ADD CONSTRAINT `pedido_ibfk_3` FOREIGN KEY (`idRepartidor`) REFERENCES `repartidor` (`idPersona`);
 
 --
--- Constraints for table `producto`
+-- Filtros para la tabla `producto`
 --
 ALTER TABLE `producto`
   ADD CONSTRAINT `producto_ibfk_1` FOREIGN KEY (`idVendedor`) REFERENCES `vendedor` (`idPersona`),
   ADD CONSTRAINT `producto_ibfk_2` FOREIGN KEY (`nombreCategoria`) REFERENCES `categoria` (`nombreCategoria`);
 
 --
--- Constraints for table `propiedadesProducto`
+-- Filtros para la tabla `propiedadesproducto`
 --
-ALTER TABLE `propiedadesProducto`
+ALTER TABLE `propiedadesproducto`
   ADD CONSTRAINT `propiedadesproducto_ibfk_1` FOREIGN KEY (`idPedido`) REFERENCES `pedido` (`idPedido`),
   ADD CONSTRAINT `propiedadesproducto_ibfk_2` FOREIGN KEY (`idFichaProducto`) REFERENCES `producto` (`idProducto`);
 
 --
--- Constraints for table `repartidor`
+-- Filtros para la tabla `repartidor`
 --
 ALTER TABLE `repartidor`
   ADD CONSTRAINT `repartidor_ibfk_1` FOREIGN KEY (`idEmpresa`) REFERENCES `empresadistribuidora` (`idEmpresa`);
 
 --
--- Constraints for table `r_comprador_tarjetadecredito`
+-- Filtros para la tabla `r_comprador_tarjetadecredito`
 --
 ALTER TABLE `r_comprador_tarjetadecredito`
   ADD CONSTRAINT `r_comprador_tarjetadecredito_ibfk_1` FOREIGN KEY (`idComprador`) REFERENCES `comprador` (`idPersona`),
   ADD CONSTRAINT `r_comprador_tarjetadecredito_ibfk_2` FOREIGN KEY (`numTarjeta`) REFERENCES `tarjetacredito` (`numTarjeta`);
 
 --
--- Constraints for table `r_repartea`
+-- Filtros para la tabla `r_repartea`
 --
 ALTER TABLE `r_repartea`
   ADD CONSTRAINT `r_repartea_ibfk_1` FOREIGN KEY (`idEmpresa`) REFERENCES `empresadistribuidora` (`idEmpresa`),
   ADD CONSTRAINT `r_repartea_ibfk_2` FOREIGN KEY (`idZona`) REFERENCES `zona` (`idZona`);
 
 --
--- Constraints for table `r_tienedomicilioen`
+-- Filtros para la tabla `r_tienedomicilioen`
 --
 ALTER TABLE `r_tienedomicilioen`
   ADD CONSTRAINT `r_tienedomicilioen_ibfk_1` FOREIGN KEY (`idComprador`) REFERENCES `comprador` (`idPersona`),
   ADD CONSTRAINT `r_tienedomicilioen_ibfk_2` FOREIGN KEY (`idZona`) REFERENCES `zona` (`idZona`);
 
 --
--- Constraints for table `r_tieneedificiosen`
+-- Filtros para la tabla `r_tieneedificiosen`
 --
 ALTER TABLE `r_tieneedificiosen`
   ADD CONSTRAINT `r_tieneedificiosen_ibfk_1` FOREIGN KEY (`idEmpresa`) REFERENCES `empresadistribuidora` (`idEmpresa`);
 
 --
--- Constraints for table `zona`
+-- Filtros para la tabla `zona`
 --
 ALTER TABLE `zona`
   ADD CONSTRAINT `zona_ibfk_1` FOREIGN KEY (`idZonaPadre`) REFERENCES `zona` (`idZona`);
