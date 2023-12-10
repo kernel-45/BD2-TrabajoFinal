@@ -42,7 +42,6 @@ function mostrarFormulario(scriptEjecutable) {
             #miFormulario button:hover {
                 background-color: rgb(141, 112, 112);
             }
-            
         
             /* Estilo para resaltar campos requeridos no completados */
             #miFormulario.invalid-form [required]:invalid {
@@ -50,9 +49,9 @@ function mostrarFormulario(scriptEjecutable) {
             }
         </style>
         <form id="miFormulario" method="post" action="${scriptEjecutable}">
-            Número de tarjeta: <input type="number" name="tjc" pattern="[0-9]{16}" required><br>
+            Número de tarjeta: <input type="text" name="tjc" required pattern="[0-9]{16}" placeholder="Escriba un número de 16 dígitos"><br>
             Fecha de caducidad: <input type="date" name="fcad" required><br>
-            CVC: <input type="password" name="cvc" required><br>
+            CVC: <input type="password" name="cvc" required pattern="[0-9]{3}" placeholder="Escriba un número de 3 dígitos"><br>
             <button class="boton-enviar">Enviar</button>
         </form>
     `;

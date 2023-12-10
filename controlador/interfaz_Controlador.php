@@ -59,6 +59,36 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         </div>
         </div>
     </div>
-    
+    <script>
+        document.getElementById('formBuscarPedidos').addEventListener('submit', function(e) {
+            e.preventDefault(); // Evita el envío normal del formulario
+
+            // Recoger los datos del formulario
+            var formData = new FormData(this);
+
+            // Realizar la solicitud AJAX
+            fetch('busquedaControlador.php', {
+                method: 'POST',
+                body: formData
+            })
+            .then(response => {
+                if (!response.ok) {
+                    throw new Error('La respuesta de la red no fue ok');
+                }
+                return response.json();
+            })
+            .then(data => {
+    if (data.success) {
+        window.location.href = 'interfaz_controlador_2.php';
+    } else {
+        alert('Error: ' + data.message);
+    }
+})
+            .catch(error => {
+                console.error('Error:', error);
+                alert('Hubo un problema al procesar la solicitud: ' + error.message);
+            });
+        });
+    </script>
      </body>
 </html>

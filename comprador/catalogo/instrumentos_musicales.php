@@ -12,7 +12,7 @@ if ($conn->connect_error) {
 }
 
 // Seleccionas los productos
-$sql = "SELECT nombre, descripcion, precio, stock FROM producto";
+$sql = "SELECT nombre, descripcion, precio, stock FROM producto WHERE nombreCategoria = 'Instrumentos musicales'";
 $result = $conn->query($sql);
 
 // Verificar si hay resultados
@@ -39,7 +39,7 @@ if ($result->num_rows > 0) {
         <button class="boton" onclick="location.href='mis_pedidos.html'">Mis pedidos</button>
         <button class="boton" onclick="location.href='tarjeta-credito/indicar_tarjeta_credito.html'">Indicar tarjeta de crédito</button>
       </div>
-      CATÁLOGO
+      INSTRUMENTOS
       <div class="botones">
         <button class="boton" onclick="location.href='../../inicio-sesion/iniciar_sesion.html'">Identifícate</button>
         <button class="boton">

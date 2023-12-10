@@ -43,14 +43,13 @@ function mostrarFormulario(scriptEjecutable) {
                 background-color: rgb(141, 112, 112);
             }
             
-        
             /* Estilo para resaltar campos requeridos no completados */
             #miFormulario.invalid-form [required]:invalid {
                 border: 1px solid red;
             }
         </style>
         <form id="miFormulario" method="post" action="${scriptEjecutable}">
-            CP: <input type="number" name="cp" required><br>
+            CP: <input type="text" name="cp" required pattern="[0-9]{5}" placeholder="Escriba un número de 5 dígitos"><br>
             Localidad: <input type="text" name="localidad" required><br>
             Tipo vía: <select name="tipo_via" required>
                 <option value="Calle">Calle</option>
@@ -72,10 +71,10 @@ function mostrarFormulario(scriptEjecutable) {
                 <option value="Pasaje">Pasaje</option>
             </select>
             Vía: <input type="text" name="via" required><br>
-            Número: <input type="number" name="numero" required><br>
+            Número: <input type="number" name="numero" required min="0" placeholder="Escriba un número natural"><br>
             Portal: <input type="text" name="portal"><br>
             Escalera: <input type="text" name="escalera"><br>
-            Piso: <input type="number" name="piso"><br>
+            Piso: <input type="number" name="piso" min="0" placeholder="Escriba un número natural"><br>
             Puerta: <input type="text" name="puerta"><br>
             <button class="boton-enviar">Enviar</button>
         </form>
