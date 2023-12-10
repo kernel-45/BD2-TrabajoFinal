@@ -69,6 +69,6 @@ if ($conn->connect_error) {
         })
         .catch(error => console.error('Error:', error));
     });
-    ript >
+    </script>
      </body >
 </html >
