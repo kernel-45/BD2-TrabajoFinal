@@ -8,8 +8,10 @@
     <div class="titulo">
       ESTIMAZON
       <div class="botones">
-        <button class="boton" onclick="location.href='zonas/anyadir_domicilio.php'">Añadir domicilio</button>
-        <button class="boton" onclick="location.href='zonas/indicar_entrega.php'">Indicar zona de entrega</button>
+        <div class="botones-ocultos" id="botones-comprador" style="display:none;">
+          <button class="boton" onclick="location.href='zonas/anyadir_domicilio.html'">Añadir domicilio</button>
+          <button class="boton" onclick="location.href='zonas/indicar_entrega.html'">Indicar zona de entrega</button>
+        </div>
         <button class="boton" onclick="location.href='iniciar_sesion.html'">Identifícate</button>
         <button class="boton">
           <img src="carrito.png" alt="Carrito" class="icono-carrito" />Cesta
@@ -27,4 +29,16 @@
       <button class="boton">Oficina y Papelería</button>
     </div>
   </body>
+  <script>
+    document.addEventListener('DOMContentLoaded', function() {
+            // Verificar si el usuario es un comprador y mostrar los botones correspondientes
+            var tipoUsuario = "<?php echo isset($_SESSION['tipoUser']) ? $_SESSION['tipoUser'] : ''; ?>";
+            
+            if (tipoUsuario !== 'comprador') {
+                document.getElementById('botones-comprador').style.display = 'none';
+            } else {
+                document.getElementById('botones-no-comprador').style.display = 'block';
+            }
+        });
+</script>
 </html>
