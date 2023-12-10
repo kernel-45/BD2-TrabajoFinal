@@ -14,7 +14,7 @@ $idVendedor = $_SESSION['idUser'] ?? '';
 <div class="titulo">
   ESTIMAZON
   <div class="botones">
-    <button class="boton">Hola, vendedor <?php echo $idVendedor; ?></button>
+    <button class="boton" id="perfilVendedor" onclick="window.location.href='perfilVendedor.php'"><img src="user.png" alt="User" class="icono-user" />Mi perfil </button>
   </div>
 </div>
     <h1 class="subtitulo">Subir Producto</h1>

@@ -8,13 +8,7 @@ body {
   display: flex;
   justify-content: center;
   align-items: center;
-  height: 100vh;
-}
-.contenedor-formVendedor{
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  height: 100vh;
+  margin-top: 100px;
 }
 
 .contenedor-botones {
@@ -114,6 +108,12 @@ body {
 }
 .boton:hover {
   background-color: rgb(161, 132, 132);
+}
+.icono-user {
+  vertical-align: middle; 
+  margin-right: 5px;
+  width: 30px; /* Ajusta esto según el tamaño deseado */
+  height: 30px; /* Ajusta esto según el tamaño deseado */
 }
 .icono-carrito {
   vertical-align: middle; 
