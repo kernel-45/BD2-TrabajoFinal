@@ -42,12 +42,10 @@ if ($fila['contraseña'] != $contraseña) {
 session_start();
 $_SESSION['idUser'] = $fila['idPersona'];
 $_SESSION['tipoUser'] = $tipo;
+$_SESSION['correoUser'] = $correo;
 
-if ($tipo == "vendedor") {
-    $_SESSION['correoVendedor'] = $correo;
-}
 // session_write_close() <----------------------- si lo descomento da error
 // Enviar respuesta al cliente
 
-echo json_encode(['success' => true]);
+echo json_encode(['success' => true]);//*/
 ?>

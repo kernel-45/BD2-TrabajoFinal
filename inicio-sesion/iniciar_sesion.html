@@ -141,9 +141,9 @@
                 //alert('Inicio de sesión exitoso.');
                 // Redirigir o realizar otras acciones según sea necesario
                 if (tipoUsuario == "vendedor" || tipoUsuario == "controlador") {
-                  window.location.href = "interfaz_" + tipoUsuario + ".php";
+                  window.location.href = "../interfaz_" + tipoUsuario + ".php";
                 } else { // comprador
-                  window.location.href = 'estimazon.html';
+                  window.location.href = '../estimazon.html';
                 }
             } else {
                 alert('Error al iniciar sesión: ' + data.message);
