@@ -22,6 +22,7 @@ $result = mysqli_query($conn, $consulta);
 
 if (!$result) {
     echo json_encode(['success' => false, 'message' => 'Error en la consulta: ' . mysqli_error($conn)]);
+    mysqli_close($conn);
     exit;
 }
 mysqli_close($conn);
