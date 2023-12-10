@@ -26,7 +26,7 @@
     box-sizing: border-box; /* Incluye el relleno en el ancho total */
 }
 
-.miFormulario button {
+.miFormulario-button {
     background-color: rgb(161, 132, 132);
     color: black;
     border: none;

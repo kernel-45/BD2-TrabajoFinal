@@ -28,6 +28,23 @@ if ($conn->connect_error) {
     <div class="contenedor-principal">
       <div class="subtitulo">Bienvenido, controlador <?php echo $id ?></div>
       <div class="subtitulo">De qué usuario quieres consultar productos?</div>
+              <form class="miFormulario">
+            <!-- Etiqueta y campo para un input de ejemplo -->
+            <label for="ID del usuario">ID:</label>
+            <input type="number" id="idUsuarioBuscado" name="isUsuarioBuscado">
+
+            <!-- Etiqueta y campo de selección -->
+            <label for="opciones">Opciones:</label>
+            <select id="opciones" name="opciones">
+                <option value="opcion1">Ver todos los pedidos</option>
+                <option value="opcion2">Ver pedidos con mas de 5 dias</option>
+                <!-- Más opciones según sea necesario -->
+            </select>
+
+            <!-- Botón para enviar el formulario -->
+            <button type="submit" class="miFormulario-button">Enviar</button>
+        </form>
+
     <!-- Más elementos aquí -->
     </div>
 </body>
