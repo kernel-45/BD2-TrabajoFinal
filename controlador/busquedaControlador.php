@@ -1,6 +1,4 @@
-<?php ?>
 <html>
-
 <head>
     <link rel="stylesheet" type="text/css" href="../css/estilos.css">
     <link rel="stylesheet" type="text/css" href="../css/estilosControlador.css">
@@ -14,8 +12,14 @@
         die("Conexión fallida: " . $conexion->connect_error);
     }
 
-    $idUser = $_POST['idUser'];
-    $tipoBusqueda = $_POST['tipoBusqueda'];
+    if(isset($_POST['idUser']) && isset($_POST['tipoBusqueda'])) {
+        $idUser =  $_POST['idUser']; 
+        $tipoBusqueda = $_POST['tipoBusqueda'];
+        // Aquí puedes continuar con el procesamiento de estos datos
+    } else {
+        // Manejar el caso en que los datos no estén presentes
+        echo "Datos necesarios no recibidos.";
+    }
     ?>
 </head>
 <div class="titulo">
@@ -24,8 +28,14 @@
 
 <body>
     <div class="contenedor-principal">
-        <div class="subtitulo">Bienvenido al seguimiento de tus pedidos</div>
+        <div class="subtitulo">Bienvenido al seguimiento de los pedidos del usuario <?php echo $idUser ?></div>
+        <div class="subtitulo"><?php $idUser ?> </div>
         <?php
+        $sqlP = "SELECT * FROM comprador WHERE idPersona = $idUser"; 
+        $resultP = $conn->query($sqlP);
+        if($resultP->num_rows = 0) {
+            echo "No existe ese comprador"
+        }
         if ($tipoBusqueda == "ult5d") {
             $sql = "SELECT pedido.idPedido, vendedor.idPersona, pedido.fechaConfirmacion FROM 
         (vendedor JOIN

@@ -43,13 +43,15 @@ if ($conn->connect_error) {
         </p>
         <p>
           <input type="submit" value="Realizar búsqueda">
+          <!-- <button onclick="window.location.href='busquedaControlador.php';">Realizar búsqueda</button> -->
+
         </p>
       </form>
     </div>
   </div>
   </div>
   </div>
-  <script>
+  <!-- <script>
     document.getElementById('formBuscarPedidos').addEventListener('submit', function (event) {
       event.preventDefault();
 
@@ -67,8 +69,8 @@ if ($conn->connect_error) {
         .then(data => {
           console.log(data); // Aquí manejas los datos devueltos por el servidor
         })
-        // .catch(error => console.error('Error:', error));
+        .catch(error => console.error('Error:', error));
     });
-    </script>
+    </script> -->
      </body >
 </html >
