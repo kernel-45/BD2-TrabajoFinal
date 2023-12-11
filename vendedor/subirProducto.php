@@ -2,6 +2,7 @@
 <!DOCTYPE html>
 <html lang="es">
 <head>
+    <script src="../funciones.js"></script>
     <link rel="stylesheet" type="text/css" href="../css/estilos.css">
     <meta charset="UTF-8">
     <title>Subir Producto - Estimazon</title>

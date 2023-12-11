@@ -2,6 +2,7 @@
 <html lang="es">
 
 <head>
+    <script src="../funciones.js"></script>
     <link rel="stylesheet" type="text/css" href="../css/estilos.css" />
     <meta charset="UTF-8" />
     <title>Estimazon - Mi perfil</title>
@@ -17,7 +18,7 @@
     <div class="titulo">
         ESTIMAZON
         <div class="botones">
-            <button class="boton">Cerrar sesión</button>
+            <button class="boton" onclick=resetAllCookies()>Cerrar sesión</button>
             <button class="boton" id="perfil" onclick="window.location.href='interfaz_vendedor.php'">
                 Volver
             </button>
