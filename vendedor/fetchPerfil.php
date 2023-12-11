@@ -1,19 +1,34 @@
 <?php
+// fetchPerfil.php
+session_start();
 
-$correo = isset($_GET['correo']) ? $_GET['correo'] : '';
-
-
-$conn = mysqli_connect("localhost", "root", "", "estimazon") or die("Error en la conexión con el servidor");
-$db = mysqli_select_db($conn, "estimazon") or die("Error en la conexión con la base de datos");
-
-$consulta = "SELECT nombre, apellido1, apellido2, idPersona, correo, numAvisos FROM vendedores WHERE correo = '$correo'";
-$resultado = mysqli_query($conn, $consulta);
-
-if ($filaPerfil = mysqli_fetch_assoc($resultado)) {
-    echo json_encode($filaPerfil);
-} else {
-    echo json_encode(['error' => 'No se encontraron datos para el vendedor']);
+// Asegúrate de que el usuario está logueado
+if (!isset($_SESSION['correoUser'])) {
+    echo json_encode(['error' => 'Usuario no autenticado']);
+    exit;
 }
 
-mysqli_close($conn);
+$correo = $_SESSION['correoUser'];
+
+// Conexión a la base de datos
+$conn = new mysqli("localhost", "root", "", "estimazon");
+
+// Verificar la conexión
+if ($conn->connect_error) {
+    die("Error en la conexión: " . $conn->connect_error);
+}
+
+// Consulta a la base de datos
+$sql = "SELECT nombre, apellido1, apellido2, idPersona, correo, numAvisos FROM vendedores WHERE correo = '$correo'";
+$result = $conn->query($sql);
+
+if ($result->num_rows > 0) {
+    // Enviar los datos del vendedor
+    echo json_encode($result->fetch_assoc());
+} else {
+    // No se encontraron datos
+    echo json_encode(['error' => 'No se encontraron datos del vendedor']);
+}
+
+$conn->close();
 ?>

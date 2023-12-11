@@ -14,11 +14,14 @@ echo "Recibido ID de producto para eliminar: " . $idProducto;
 if ($idProducto > 0) {
     $query = "DELETE FROM producto WHERE idProducto = $idProducto";
     if (mysqli_query($conn, $query)) {
+        header('Content-Type: application/json');
         echo json_encode(["success" => true, "message" => "Producto eliminado"]);
     } else {
+        header('Content-Type: application/json');
         echo json_encode(["success" => false, "message" => "Error al eliminar el producto"]);
     }
 } else {
+    header('Content-Type: application/json');
     echo json_encode(["success" => false, "message" => "ID del producto no válido"]);
 }
 
