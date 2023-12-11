@@ -64,7 +64,7 @@ if ($tipo != "comprador") {
     mysqli_close($conn);
     exit;
 }
-$consulta = "SELECT pedido.idPedido FROM pedido WHERE pedido.idComprador = ".$fila['idPersona']." AND pedido.fechaConfirmacion IS NULL";
+$consulta = "SELECT pedido.idPedido FROM pedido WHERE pedido.idComprador = ".$idPersona." AND pedido.fechaConfirmacion IS NULL";
 $result = mysqli_query($conn, $consulta);
 if (!$result) {
     echo json_encode(['success' => false, 'message' => "Error en la consulta: ".mysqli_error($conn)]);
@@ -79,7 +79,7 @@ if ($n_pedidos > 1) {
     $_SESSION['idCarrito'] = $fila['idPedido'];
 } else {
     
-    $insert = "INSERT INTO pedido (idComprador) VALUES (".$fila['idPersona'].")";
+    $insert = "INSERT INTO pedido (idComprador) VALUES (".$idPersona.")";
     if (!mysqli_query($conn, $insert)) {
         echo json_encode(['success' => false, 'message' => "Error en la consulta: ".mysqli_error($conn)]);
         exit;
@@ -88,5 +88,5 @@ if ($n_pedidos > 1) {
 }
 // Enviar respuesta al cliente
 mysqli_close($conn);
-echo json_encode(['success' => true]);
+echo json_encode(['success' => true]);//*/
 ?>
