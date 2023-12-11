@@ -33,10 +33,9 @@
         <?php
         $sqlP = "SELECT * FROM comprador WHERE idPersona = $idUser"; 
         $resultP = $conn->query($sqlP);
-        if($resultP->num_rows = 0) {
-            echo "No existe ese comprador"
-        }
-        if ($tipoBusqueda == "ult5d") {
+        if($resultP->num_rows == 0) {
+            echo "No existe ese comprador"; 
+        } elseif ($tipoBusqueda == "ult5d") {
             $sql = "SELECT pedido.idPedido, vendedor.idPersona, pedido.fechaConfirmacion FROM 
         (vendedor JOIN
             (producto JOIN
@@ -49,15 +48,16 @@
     WHERE (DATEDIFF(CURDATE(), pedido.fechaConfirmacion) >= 5 AND propiedadesproducto.fechaDeLlegada IS NULL);";
 
         } elseif ($tipoBusqueda == "siempre") {
-            $sql = "SELECT pedido.idPedido, vendedor.idPersona, pedido.fechaConfirmacion FROM 
-                    vendedor JOIN
-                        (producto JOIN
-                            (propiedadesproducto JOIN
-                                (comprador JOIN pedido
-                                ON idComprador = $idUser)
-                            ON pedido.idPedido = propiedadesproducto.idPedido)
-                        ON propiedadesproducto.idFichaProducto = pedido.idPedido)
-                    ON vendedor.idPersona = producto.idVendedor";
+            $sql = "SELECT pedido.idPedido, vendedor.idPersona, pedido.fechaConfirmacion, producto.nombre FROM 
+            vendedor JOIN
+                (producto JOIN
+                    (propiedadesproducto JOIN
+                        (comprador JOIN pedido
+                        ON comprador.idPersona = $idUser
+                        AND pedido.idComprador = $idUser)
+                    ON pedido.idPedido = propiedadesproducto.idPedido)
+                ON propiedadesproducto.idFichaProducto = producto.idProducto)
+            ON vendedor.idPersona = producto.idVendedor;";
         }
         $result = mysqli_query($conn, $sql);
         if ($result->num_rows > 0) {
@@ -67,14 +67,14 @@
                 $idPedido = $row["idPedido"];
                 $idVendedor = $row["idPersona"];
                 $fechaConfirmacion = $row["fechaConfirmacion"];
-
+                $nombreProducto = $row["nombre"]; 
                 // Hacer algo con estos datos
                 echo "<div class=subtitulo>";
                 echo "<div class='pedido'>";
-                echo "<div class='estado-pedido'>$estado</div>";
                 echo "<div class='id-pedido'>$idPedido</div>";
+                echo "<div class='nombre-producto'>$idVendedor</div>";
+                echo "<div class='nombre-producto'>$fechaConfirmacion</div>";
                 echo "<div class='nombre-producto'>$nombre</div>";
-                echo "<div class='descripcion-producto'>$descripcion</div>";
                 echo "</div>";
                 echo "</div>";
             }
