@@ -1,14 +1,21 @@
 <!DOCTYPE html>
 <html lang="es">
 <head>
+    <link rel="stylesheet" type="text/css" href="../css/estilosFormulario.css">
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Formulario de Datos</title>
-    <script src="formulario.js"></script>
+    <script src="../funciones.js"></script>
 </head>
 <body>
+    <form id="miFormulario" method="post" action="tarjeta_credito_anyadida.php">
+        Número de tarjeta: <input type="text" name="tjc" required pattern="[0-9]{16}" placeholder="Escriba un número de 16 dígitos"><br>
+        Fecha de caducidad: <input type="date" name="fcad" required><br>
+        CVC: <input type="password" name="cvc" required pattern="[0-9]{3}" placeholder="Escriba un número de 3 dígitos"><br>
+        <button class="boton-enviar">Enviar</button>
+    </form> 
 <script>
-    mostrarFormulario("tarjeta_credito_anyadida.php")
+    procesarFormulario(1);
 </script>
 </body>
 </html>

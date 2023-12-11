@@ -50,8 +50,8 @@ $conn->close();
 
         <?php echo strtoupper($categoria); ?>
         <div class="botones">
-            <button class="boton" onclick="location.href='perfil.html'">Perfil</button>
             <button class="boton" onclick=resetAllCookies(1)>Cerrar sesión</button>
+            <button class="boton" onclick="location.href='perfil.html'">Perfil</button>
             <button class="boton" onclick="location.href='cesta/cesta.php'">
                 <img src="../carrito.png" alt="Carrito" class="icono-carrito" />Cesta
             </button>

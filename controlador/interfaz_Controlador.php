@@ -51,26 +51,6 @@ if ($conn->connect_error) {
   </div>
   </div>
   </div>
-  <!-- <script>
-    document.getElementById('formBuscarPedidos').addEventListener('submit', function (event) {
-      event.preventDefault();
 
-      var idUser = document.getElementById('idUser').value;
-      var tipoBusqueda = document.getElementById('tipoBusqueda').value;
-
-      fetch('busquedaControlador.php', {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/x-www-form-urlencoded',
-        },
-        body: 'idUser=' + idUser + '&tipoBusqueda=' + tipoBusqueda
-      })
-        .then(response => response.json())
-        .then(data => {
-          console.log(data); // Aquí manejas los datos devueltos por el servidor
-        })
-        .catch(error => console.error('Error:', error));
-    });
-    </script> -->
      </body >
 </html >

@@ -7,13 +7,15 @@
   </head>
   <body>
     <div class="titulo">
-      <div class="botones-ocultos" id="botones-comprador" style="display:none;">
-        <button class="boton" onclick=resetAllCookies(0)> Cerrar sesión</button>
-        <button class="boton" onclick="location.href='comprador/perfil.html'">Perfil</button>
-      </div>
       ESTIMAZON
       <div class="botones">
-        <button class="boton" onclick="location.href='inicio-sesion/iniciar_sesion.html'">Identifícate</button>
+        <div id="botones-comprador" style="display: inline-block;">
+          <button class="boton" onclick=resetAllCookies(0)> Cerrar sesión</button>
+          <button class="boton" onclick="location.href='comprador/perfil.html'">Perfil</button>
+        </div>
+        <div class="botones" id="botones-usuario" style="margin-right: 100px;">
+          <button class="boton" onclick="location.href='inicio-sesion/iniciar_sesion.html'">Identifícate</button>
+        </div>
         <button class="boton" onclick="location.href='comprador/cesta/cesta.php'">
           <img src="carrito.png" alt="Carrito" class="icono-carrito" />Cesta
         </button>
@@ -37,24 +39,5 @@
     function accederCategoria(param_categoria) {
       window.location.href = 'comprador/catalogo.php?categoria=' + param_categoria;
     }
-
-    function actualizarBotones() {
-      // Realizar una solicitud Ajax al servidor para obtener el tipo de usuario
-      var xhr = new XMLHttpRequest();
-      xhr.onreadystatechange = function() {
-          if (xhr.readyState === 4 && xhr.status === 200) {
-              var tipoUsuario = xhr.responseText;
-              // Verificar y ajustar la visibilidad de los elementos según el tipo de usuario
-              if (tipoUsuario !== 'comprador') {
-                  document.getElementById('botones-comprador').style.display = 'none';
-              } else {
-                  document.getElementById('botones-comprador').style.display = 'block';
-              }
-          }
-      };
-      // Realizar la solicitud al archivo PHP que obtiene el tipo de usuario
-      xhr.open('GET', 'get_tipoUser.php', true);
-      xhr.send();
-    };
 </script>
 </html>
