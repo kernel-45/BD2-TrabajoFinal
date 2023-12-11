@@ -31,7 +31,16 @@
                 <p>Precio: <input type="number" value="" id="precioProducto"></p>
                 <p>Descripción: <textarea id="descripcionProducto"></textarea></p>
                 <p>Stock: <input type="number" value="" id="stockProducto"></p>
-                <p>Categoria: <input type="text" value="" id="nombreCategoria"></p>
+                <p>Categoria: <select id="nombreCategoria" name="nombreCategoria" required>
+                        <option value="Alimentos">Alimentos</option>
+                        <option value="Arte y manualidades">Arte y Manualidades</option>
+                        <option value="Artículos para el hogar">Hogar</option>
+                        <option value="Electrónica">Electrónica</option>
+                        <option value="Instrumentos musicales">Instrumentos Musicales</option>
+                        <option value="Juguetes">Juguetes</option>
+                        <option value="Libros">Libros</option>
+                        <option value="Oficina y papelería">Oficina y Papelería</option>
+                    </select></p>
                 <button onclick="actualizarProducto()">Actualizar</button>
             </div>
         </div>
