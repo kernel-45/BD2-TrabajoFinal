@@ -6,7 +6,7 @@ $correo = isset($_GET['correo']) ? $_GET['correo'] : '';
 $conn = mysqli_connect("localhost", "root", "", "estimazon") or die("Error en la conexión con el servidor");
 $db = mysqli_select_db($conn, "estimazon") or die("Error en la conexión con la base de datos");
 
-$consulta = "SELECT nombre, apellido1, apellido2, idPersona, correo, numAvisos FROM vendedores WHERE correo = '$correo'";
+$consulta = "SELECT nombre, apellido1, apellido2, idPersona, correo, numAvisos FROM vendedor WHERE correo = '$correo'";
 $resultado = mysqli_query($conn, $consulta);
 
 if ($filaPerfil = mysqli_fetch_assoc($resultado)) {
