@@ -67,7 +67,7 @@ if ($conn->connect_error) {
         .then(data => {
           console.log(data); // Aquí manejas los datos devueltos por el servidor
         })
-        .catch(error => console.error('Error:', error));
+        // .catch(error => console.error('Error:', error));
     });
     </script>
      </body >
