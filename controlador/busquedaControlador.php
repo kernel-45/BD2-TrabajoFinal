@@ -1,6 +1,4 @@
-<?php ?>
 <html>
-
 <head>
     <link rel="stylesheet" type="text/css" href="../css/estilos.css">
     <link rel="stylesheet" type="text/css" href="../css/estilosControlador.css">
@@ -14,8 +12,14 @@
         die("Conexión fallida: " . $conexion->connect_error);
     }
 
-    $idUser = $_POST['idUser'];
-    $tipoBusqueda = $_POST['tipoBusqueda'];
+    if(isset($_POST['idUser']) && isset($_POST['tipoBusqueda'])) {
+        $idUser =  $_POST['idUser']; 
+        $tipoBusqueda = $_POST['tipoBusqueda'];
+        // Aquí puedes continuar con el procesamiento de estos datos
+    } else {
+        // Manejar el caso en que los datos no estén presentes
+        echo "Datos necesarios no recibidos.";
+    }
     ?>
 </head>
 <div class="titulo">
@@ -24,9 +28,14 @@
 
 <body>
     <div class="contenedor-principal">
-        <div class="subtitulo">Bienvenido al seguimiento de tus pedidos</div>
+        <div class="subtitulo">Bienvenido al seguimiento de los pedidos del usuario <?php echo $idUser ?></div>
+        <div class="subtitulo"><?php $idUser ?> </div>
         <?php
-        if ($tipoBusqueda == "ult5d") {
+        $sqlP = "SELECT * FROM comprador WHERE idPersona = $idUser"; 
+        $resultP = $conn->query($sqlP);
+        if($resultP->num_rows == 0) {
+            echo "No existe ese comprador"; 
+        } elseif ($tipoBusqueda == "ult5d") {
             $sql = "SELECT pedido.idPedido, vendedor.idPersona, pedido.fechaConfirmacion FROM 
         (vendedor JOIN
             (producto JOIN
@@ -39,15 +48,16 @@
     WHERE (DATEDIFF(CURDATE(), pedido.fechaConfirmacion) >= 5 AND propiedadesproducto.fechaDeLlegada IS NULL);";
 
         } elseif ($tipoBusqueda == "siempre") {
-            $sql = "SELECT pedido.idPedido, vendedor.idPersona, pedido.fechaConfirmacion FROM 
-                    vendedor JOIN
-                        (producto JOIN
-                            (propiedadesproducto JOIN
-                                (comprador JOIN pedido
-                                ON idComprador = $idUser)
-                            ON pedido.idPedido = propiedadesproducto.idPedido)
-                        ON propiedadesproducto.idFichaProducto = pedido.idPedido)
-                    ON vendedor.idPersona = producto.idVendedor";
+            $sql = "SELECT pedido.idPedido, vendedor.idPersona, pedido.fechaConfirmacion, producto.nombre FROM 
+            vendedor JOIN
+                (producto JOIN
+                    (propiedadesproducto JOIN
+                        (comprador JOIN pedido
+                        ON comprador.idPersona = $idUser
+                        AND pedido.idComprador = $idUser)
+                    ON pedido.idPedido = propiedadesproducto.idPedido)
+                ON propiedadesproducto.idFichaProducto = producto.idProducto)
+            ON vendedor.idPersona = producto.idVendedor;";
         }
         $result = mysqli_query($conn, $sql);
         if ($result->num_rows > 0) {
@@ -57,15 +67,13 @@
                 $idPedido = $row["idPedido"];
                 $idVendedor = $row["idPersona"];
                 $fechaConfirmacion = $row["fechaConfirmacion"];
-
+                $nombreProducto = $row["nombre"]; 
                 // Hacer algo con estos datos
                 echo "<div class=subtitulo>";
-                echo "<div class='pedido'>";
-                echo "<div class='estado-pedido'>$estado</div>";
-                echo "<div class='id-pedido'>$idPedido</div>";
-                echo "<div class='nombre-producto'>$nombre</div>";
-                echo "<div class='descripcion-producto'>$descripcion</div>";
-                echo "</div>";
+                echo "<div class='id-pedido'>ID pedido: $idPedido</div>";
+                echo "<div class='nombre-producto'>ID vendedor: $idVendedor</div>";
+                echo "<div class='nombre-producto'>Fecha de pago del pedido: $fechaConfirmacion</div>";
+                echo "<div class='nombre-producto'>Nombre del producto: $nombreProducto</div>";
                 echo "</div>";
             }
         } else {

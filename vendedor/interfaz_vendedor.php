@@ -34,6 +34,13 @@
         >
         Nuevo producto
       </button>
+      <button 
+        class="boton"
+        id="restock"
+        onclick="window.location.href='modificarProducto.php'"
+        >
+        Modificar producto
+      </button>
     </div>
   </body>
 </html>
