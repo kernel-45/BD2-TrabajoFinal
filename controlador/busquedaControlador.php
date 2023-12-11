@@ -59,7 +59,7 @@
                     (comprador JOIN pedido
                     ON idComprador = $idUser)
                 ON pedido.idPedido = propiedadesproducto.idPedido)
-            ON propiedadesproducto.idFichaProducto = pedido.idPedido)
+            ON propiedadesproducto.idProducto = pedido.idPedido)
         ON vendedor.idPersona = producto.idVendedor)
     WHERE (DATEDIFF(CURDATE(), pedido.fechaConfirmacion) >= 5 AND propiedadesproducto.fechaDeLlegada IS NULL);";
 
@@ -72,7 +72,7 @@
                         ON comprador.idPersona = $idUser
                         AND pedido.idComprador = $idUser)
                     ON pedido.idPedido = propiedadesproducto.idPedido)
-                ON propiedadesproducto.idFichaProducto = producto.idProducto)
+                ON propiedadesproducto.idProducto = producto.idProducto)
             ON vendedor.idPersona = producto.idVendedor;";
         }
         $result = mysqli_query($conn, $sql);

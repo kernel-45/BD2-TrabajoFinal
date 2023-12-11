@@ -3,7 +3,7 @@ function obtenercesta($idPersona, $conn) {
 $sql = "SELECT pedido.idPedido, producto.nombre, producto.descripcion, producto.precio, producto.stock
         FROM producto 
         JOIN propiedadesproducto 
-        ON producto.idProducto = propiedadesproducto.idFichaProducto 
+        ON producto.idProducto = propiedadesproducto.idProducto 
         JOIN pedido 
         ON pedido.idComprador= $idPersona AND pedido.fechaConfirmacion IS NULL AND pedido.idPedido = propiedadesproducto.idPedido;";
 $result = mysqli_query($conn, $sql);

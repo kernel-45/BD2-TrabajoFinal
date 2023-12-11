@@ -15,7 +15,6 @@ session_start();
 $id = $_SESSION['idUser']; 
 // Obtienes los productos de la cesta
 $productosEnCesta = obtenercesta($id, $conn);
-var_dump($productosEnCesta);
 ?>
 <!DOCTYPE html>
 <html lang="es">
@@ -39,7 +38,7 @@ var_dump($productosEnCesta);
       </div>
     </div>
     <h1>Cesta</h1>
-    <ul class="propiedadesproducto">
+    <ul class="propiedadesproducto" id="listacarrito">
         <?php foreach ($productosEnCesta as $producto): ?>
             <li>
                 <h3><?php echo $producto['idPedido']; ?></h3>
@@ -49,10 +48,10 @@ var_dump($productosEnCesta);
                 <p><strong>Stock:</strong> <?php echo $producto['stock']; ?></p>
             </li>
         <?php endforeach; ?>
-    </ul>
+        </ul>
 
     <a href="../../estimazon.html" id="volverButton">Volver a la lista de categorías</a>
 
-    <div class="subtitulo">EEEEEEEEEEEE, AAAAAAAAAAAAAAAAAA <?php echo $id ?></div>
+
 </body>
 </html>

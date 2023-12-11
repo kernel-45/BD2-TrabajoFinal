@@ -16,9 +16,9 @@ if ($conn->connect_error) {
 
 // Seleccionas los productos
 if ($categoria == "Catálogo") {
-    $sql = "SELECT nombre, descripcion, precio, stock FROM producto";
+    $sql = "SELECT p.nombre as nprod, p.descripcion, p.precio, p.stock, v.nombre, v.apellido1 FROM producto p JOIN vendedor v ON v.idPersona = p.idVendedor";
 } else {
-    $sql = "SELECT nombre, descripcion, precio, stock FROM producto WHERE nombreCategoria = '".$categoria."'";
+    $sql = "SELECT p.nombre as nprod, p.descripcion, p.precio, p.stock, v.nombre, v.apellido1 FROM producto p JOIN vendedor v ON v.idPersona = p.idVendedor AND nombreCategoria = '".$categoria."'";
 }
 
 echo $sql;
@@ -51,7 +51,7 @@ $conn->close();
       <?php echo strtoupper($categoria); ?>
       <div class="botones">
         <button class="boton" onclick="location.href='../inicio-sesion/iniciar_sesion.html'">Identifícate</button>
-        <button class="boton">
+        <button class="boton" onclick="location.href='cesta/cesta.php'">
           <img src="../carrito.png" alt="Carrito" class="icono-carrito" />Cesta
         </button>
       </div>
@@ -61,10 +61,11 @@ $conn->close();
     <ul>
         <?php foreach ($productos as $producto): ?>
             <li>
-                <h3><?php echo $producto['nombre']; ?></h3>
+                <h3><?php echo $producto['nprod']; ?></h3>
                 <p><strong>Descripción:</strong> <?php echo $producto['descripcion']; ?></p>
                 <p><strong>Precio:</strong> $<?php echo $producto['precio']; ?></p>
                 <p><strong>Stock:</strong> <?php echo $producto['stock']; ?></p>
+                <p><strong>Vendedor:</strong> <?php echo $producto['nombre']; ?> <?php echo $producto['apellido1']; ?></p></p>
                 <!-- Botón "Añadir al Carrito" -->
                 <button onclick=>Añadir al Carrito</button>
             </li>
