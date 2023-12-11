@@ -21,6 +21,18 @@
         echo "Datos necesarios no recibidos.";
     }
     ?>
+    <style>
+        table {
+            border: 1px solid black;
+            width: 100%;
+            padding: 5%;
+        }
+        th, td {
+            border: 1px solid black;
+            text-align: left;
+            padding: 8px;
+        }
+    </style>
 </head>
 <div class="titulo">
     ESTIMAZON
@@ -61,6 +73,18 @@
         }
         $result = mysqli_query($conn, $sql);
         if ($result->num_rows > 0) {
+            //acaba php
+            ?>
+            <!-- pongo lo de la tabla de jaume -->
+            <table>
+            <tr>
+                <td>id pedido </td>
+                <td>ID vendedor </td>
+                <td>Fecha confirmacion pedido </td>
+                <td>Nombre producto </td>
+            </tr>
+            <!-- vuelve a abrir php -->
+            <?php
             // Procesar cada fila de resultado
             while ($row = mysqli_fetch_array($result)) {
                 // Acceder a los atributos individuales
@@ -69,19 +93,31 @@
                 $fechaConfirmacion = $row["fechaConfirmacion"];
                 $nombreProducto = $row["nombre"]; 
                 // Hacer algo con estos datos
-                echo "<div class=subtitulo>";
-                echo "<div class='id-pedido'>ID pedido: $idPedido</div>";
-                echo "<div class='nombre-producto'>ID vendedor: $idVendedor</div>";
-                echo "<div class='nombre-producto'>Fecha de pago del pedido: $fechaConfirmacion</div>";
-                echo "<div class='nombre-producto'>Nombre del producto: $nombreProducto</div>";
+                echo "<tr>";
+                echo "<td> $idPedido</td>";
+                echo "<td> $idVendedor</td>";
+                echo "<td> $fechaConfirmacion</td>";
+                echo "<td> $nombreProducto</td>";;
+                echo "</td>";
+                if($fechaLLegada == null) {
+                    echo "pendent"; 
+                    //poner boton para marcar como recibido
+                }else{
+                    echo "recibido"; 
+                }
+                echo "<div "; 
                 echo "</div>";
             }
+            ?>
+            </table>
+            <?php
         } else {
             echo "<div class='subtituloS'>";
             echo "<br><br><br><br>El usuario no ha hecho ningún pedido todavía. <br><br> 
               Cuando empiece a pedir productos de Estimazon sus productos aparecerán aquí";
             echo "</div>";
         }
+        
 
 
         ?>
