@@ -16,7 +16,7 @@ $idVendedor = $_SESSION['idUser'] ?? '';
     <div class="titulo">
       ESTIMAZON
       <div class="botones">
-      <button class="boton" onclick=resetAllCookies()>Cerrar sesión</button>
+      <button class="boton" onclick=resetAllCookies(1)>Cerrar sesión</button>
         <button class="boton" id="perfilVendedor" onclick="window.location.href='perfilVendedor.php'"><img src="user.png" alt="User" class="icono-user" />Mi perfil </button>
       </div>
     </div>

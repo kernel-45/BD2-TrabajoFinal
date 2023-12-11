@@ -18,7 +18,7 @@
     <div class="titulo">
         ESTIMAZON
         <div class="botones">
-            <button class="boton" onclick=resetAllCookies()>Cerrar sesión</button>
+            <button class="boton" onclick=resetAllCookies(1)>Cerrar sesión</button>
             <button class="boton" id="perfil" onclick="window.location.href='interfaz_vendedor.php'">
                 Volver
             </button>

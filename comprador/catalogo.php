@@ -39,6 +39,7 @@ $conn->close();
 <html lang="es">
 
 <head>
+    <script src="../funciones.js"></script>
     <link rel="stylesheet" type="text/css" href="../css/estilos.css">
     <meta charset="UTF-8">
     <title>Estimazon</title>
@@ -46,20 +47,22 @@ $conn->close();
 
 <body>
     <div class="titulo">
-        <div class="botones-ocultos" id="botones-comprador">
-            <button class="boton" onclick=resetAllCookies()>Cerrar sesión</button>
-            <button class="boton" onclick="location.href='perfil.html'">Perfil</button>
-        </div>
 
         <?php echo strtoupper($categoria); ?>
         <div class="botones">
-            <button class="boton" onclick="location.href='../inicio-sesion/iniciar_sesion.html'">Identifícate</button>
+            <button class="boton" onclick="location.href='perfil.html'">Perfil</button>
+            <button class="boton" onclick=resetAllCookies(1)>Cerrar sesión</button>
             <button class="boton" onclick="location.href='cesta/cesta.php'">
                 <img src="../carrito.png" alt="Carrito" class="icono-carrito" />Cesta
             </button>
         </div>
     </div>
-    <h1 class="subtitulo"></h1>
+    <h1 class="derecha">
+        
+            <button class="boton-volver" onclick="location.href='../estimazon.html'">Volver</button>
+       
+    </h1>
+
     <ul>
         <?php foreach ($productos as $producto): ?>
         <li>
@@ -67,7 +70,8 @@ $conn->close();
             <p><strong>Descripción:</strong> <?php echo $producto['descripcion']; ?></p>
             <p><strong>Precio:</strong> $<?php echo $producto['precio']; ?></p>
             <p><strong>Stock:</strong> <?php echo $producto['stock']; ?></p>
-            <p><strong>Vendedor:</strong> <?php echo $producto['nombre']; ?> <?php echo $producto['apellido1']; ?></p>
+            <p><strong>Vendedor:</strong> <?php echo $producto['nombre']; ?> <?php echo $producto['apellido1']; ?>
+            </p>
             </p>
             <!-- Botón "Añadir al Carrito" -->
             <button onclick=>Añadir al Carrito</button>

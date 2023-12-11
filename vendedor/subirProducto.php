@@ -1,28 +1,30 @@
-
 <!DOCTYPE html>
 <html lang="es">
+
 <head>
     <script src="../funciones.js"></script>
     <link rel="stylesheet" type="text/css" href="../css/estilos.css">
     <meta charset="UTF-8">
     <title>Subir Producto - Estimazon</title>
 </head>
+
 <body>
-<?php
+    <?php
 session_start(); 
 $idVendedor = $_SESSION['idUser'] ?? ''; 
 ?>
-<div class="titulo">
-  ESTIMAZON
-  <div class="botones">
-    <button class="boton" onclick=resetAllCookies()>Cerrar sesión</button>
-    <button class="boton" id="perfilVendedor" onclick="window.location.href='perfilVendedor.php'"><img src="user.png" alt="User" class="icono-user" />Mi perfil </button>
-  </div>
-</div>
+    <div class="titulo">
+        ESTIMAZON
+        <div class="botones">
+            <button class="boton" onclick=resetAllCookies(1)>Cerrar sesión</button>
+            <button class="boton" id="perfilVendedor" onclick="window.location.href='perfilVendedor.php'"><img
+                    src="user.png" alt="User" class="icono-user" />Mi perfil </button>
+        </div>
+    </div>
     <h1 class="subtitulo">Subir Producto</h1>
     <div class="centrar">
         <div id="formularioSubirProducto">
-             <form id="formSubirProducto" action="procesarProducto.php" method="POST">
+            <form id="formSubirProducto" action="procesarProducto.php" method="POST">
                 <p>
                     <label for="nombreProducto">Nombre del Producto:</label>
                     <input type="text" id="nombreProducto" name="nombreProducto" required>
@@ -60,14 +62,14 @@ $idVendedor = $_SESSION['idUser'] ?? '';
         </div>
     </div>
     <script>
-        document.getElementById('formSubirProducto').addEventListener('submit', function(e) {
-            e.preventDefault(); // Evita el envío normal del formulario
+    document.getElementById('formSubirProducto').addEventListener('submit', function(e) {
+        e.preventDefault(); // Evita el envío normal del formulario
 
-            // Recoger los datos del formulario
-            var formData = new FormData(this);
+        // Recoger los datos del formulario
+        var formData = new FormData(this);
 
-            // Realizar la solicitud AJAX
-            fetch('procesarProducto.php', {
+        // Realizar la solicitud AJAX
+        fetch('procesarProducto.php', {
                 method: 'POST',
                 body: formData
             })
@@ -78,17 +80,18 @@ $idVendedor = $_SESSION['idUser'] ?? '';
                 return response.json();
             })
             .then(data => {
-    if (data.success) {
-        window.location.href = 'interfaz_vendedor.php';
-    } else {
-        alert('Error: ' + data.message);
-    }
-})
+                if (data.success) {
+                    window.location.href = 'interfaz_vendedor.php';
+                } else {
+                    alert('Error: ' + data.message);
+                }
+            })
             .catch(error => {
                 console.error('Error:', error);
                 alert('Hubo un problema al procesar la solicitud: ' + error.message);
             });
-        });
+    });
     </script>
 </body>
+
 </html>
