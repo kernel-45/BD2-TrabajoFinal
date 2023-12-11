@@ -19,6 +19,7 @@ $productosEnCesta = obtenercesta($id, $conn);
 <!DOCTYPE html>
 <html lang="es">
 <head>
+    
     <link rel="stylesheet" type="text/css" href="../../css/estilos.css">
     <meta charset="UTF-8">
     <title>Estimazon</title>
@@ -45,12 +46,11 @@ $productosEnCesta = obtenercesta($id, $conn);
                 <p><strong>Stock:</strong> <?php echo $producto['nombre']; ?></p>
                 <p><strong>Descripción:</strong> <?php echo $producto['descripcion']; ?></p>
                 <p><strong>Precio:</strong> $<?php echo $producto['precio']; ?></p>
-                <p><strong>Stock:</strong> <?php echo $producto['stock']; ?></p>
+                <p><strong>Cantidad:</strong> <?php echo $producto['qtt']; ?></p>
             </li>
         <?php endforeach; ?>
         </ul>
 
-    <a href="../../estimazon.html" id="volverButton">Volver a la lista de categorías</a>
 
 
 </body>

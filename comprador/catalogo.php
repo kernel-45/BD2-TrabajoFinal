@@ -1,6 +1,7 @@
 <?php
 
-// Capturar el cuerpo de la solicitud
+session_start();
+$id = $_SESSION['idUser'];
 $categoria = $_GET['categoria'];
 $servername = "localhost";
 $username = "root";
@@ -8,6 +9,7 @@ $password = "";
 $dbname = "estimazon";
 
 $conn = new mysqli($servername, $username, $password, $dbname);
+include('anadir_carrito.php');
 
 // Verificar la conexión
 if ($conn->connect_error) {
@@ -16,12 +18,11 @@ if ($conn->connect_error) {
 
 // Seleccionas los productos
 if ($categoria == "Catálogo") {
-    $sql = "SELECT p.nombre as nprod, p.descripcion, p.precio, p.stock, v.nombre, v.apellido1 FROM producto p JOIN vendedor v ON v.idPersona = p.idVendedor";
+    $sql = "SELECT p.nombre as nprod, p.descripcion, p.precio, p.stock, v.nombre, v.apellido1, p.idProducto FROM producto p JOIN vendedor v ON v.idPersona = p.idVendedor";
 } else {
-    $sql = "SELECT p.nombre as nprod, p.descripcion, p.precio, p.stock, v.nombre, v.apellido1 FROM producto p JOIN vendedor v ON v.idPersona = p.idVendedor AND nombreCategoria = '".$categoria."'";
+    $sql = "SELECT p.nombre as nprod, p.descripcion, p.precio, p.stock, v.nombre, v.apellido1, p.idProducto FROM producto p JOIN vendedor v ON v.idPersona = p.idVendedor AND nombreCategoria = '" . $categoria . "'";
 }
 
-echo $sql;
 $result = $conn->query($sql);
 
 // Verificar si hay resultados
@@ -32,13 +33,14 @@ if ($result->num_rows > 0) {
     $productos = array(); // Si no hay resultados, inicializar un array vacío
 }
 
-$conn->close();
+
 
 ?>
 <!DOCTYPE html>
 <html lang="es">
 
 <head>
+    <script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
     <script src="../funciones.js"></script>
     <link rel="stylesheet" type="text/css" href="../css/estilos.css">
     <meta charset="UTF-8">
@@ -58,28 +60,44 @@ $conn->close();
         </div>
     </div>
     <h1 class="derecha">
-        
-            <button class="boton-volver" onclick="location.href='../estimazon.html'">Volver</button>
-       
+
+        <button class="boton-volver" onclick="location.href='../estimazon.html'">Volver</button>
+
     </h1>
 
     <ul>
-        <?php foreach ($productos as $producto): ?>
-        <li>
-            <h3><?php echo $producto['nprod']; ?></h3>
-            <p><strong>Descripción:</strong> <?php echo $producto['descripcion']; ?></p>
-            <p><strong>Precio:</strong> $<?php echo $producto['precio']; ?></p>
-            <p><strong>Stock:</strong> <?php echo $producto['stock']; ?></p>
-            <p><strong>Vendedor:</strong> <?php echo $producto['nombre']; ?> <?php echo $producto['apellido1']; ?>
-            </p>
-            </p>
-            <!-- Botón "Añadir al Carrito" -->
-            <button onclick=>Añadir al Carrito</button>
-        </li>
+        <?php
+        foreach ($productos as $producto): ?>
+            <li>
+                <h3>
+                    <?php echo $producto['nprod']; ?>
+                </h3>
+                <p><strong>Descripción:</strong>
+                    <?php echo $producto['descripcion']; ?>
+                </p>
+                <p><strong>Precio:</strong> $
+                    <?php echo $producto['precio']; ?>
+                </p>
+                <p><strong>Stock:</strong>
+                    <?php echo $producto['stock']; ?>
+                </p>
+                <p><strong>Vendedor:</strong>
+                    <?php echo $producto['nombre']; ?>
+                    <?php echo $producto['apellido1']; ?>
+                </p>
+                </p>
+                <?php $idtemporal = $producto['idProducto']; ?>
+                <form action="anadir_carrito.php" method="post">
+                    <input type="text" name="qtt" placeholder="Cantidad">
+                    <input type="hidden" name="idtemporal" value="<?php echo $idtemporal; ?>">
+                    <input type="submit" value="Añadir a la cesta">
+                </form>
+                
+
+            </li>
         <?php endforeach; ?>
     </ul>
 
-    <a href="../estimazon.html" id="volverButton">Volver a la lista de categorías</a>
 
 </body>
 
