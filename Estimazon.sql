@@ -53,11 +53,11 @@ INSERT INTO `categoria` (`nombreCategoria`) VALUES
 
 CREATE TABLE `comprador` (
   `idPersona` int(11) NOT NULL,
-  `correo` varchar(255) DEFAULT NULL,
-  `contraseña` varchar(255) DEFAULT NULL,
-  `nombre` varchar(20) DEFAULT NULL,
-  `apellido1` varchar(20) DEFAULT NULL,
-  `apellido2` varchar(20) DEFAULT NULL
+  `correo` varchar(255) NOT NULL,
+  `contraseña` varchar(255) NOT NULL,
+  `nombre` varchar(255) NOT NULL,
+  `apellido1` varchar(255) NOT NULL,
+  `apellido2` varchar(255) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
@@ -836,11 +836,11 @@ INSERT INTO `comprador` (`idPersona`, `correo`, `contraseña`, `nombre`, `apelli
 
 CREATE TABLE `controlador` (
   `idPersona` int(11) NOT NULL,
-  `correo` varchar(255) DEFAULT NULL,
-  `contraseña` varchar(255) DEFAULT NULL,
-  `nombre` varchar(20) DEFAULT NULL,
-  `apellido1` varchar(20) DEFAULT NULL,
-  `apellido2` varchar(20) DEFAULT NULL
+  `correo` varchar(255) NOT NULL,
+  `contraseña` varchar(255) NOT NULL,
+  `nombre` varchar(255) NOT NULL,
+  `apellido1` varchar(255) NOT NULL,
+  `apellido2` varchar(255) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
@@ -982,8 +982,8 @@ INSERT INTO `empresadistribuidora` (`idEmpresa`, `nombreEmpresa`) VALUES
 CREATE TABLE `incidencia` (
   `idIncidencia` int(11) NOT NULL,
   `descripcion` text DEFAULT NULL,
-  `idPedido` int(11) DEFAULT NULL,
-  `tipo` varchar(25) DEFAULT NULL
+  `idPedido` int(11) NOT NULL,
+  `tipo` varchar(25) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 -- --------------------------------------------------------
@@ -996,7 +996,7 @@ CREATE TABLE `pedido` (
   `idPedido` int(11) NOT NULL,
   `fechaConfirmacion` date DEFAULT NULL,
   `idZona` int(11) DEFAULT NULL,
-  `idComprador` int(11) DEFAULT NULL,
+  `idComprador` int(11) NOT NULL,
   `idRepartidor` int(11) DEFAULT NULL,
   `estado` varchar(50) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
@@ -1010,10 +1010,10 @@ CREATE TABLE `pedido` (
 CREATE TABLE `producto` (
   `idProducto` int(11) NOT NULL,
   `nombre` varchar(50) NOT NULL,
-  `precio` int(11) DEFAULT NULL,
+  `precio` int(11) NOT NULL,
   `descripcion` text DEFAULT NULL,
-  `stock` int(11) DEFAULT NULL,
-  `idVendedor` int(11) DEFAULT NULL,
+  `stock` int(11) DEFAULT 0,
+  `idVendedor` int(11) NOT NULL,
   `nombreCategoria` varchar(25) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
@@ -1120,9 +1120,9 @@ INSERT INTO `producto` (`idProducto`, `nombre`, `precio`, `descripcion`, `stock`
 
 CREATE TABLE `propiedadesproducto` (
   `fechaDeLlegada` date DEFAULT NULL,
-  `idPedido` int(11) DEFAULT NULL,
-  `idFichaProducto` int(11) DEFAULT NULL,
-  `qtt` int(11) DEFAULT NULL
+  `idPedido` int(11) NOT NULL,
+  `idProducto` int(11) NOT NULL,
+  `qtt` int(11) DEFAULT 1
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 -- --------------------------------------------------------
@@ -1134,11 +1134,11 @@ CREATE TABLE `propiedadesproducto` (
 CREATE TABLE `repartidor` (
   `idPersona` int(11) NOT NULL,
   `idEmpresa` int(11) NOT NULL,
-  `correo` varchar(255) DEFAULT NULL,
-  `contraseña` varchar(255) DEFAULT NULL,
-  `nombre` varchar(20) DEFAULT NULL,
-  `apellido1` varchar(20) DEFAULT NULL,
-  `apellido2` varchar(20) DEFAULT NULL
+  `correo` varchar(255) NOT NULL,
+  `contraseña` varchar(255) NOT NULL,
+  `nombre` varchar(255) NOT NULL,
+  `apellido1` varchar(255) NOT NULL,
+  `apellido2` varchar(255) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
@@ -1334,11 +1334,11 @@ INSERT INTO `tipoincidencia` (`tipo`) VALUES
 CREATE TABLE `vendedor` (
   `idPersona` int(11) NOT NULL,
   `numAvisos` int(11) DEFAULT NULL,
-  `correo` varchar(255) DEFAULT NULL,
-  `contraseña` varchar(255) DEFAULT NULL,
-  `nombre` varchar(20) DEFAULT NULL,
-  `apellido1` varchar(20) DEFAULT NULL,
-  `apellido2` varchar(20) DEFAULT NULL
+  `correo` varchar(255) NOT NULL,
+  `contraseña` varchar(255) NOT NULL,
+  `nombre` varchar(255) NOT NULL,
+  `apellido1` varchar(255) NOT NULL,
+  `apellido2` varchar(255) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
@@ -1519,7 +1519,7 @@ ALTER TABLE `producto`
 --
 ALTER TABLE `propiedadesproducto`
   ADD KEY `idPedido` (`idPedido`),
-  ADD KEY `idFichaProducto` (`idFichaProducto`);
+  ADD KEY `idProducto` (`idProducto`);
 
 --
 -- Indices de la tabla `repartidor`
@@ -1672,7 +1672,7 @@ ALTER TABLE `producto`
 --
 ALTER TABLE `propiedadesproducto`
   ADD CONSTRAINT `propiedadesproducto_ibfk_1` FOREIGN KEY (`idPedido`) REFERENCES `pedido` (`idPedido`),
-  ADD CONSTRAINT `propiedadesproducto_ibfk_2` FOREIGN KEY (`idFichaProducto`) REFERENCES `producto` (`idProducto`);
+  ADD CONSTRAINT `propiedadesproducto_ibfk_2` FOREIGN KEY (`idProducto`) REFERENCES `producto` (`idProducto`);
 
 --
 -- Filtros para la tabla `repartidor`
@@ -1705,7 +1705,8 @@ ALTER TABLE `r_tienedomicilioen`
 -- Filtros para la tabla `r_tieneedificiosen`
 --
 ALTER TABLE `r_tieneedificiosen`
-  ADD CONSTRAINT `r_tieneedificiosen_ibfk_1` FOREIGN KEY (`idEmpresa`) REFERENCES `empresadistribuidora` (`idEmpresa`);
+  ADD CONSTRAINT `r_tieneedificiosen_ibfk_1` FOREIGN KEY (`idEmpresa`) REFERENCES `empresadistribuidora` (`idEmpresa`),
+  ADD CONSTRAINT `r_tieneedificiosen_ibfk_2` FOREIGN KEY (`idZona`) REFERENCES `zona`(`idZona`);
 
 --
 -- Filtros para la tabla `zona`
