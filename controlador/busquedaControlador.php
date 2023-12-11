@@ -18,11 +18,24 @@
     if ($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_POST['ponerAviso'])) {
         $idVendedor = $_POST['idVendedor'];
         $sql2 = "UPDATE vendedor SET numAvisos = numAvisos + 1 WHERE idPersona = $idVendedor";
-    
         // Aquí, ejecuta la consulta $sql2 usando mysqli_query o PDO
         // Por ejemplo, con mysqli:
         mysqli_query($conn, $sql2);
         if ($conn->query($sql2) === TRUE) {
+            echo "Aviso actualizado correctamente.";
+            header('Location: interfaz_Controlador.php');
+            exit();
+        } else {
+            echo "Error al actualizar el aviso: " . $conn->error;
+        }
+    }
+    if ($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_POST['marcarRecibido'])) {
+        $idPedido = $_POST['idPedido'];
+        $sql3 = "UPDATE propiedadesProducto SET fechaDeLlegada = CURDATE() WHERE propiedadesProducto.idPedido = $idPedido";
+        // Aquí, ejecuta la consulta $sql2 usando mysqli_query o PDO
+        // Por ejemplo, con mysqli:
+        mysqli_query($conn, $sql3);
+        if ($conn->query($sql3) === TRUE) {
             echo "Aviso actualizado correctamente.";
             header('Location: interfaz_Controlador.php');
             exit();
@@ -126,7 +139,10 @@
                         echo "<input type='hidden' name='idVendedor' value='" . $idVendedor . "'>";
                         echo "<button type='submit' name='ponerAviso'>Poner Aviso</button>";
                         echo "</form>";
-                        //poner boton para marcar como recibido
+                        echo "<form method='post'>";
+                        echo "<input type='hidden' name='idPedido' value='" . $idPedido . "'>";
+                        echo "<button type='submit' name='marcarRecibido'>Marcar como recibido</button>";
+                        echo "</form>";
                     } else {
                         echo "recibido";
                     }
@@ -138,10 +154,17 @@
             </table>
             <?php
         } else {
-            echo "<div class='subtituloS'>";
+            if($tipoBusqueda == "siempre"){
+            echo "<div class='subtitulo'>";
             echo "<br><br><br><br>El usuario no ha hecho ningún pedido todavía. <br><br> 
               Cuando empiece a pedir productos de Estimazon sus productos aparecerán aquí";
             echo "</div>";
+            } else {
+                echo "<div class='subtitulo'>";
+                echo "<br><br><br><br>El usuario no tiene pedidos no entregados en los ultimos 5 dias. <br><br> 
+                  Cuando realice pedidos que no le hayan llegado al cabo de 5 días aparecerán aquí";
+                echo "</div>";
+            }
         }
 
 
