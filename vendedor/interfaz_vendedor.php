@@ -25,13 +25,13 @@
     <h1 class="subtitulo">Hola, vendedor <?php echo $idVendedor; ?></h1>
     <div class="contenedor-central centrar">
         <button class="boton" id="consultarProductos" onclick="window.location.href='listaProductos.php'">
-            <img src="lupa.png" alt="User" class="icono-user" /> Consultar productos
+            <img src="imgAssets/lupa.png" alt="User" class="icono-user" /> Consultar productos
         </button>
         <button class="boton" id="SubirProducto" onclick="window.location.href='subirProducto.php'">
-            <img src="anadir.png" alt="User" class="icono-user" />Nuevo producto
+            <img src="imgAssets/anadir.png" alt="User" class="icono-user" />Nuevo producto
         </button>
         <button class="boton" id="restock" onclick="window.location.href='modificarProducto.php'">
-            <img src="mod.png" alt="User" class="icono-user" />Modificar producto
+            <img src="imgAssets/mod.png" alt="User" class="icono-user" />Modificar producto
         </button>
     </div>
 </body>

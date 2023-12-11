@@ -1,5 +1,6 @@
 <?php
 session_start();
+
 $idVendedor = isset($_SESSION['idUser']) ? intval($_SESSION['idUser']) : 0;
 if ($idVendedor <= 0) {
     echo json_encode(["success" => false, "message" => "Error: Vendedor no identificado."]);
@@ -12,17 +13,31 @@ if (!$conn) {
     exit;
 }
 
-$nombreProducto = mysqli_real_escape_string($conn, $_POST['nombreProducto'] ?? '');
-$precioProducto = isset($_POST['precioProducto']) ? intval($_POST['precioProducto']) : null;
-$descripcionProducto = isset($_POST['descripcionProducto']) ? mysqli_real_escape_string($conn, $_POST['descripcionProducto']) : null;
-$stockProducto = isset($_POST['stockProducto']) ? intval($_POST['stockProducto']) : null;
+// Decodificar los datos JSON recibidos
+$data = json_decode(file_get_contents('php://input'), true);
+$idProducto = isset($data['idProducto']) ? intval($data['idProducto']) : null;
 
-if (empty($nombreProducto)) {
-    echo json_encode(["success" => false, "message" => "Por favor, proporciona el nombre del producto."]);
+if ($idProducto === null) {
+    // Consulta para obtener los productos del vendedor
+    $query = "SELECT * FROM producto WHERE idVendedor = $idVendedor";
+    $resultado = mysqli_query($conn, $query);
+    $productos = [];
+
+    while ($fila = mysqli_fetch_assoc($resultado)) {
+        $productos[] = $fila;
+    }
+
+    echo json_encode($productos);
     exit;
 }
 
-$query = "SELECT idProducto FROM producto WHERE idVendedor = $idVendedor AND nombre = '$nombreProducto'";
+$nombreProducto = mysqli_real_escape_string($conn, $data['nombreProducto'] ?? '');
+$precioProducto = isset($data['precioProducto']) ? intval($data['precioProducto']) : null;
+$descripcionProducto = isset($data['descripcionProducto']) ? mysqli_real_escape_string($conn, $data['descripcionProducto']) : null;
+$stockProducto = isset($data['stockProducto']) ? intval($data['stockProducto']) : null;
+$nombreCategoria = isset($data['nombreCategoria']) ? mysqli_real_escape_string($conn, $data['nombreCategoria']) : null;
+
+$query = "SELECT idProducto FROM producto WHERE idVendedor = $idVendedor AND idProducto = $idProducto";
 $resultado = mysqli_query($conn, $query);
 
 if (mysqli_num_rows($resultado) > 0) {
@@ -37,6 +52,9 @@ if (mysqli_num_rows($resultado) > 0) {
     }
     if ($stockProducto !== null) {
         $updates[] = "stock = $stockProducto";
+    }
+    if ($nombreCategoria !== null) {
+        $updates[] = "nombreCategoria = '$nombreCategoria'";
     }
 
     if (count($updates) > 0) {

@@ -9,6 +9,27 @@ body {
   justify-content: center;
   align-items: center;
   margin-top: 100px;
+  text-align: center;
+}
+.container {
+  display: flex;
+  flex-direction: column; /* Alinea los elementos verticalmente */
+  justify-content: center;
+  align-items: center;
+  height: 50vh; /* Esto centra verticalmente el contenido */
+  text-align: center; /* Esto centra el texto horizontalmente */
+}
+
+.seleccion-y-detalles {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+}
+#seleccionProducto {
+  width: 100%;
+  max-width: 400px;
+  margin-bottom: 10px; /* Agregamos un margen inferior para separar los elementos */
 }
 
 .contenedor-botones {
