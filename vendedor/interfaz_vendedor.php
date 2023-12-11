@@ -13,6 +13,7 @@
     <div class="titulo">
       ESTIMAZON
       <div class="botones">
+      <button class="boton">Cerrar sesión</button>
   <button class="boton" id="perfilVendedor" onclick="window.location.href='perfilVendedor.php'">
     <img src="user.png" alt="User" class="icono-user" />Mi perfil 
   </button>
