@@ -66,14 +66,15 @@
         if ($resultP->num_rows == 0) {
             echo "No existe ese comprador";
         } elseif ($tipoBusqueda == "ult5d") {
-            $sql = "SELECT pedido.idPedido, vendedor.idPersona, pedido.fechaConfirmacion FROM 
+            $sql = "SELECT pedido.idPedido, vendedor.idPersona, pedido.fechaConfirmacion, producto.nombre, propiedadesproducto.fechaDeLlegada FROM 
         (vendedor JOIN
             (producto JOIN
                 (propiedadesproducto JOIN
                     (comprador JOIN pedido
-                    ON idComprador = $idUser)
+                    ON pedido.idComprador = $idUser
+                    AND comprador.idPersona = $idUser)
                 ON pedido.idPedido = propiedadesproducto.idPedido)
-            ON propiedadesproducto.idProducto = pedido.idPedido)
+            ON propiedadesproducto.idProducto = producto.idProducto)
         ON vendedor.idPersona = producto.idVendedor)
     WHERE (DATEDIFF(CURDATE(), pedido.fechaConfirmacion) >= 5 AND propiedadesproducto.fechaDeLlegada IS NULL);";
 
