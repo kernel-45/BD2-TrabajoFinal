@@ -1,0 +1,46 @@
+/* Estilo general para el formulario */
+#miFormulario {
+    background-color: rgb(141, 112, 112);
+    color: black;
+    padding: 20px;
+    max-width: 400px;
+    margin: auto; /* Centra el formulario horizontalmente */
+    margin-top: 20px; /* Añade un margen en la parte superior para separarlo del elemento anterior */
+    margin-bottom: 20px; /* Añade un margen en la parte inferior para separarlo del siguiente elemento */
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.3);
+    border-radius: 10px;
+    font-family: Arial, Helvetica, sans-serif;
+}
+
+#miFormulario label {
+    display: block;
+    margin-bottom: 5px;
+}
+
+#miFormulario input,
+#miFormulario select {
+    width: calc(100% - 20px); /* Ancho del 100% con un ajuste para el relleno */
+    padding: 10px;
+    margin-bottom: 10px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    box-sizing: border-box; /* Incluye el relleno en el ancho total */
+}
+
+#miFormulario button {
+    background-color: rgb(161, 132, 132);
+    color: black;
+    border: none;
+    padding: 10px 20px;
+    cursor: pointer;
+    transition: background-color 0.3s;
+}
+
+#miFormulario button:hover {
+    background-color: rgb(141, 112, 112);
+}
+
+/* Estilo para resaltar campos requeridos no completados */
+#miFormulario.invalid-form [required]:invalid {
+    border: 1px solid red;
+}

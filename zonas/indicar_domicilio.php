@@ -9,9 +9,9 @@
 </head>
 <body class="contenedor-estimazon">
     <div class="titulo"> Estimazon </div>
-    <div class="contenedor-central">
+    <div class="producto">
         <label for="opciones" class="subtitulo">Selecciona un domicilio:</label>
-        <select id="opciones" name="opciones">
+        <select class="boton" id="opciones" name="opciones">
         <?php
         // Conexión a la base de datos
         $conn = mysqli_connect("localhost","root","") or die("error a conexió amb servidor");
@@ -42,7 +42,7 @@
                     WHERE zona.idZona = ".$zona['idZonaPadre'];
                 $zonas = mysqli_query($conn, $consulta_zonas);
             }
-            echo '<option value="'.$domicilio.'">'.$direccion.'</option>';
+            echo '<option class="boton" value="'.$domicilio['idZona'].'">'.$direccion.'</option>';
         }
         // Cerrar la conexión a la base de datos
         mysqli_close($conn);
@@ -50,14 +50,35 @@
     </select>
 </body>
 <script>
-  document.addEventListener("DOMContentLoaded", function() {
-    const select = document.getElementById("opciones");
+    document.addEventListener("DOMContentLoaded", function() {
+        const select = document.getElementById("opciones");
 
-    select.addEventListener("change", function() {
-      const selectedOption = this.options[this.selectedIndex];
-      selectedOption.style.backgroundColor = "rgb(80, 80, 80)";
-      selectedOption.style.color = "white";
+        select.addEventListener("change", function() {
+            const selectedOption = this.options[this.selectedIndex];
+            const idDireccionSeleccionada = selectedOption.getAttribute("value");
+            const direccionSeleccionada = selectedOption.text;
+            // Enviar la dirección seleccionada al servidor mediante una petición AJAX
+            const xhr = new XMLHttpRequest();
+            const url = "guardar_domicilio.php"; // Ajusta la URL según tu estructura de archivos
+            const data = "direccion=" + encodeURIComponent(direccionSeleccionada) + "&idZona=" + encodeURIComponent(idDireccionSeleccionada);
+
+            xhr.open("POST", url, true);
+            xhr.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");
+
+            xhr.onreadystatechange = function() {
+                if (xhr.readyState == 4) {
+                    if (xhr.status == 200) {
+                        const response = JSON.parse(xhr.responseText);
+                        alert(response.message);
+                    } else {
+                        alert("Error en la solicitud al servidor");
+                    }
+                }
+            };
+
+            xhr.send(data);
+        });
     });
-  });
 </script>
+
 </html>

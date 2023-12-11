@@ -1,14 +1,46 @@
 <!DOCTYPE html>
 <html lang="es">
 <head>
+    <link rel="stylesheet" type="text/css" href="../css/estilosFormulario.css">
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Formulario de Datos</title>
-    <script src="formulario.js"></script>
+    <script src="../funciones.js"></script>
 </head>
 <body>
+<form id="miFormulario" method="post" action="domicilio_anyadido.php">
+    CP: <input type="text" name="cp" required pattern="[0-9]{5}" placeholder="Escriba un número de 5 dígitos"><br>
+    Localidad: <input type="text" name="localidad" required><br>
+    Tipo vía: <select name="tipo_via" required>
+        <option value="Alameda">Alameda</option>
+        <option value="Avenida">Avenida</option>
+        <option value="Bulevar">Bulevar</option>
+        <option value="Calle">Calle</option>
+        <option value="Camino">Camino</option>
+        <option value="Carretera">Carretera</option>
+        <option value="Carrera">Carrera</option>
+        <option value="Cuesta">Cuesta</option>
+        <option value="Glorieta">Glorieta</option>
+        <option value="Paseo">Paseo</option>
+        <option value="Paseo Marítimo">Paseo Marítimo</option>
+        <option value="Pasaje">Pasaje</option>
+        <option value="Plaza">Plaza</option>
+        <option value="Plazoleta">Plazoleta</option>
+        <option value="Rambla">Rambla</option>
+        <option value="Ronda">Ronda</option>
+        <option value="Travesía">Travesía</option>
+        <option value="Vía">Vía</option>
+    </select>
+    Vía: <input type="text" name="via" required><br>
+    Número: <input type="number" name="numero" min="0" required placeholder="Escriba un número natural"><br>
+    Portal: <input type="text" name="portal"><br>
+    Escalera: <input type="text" name="escalera"><br>
+    Piso: <input type="number" name="piso" min="0" placeholder="Escriba un número natural"><br>
+    Puerta: <input type="text" name="puerta"><br>
+    <button class="boton-enviar">Enviar</button>
+</form>
 <script>
-    mostrarFormulario("domicilio_anyadido.php");
+    procesarFormulario(1);
 </script>
 </body>
 </html>
