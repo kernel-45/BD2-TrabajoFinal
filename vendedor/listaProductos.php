@@ -58,36 +58,10 @@ $idVendedor = $_SESSION['idUser'] ?? '';
                                  <p>Precio: ${producto.precio}</p>
                                  <p>Descripción: ${producto.descripcion}</p>
                                  <p>Stock: ${producto.stock}</p>
-                                 <p>Categoria: ${producto.nombreCategoria}</p>
-                                 <button onclick="eliminarProducto(${producto.idProducto})">Eliminar</button>`;
+                                 <p>Categoria: ${producto.nombreCategoria}</p>`;
+                                 
                 contenedor.appendChild(div);
             });
-        }
-        function eliminarProducto(idProducto) {
-            console.log("Eliminar producto con ID:", idProducto);
-            fetch('eliminarProducto.php', {
-                method: 'POST',
-                headers: {
-                'Content-Type': 'application/json',
-                 },
-                 body: JSON.stringify({ idProducto })
-             })
-              .then(response => {
-                 if (!response.ok) {
-                     throw new Error('Error en la respuesta del servidor');
-                 }
-                 return response.json();
-                })
-             .then(data => {
-                 if(data.success) {
-                    window.location.href = 'interfaz_vendedor.php';
-                 } else {
-                      alert('No se pudo eliminar el producto: ' + data.message);
-                 }
-              })
-            .catch(error => {
-                console.error('Error:', error);
-             });
         }
     });
     </script>
