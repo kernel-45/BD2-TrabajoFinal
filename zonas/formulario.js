@@ -52,26 +52,27 @@ function mostrarFormulario(scriptEjecutable) {
             CP: <input type="text" name="cp" required pattern="[0-9]{5}" placeholder="Escriba un número de 5 dígitos"><br>
             Localidad: <input type="text" name="localidad" required><br>
             Tipo vía: <select name="tipo_via" required>
-                <option value="Calle">Calle</option>
-                <option value="Avenida">Avenida</option>
-                <option value="Plaza">Plaza</option>
-                <option value="Carretera">Carretera</option>
-                <option value="Camino">Camino</option>
-                <option value="Paseo">Paseo</option>
-                <option value="Glorieta">Glorieta</option>
-                <option value="Bulevar">Bulevar</option>
-                <option value="Travesía">Travesía</option>
-                <option value="Rambla">Rambla</option>
-                <option value="Paseo Marítimo">Paseo Marítimo</option>
-                <option value="Carrera">Carrera</option>
                 <option value="Alameda">Alameda</option>
-                <option value="Ronda">Ronda</option>
+                <option value="Avenida">Avenida</option>
+                <option value="Bulevar">Bulevar</option>
+                <option value="Calle">Calle</option>
+                <option value="Camino">Camino</option>
+                <option value="Carretera">Carretera</option>
+                <option value="Carrera">Carrera</option>
                 <option value="Cuesta">Cuesta</option>
-                <option value="Plazoleta">Plazoleta</option>
+                <option value="Glorieta">Glorieta</option>
+                <option value="Paseo">Paseo</option>
+                <option value="Paseo Marítimo">Paseo Marítimo</option>
                 <option value="Pasaje">Pasaje</option>
+                <option value="Plaza">Plaza</option>
+                <option value="Plazoleta">Plazoleta</option>
+                <option value="Rambla">Rambla</option>
+                <option value="Ronda">Ronda</option>
+                <option value="Travesía">Travesía</option>
+                <option value="Vía">Vía</option>
             </select>
             Vía: <input type="text" name="via" required><br>
-            Número: <input type="number" name="numero" required min="0" placeholder="Escriba un número natural"><br>
+            Número: <input type="number" name="numero" min="0" required placeholder="Escriba un número natural"><br>
             Portal: <input type="text" name="portal"><br>
             Escalera: <input type="text" name="escalera"><br>
             Piso: <input type="number" name="piso" min="0" placeholder="Escriba un número natural"><br>
@@ -110,6 +111,31 @@ function enviarFormulario(formulario) {
         },
         body: JSON.stringify(Object.fromEntries(formData)),
     })
+    .then(response => {
+        if (!response.ok) {
+            throw new Error('Network response was not ok');
+        }
+        return response.json();
+    })
+    .then(data => {
+        // Manejar la respuesta del servidor aquí
+        if (data.success) {
+            // Redirigir o realizar otras acciones según sea necesario
+            alert('Operación exitosa');
+            window.location.href = '../estimazon.html';
+        } else {
+            alert('Error al enviar el formulario: ' + data.message);
+        }
+    })
+    .catch(error => {
+        console.error('Error:', error);
+        alert('Hubo un problema al procesar la solicitud. Por favor, inténtalo de nuevo más tarde.');
+    });
+}
+
+function mostrarDomicilios() {
+    // Realizar la solicitud AJAX
+    fetch('domicilios.php', {})
     .then(response => {
         if (!response.ok) {
             throw new Error('Network response was not ok');
