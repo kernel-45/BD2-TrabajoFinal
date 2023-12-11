@@ -25,7 +25,7 @@ $productosEnCesta = obtenercesta($id, $conn);
 </head>
 <body>
 <div class="titulo">
-    <div class="botones-ocultos" id="botones-comprador">
+    <div class="botones" id="botones-comprador">
         <button class="boton" onclick=resetAllCookies()>Cerrar sesión</button>
         <button class="boton" onclick="location.href='../perfil.html'">Perfil</button>
     </div>

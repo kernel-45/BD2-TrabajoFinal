@@ -83,14 +83,7 @@ body {
     -50%
   ); 
 }
-.botones-ocultos {
-  position: absolute; 
-  left: 20px;
-  top: 50%; 
-  transform: translateY(
-    -50%
-  ); 
-}
+
 .boton {
   background-color: rgb(
     141,
