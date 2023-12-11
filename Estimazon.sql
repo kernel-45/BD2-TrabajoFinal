@@ -1,11 +1,11 @@
 -- phpMyAdmin SQL Dump
--- version 5.2.1
+-- version 5.2.0
 -- https://www.phpmyadmin.net/
 --
 -- Servidor: 127.0.0.1
--- Tiempo de generación: 10-12-2023 a las 16:25:34
--- Versión del servidor: 10.4.28-MariaDB
--- Versión de PHP: 8.2.4
+-- Tiempo de generación: 11-12-2023 a las 19:34:13
+-- Versión del servidor: 10.4.27-MariaDB
+-- Versión de PHP: 8.2.0
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 START TRANSACTION;
@@ -20,6 +20,29 @@ SET time_zone = "+00:00";
 --
 -- Base de datos: `estimazon`
 --
+
+DELIMITER $$
+--
+-- Funciones
+--
+CREATE DEFINER=`root`@`localhost` FUNCTION `obtener_estado` (`vendedor_id` INT) RETURNS VARCHAR(20) CHARSET utf8mb4 COLLATE utf8mb4_general_ci  BEGIN
+    DECLARE estado VARCHAR(20);
+    DECLARE numero INT;
+
+    SELECT numAvisos INTO numero FROM vendedor WHERE idPersona = vendedor_id;
+
+    IF numero >= 0 AND numero < 3 THEN
+        SET estado = 'inocente';
+    ELSEIF numero >= 3 AND numero < 6 THEN
+        SET estado = 'sospechoso';
+    ELSE
+        SET estado = 'dolent';
+    END IF;
+
+    RETURN estado;
+END$$
+
+DELIMITER ;
 
 -- --------------------------------------------------------
 
@@ -1706,7 +1729,7 @@ ALTER TABLE `r_tienedomicilioen`
 --
 ALTER TABLE `r_tieneedificiosen`
   ADD CONSTRAINT `r_tieneedificiosen_ibfk_1` FOREIGN KEY (`idEmpresa`) REFERENCES `empresadistribuidora` (`idEmpresa`),
-  ADD CONSTRAINT `r_tieneedificiosen_ibfk_2` FOREIGN KEY (`idZona`) REFERENCES `zona`(`idZona`);
+  ADD CONSTRAINT `r_tieneedificiosen_ibfk_2` FOREIGN KEY (`idZona`) REFERENCES `zona` (`idZona`);
 
 --
 -- Filtros para la tabla `zona`
