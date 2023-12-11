@@ -26,7 +26,7 @@ if ($conn->connect_error) {
     <div class="subtitulo">Bienvenido, controlador
       <?php echo $id ?>
     </div>
-    <div class="subtitulo">De qué usuario quieres consultar productos?</div>
+    <div class="subtitulo">De qué usuario quieres consultar pedidos?</div>
     <div class="miFormulario">
       <form id="formBuscarPedidos" action="busquedaControlador.php" method="POST">
         <p>
