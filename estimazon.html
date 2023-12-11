@@ -3,11 +3,12 @@
     <link rel="stylesheet" type="text/css" href="css/estilos.css">
     <meta charset="UTF-8">
     <title>Estimazon</title>
+    <script src="funciones.js"></script>
   </head>
   <body>
     <div class="titulo">
       <div class="botones-ocultos" id="botones-comprador" style="display:none;">
-        <button class="boton" onclick=resetAllCookies()>Cerrar sesión</button>
+        <button class="boton" onclick=resetAllCookies()> sesión</button>
         <button class="boton" onclick="location.href='comprador/perfil.html'">Perfil</button>
       </div>
       ESTIMAZON
@@ -55,16 +56,5 @@
       xhr.open('GET', 'get_tipoUser.php', true);
       xhr.send();
     };
-
-    function resetAllCookies() {
-      var cookies = document.cookie.split(";");
-      for (var i = 0; i < cookies.length; i++) {
-        var cookie = cookies[i];
-        var eqPos = cookie.indexOf("=");
-        var name = eqPos > -1 ? cookie.substr(0, eqPos) : cookie;
-        document.cookie = name + "=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/;";
-      }
-      actualizarBotones();
-    }
 </script>
 </html>
