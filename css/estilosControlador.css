@@ -26,7 +26,7 @@
     box-sizing: border-box; /* Incluye el relleno en el ancho total */
 }
 
-.miFormulario-button {
+.miFormulariobutton {
     background-color: rgb(161, 132, 132);
     color: black;
     border: none;
@@ -38,16 +38,19 @@
 .miFormulario button:hover {
     background-color: rgb(141, 112, 112);
 }
-.pedido{
-    display:grid; 
-    justify-items: center;
-    align-items: center;
-    margin-top: auto;
-      grid-row: span 2; 
-      grid-column: span 6; 
-      grid-template-columns: 76px 76px 76px 76px 76px 76px 76px 76px; 
-      grid-template-rows: 41px 41px 41px 41px; 
-      border: 1px solid #ccc;
-      padding: 10px;
-      margin: 10px;
-    }
+.boton-aviso{
+        background-color: rgb(
+          141,
+          112,
+          112
+        ); 
+        color: black;
+        border: white;
+        padding: 10px 20px; 
+        margin-left: 10px; 
+        cursor: pointer; 
+        transition: background-color 0.3s;
+}
+.contenedor-botones .boton:hover {
+    background-color: rgb(80, 80, 80);
+  }

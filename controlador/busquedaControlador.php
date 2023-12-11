@@ -70,12 +70,10 @@
                 $nombreProducto = $row["nombre"]; 
                 // Hacer algo con estos datos
                 echo "<div class=subtitulo>";
-                echo "<div class='pedido'>";
-                echo "<div class='id-pedido'>$idPedido</div>";
-                echo "<div class='nombre-producto'>$idVendedor</div>";
-                echo "<div class='nombre-producto'>$fechaConfirmacion</div>";
-                echo "<div class='nombre-producto'>$nombre</div>";
-                echo "</div>";
+                echo "<div class='id-pedido'>ID pedido: $idPedido</div>";
+                echo "<div class='nombre-producto'>ID vendedor: $idVendedor</div>";
+                echo "<div class='nombre-producto'>Fecha de pago del pedido: $fechaConfirmacion</div>";
+                echo "<div class='nombre-producto'>Nombre del producto: $nombreProducto</div>";
                 echo "</div>";
             }
         } else {
