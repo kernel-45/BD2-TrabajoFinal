@@ -1,4 +1,4 @@
-function resetAllCookies() {
+function resetAllCookies(profundidad) {
     var cookies = document.cookie.split(";");
     for (var i = 0; i < cookies.length; i++) {
       var cookie = cookies[i];
@@ -7,9 +7,9 @@ function resetAllCookies() {
       document.cookie = name + "=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/;";
     }
     
-    if (window.location.href.endsWith("estimazon.html")) {
+    if (profundidad == 0) {
         actualizarBotones();
     } else {
-        window.location.href = "estimazon.html";
+        window.location.href = "../".repeat(profundidad) + "estimazon.html";
     }
   }
