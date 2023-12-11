@@ -21,28 +21,7 @@ SET time_zone = "+00:00";
 -- Base de datos: `estimazon`
 --
 
-DELIMITER $$
---
--- Funciones
---
-CREATE DEFINER=`root`@`localhost` FUNCTION `obtener_estado` (`vendedor_id` INT) RETURNS VARCHAR(20) CHARSET utf8mb4 COLLATE utf8mb4_general_ci  BEGIN
-    DECLARE estado VARCHAR(20);
-    DECLARE numero INT;
 
-    SELECT numAvisos INTO numero FROM vendedor WHERE idPersona = vendedor_id;
-
-    IF numero >= 0 AND numero < 3 THEN
-        SET estado = 'inocente';
-    ELSEIF numero >= 3 AND numero < 6 THEN
-        SET estado = 'sospechoso';
-    ELSE
-        SET estado = 'dolent';
-    END IF;
-
-    RETURN estado;
-END$$
-
-DELIMITER ;
 
 -- --------------------------------------------------------
 
