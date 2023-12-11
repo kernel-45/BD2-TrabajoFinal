@@ -56,6 +56,12 @@ if ($conn->connect_error) {
 <body>
     <div class="titulo">
         ESTIMAZON
+        <div class="botones">
+            <button class="boton" onclick=resetAllCookies(1)>Cerrar sesión</button>
+            <button class="boton" id="perfilControlador" onclick="window.location.href='perfilControlador.php'">
+                <img src="../vendedor/user.png" alt="User" class="icono-user" />Mi perfil
+            </button>
+        </div>
     </div>
     <div class="contenedor-principal">
         <div class="subtitulo">Bienvenido, controlador
