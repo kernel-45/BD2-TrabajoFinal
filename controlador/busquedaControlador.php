@@ -1,4 +1,5 @@
 <html>
+
 <head>
     <link rel="stylesheet" type="text/css" href="../css/estilos.css">
     <link rel="stylesheet" type="text/css" href="../css/estilosControlador.css">
@@ -16,9 +17,9 @@
         echo "Datos necesarios no recibidos.";
     }
 
-    
+
     ?>
-   
+
     <style>
         table {
             border: 1px solid black;
@@ -112,12 +113,13 @@
                     } else {
                         echo "recibido";
                     }
-                    function ponerAviso($idVendedor) {
+                    function ponerAviso($idVendedor)
+                    {
                         // Código de la función
                         $conn = new mysqli("localhost", "root", "", "Estimazon");
-                        $sql = "UPDATE vendedor SET numAvisos = numAvisos+1 WHERE idPersona = $idVendedor"; 
-                        $conn->query($sql); 
-                        echo "aviso puesto"; 
+                        $sql = "UPDATE vendedor SET numAvisos = numAvisos+1 WHERE idPersona = $idVendedor";
+                        $conn->query($sql);
+                        echo "aviso puesto";
                     }
                     echo "</td>";
                     echo "<div ";

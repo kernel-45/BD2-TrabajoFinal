@@ -12,8 +12,8 @@
       <div class="boton" onclick="location.href='../zonas/anyadir_domicilio.html'">
         Añadir domicilio
       </div>
-      <div class="boton" onclick="location.href='../zonas/indicar_entrega.html'">
-        Indicar zona de entrega
+      <div class="boton" onclick="location.href='../zonas/indicar_domicilio.php'">
+        Indicar domicilio para la entrega
       </div>
       <div class="boton" onclick="location.href='../mis_pedidos.html'">
         Mis pedidos
@@ -21,43 +21,7 @@
       <div class="boton" onclick="location.href='../tarjeta-credito/indicar_tarjeta_credito.html'">
         Indicar tarjeta de crédito
       </div>
-      <div class="boton" onclick="eliminarCuenta()">
-        Eliminar cuenta
-      </div>
     </div>
   </div>
 </body>
-<script>
-    function eliminarCuenta(){
-        // Realizar la solicitud AJAX
-      fetch('eliminar_cuenta.php', {
-        
-      })
-        .then(response => {
-          if (!response.ok) {
-            throw new Error('Network response problem');
-          }
-          return response.json();
-        })
-        .then(data => {
-          // Manejar la respuesta del servidor aquí
-          if (data.success) {
-            var cookies = document.cookie.split(";");
-            for (var i = 0; i < cookies.length; i++) {
-                var cookie = cookies[i];
-                var eqPos = cookie.indexOf("=");
-                var name = eqPos > -1 ? cookie.substr(0, eqPos) : cookie;
-                document.cookie = name + "=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/;";
-            }
-            window.location.href = '../estimazon.html';
-          } else {
-            alert('Error al eliminar la cuenta: ' + data.message);
-          }
-        })
-        .catch(error => {
-          console.error('Error:', error);
-          alert('Hubo un problema al procesar la solicitud. Por favor, inténtalo de nuevo más tarde.');
-        });
-    }
-</script>
 </html>
