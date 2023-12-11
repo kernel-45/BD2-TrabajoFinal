@@ -1,5 +1,4 @@
 <html>
-
 <head>
     <link rel="stylesheet" type="text/css" href="../css/estilos.css">
     <link rel="stylesheet" type="text/css" href="../css/estilosControlador.css">
@@ -17,9 +16,9 @@
         echo "Datos necesarios no recibidos.";
     }
 
-
+    
     ?>
-
+   
     <style>
         table {
             border: 1px solid black;
@@ -60,7 +59,7 @@
                     (comprador JOIN pedido
                     ON idComprador = $idUser)
                 ON pedido.idPedido = propiedadesproducto.idPedido)
-            ON propiedadesproducto.idProducto = pedido.idPedido)
+            ON propiedadesproducto.idFichaProducto = pedido.idPedido)
         ON vendedor.idPersona = producto.idVendedor)
     WHERE (DATEDIFF(CURDATE(), pedido.fechaConfirmacion) >= 5 AND propiedadesproducto.fechaDeLlegada IS NULL);";
 
@@ -73,7 +72,7 @@
                         ON comprador.idPersona = $idUser
                         AND pedido.idComprador = $idUser)
                     ON pedido.idPedido = propiedadesproducto.idPedido)
-                ON propiedadesproducto.idProducto = producto.idProducto)
+                ON propiedadesproducto.idFichaProducto = producto.idProducto)
             ON vendedor.idPersona = producto.idVendedor;";
         }
         $result = mysqli_query($conn, $sql);
@@ -113,13 +112,12 @@
                     } else {
                         echo "recibido";
                     }
-                    function ponerAviso($idVendedor)
-                    {
+                    function ponerAviso($idVendedor) {
                         // Código de la función
                         $conn = new mysqli("localhost", "root", "", "Estimazon");
-                        $sql = "UPDATE vendedor SET numAvisos = numAvisos+1 WHERE idPersona = $idVendedor";
-                        $conn->query($sql);
-                        echo "aviso puesto";
+                        $sql = "UPDATE vendedor SET numAvisos = numAvisos+1 WHERE idPersona = $idVendedor"; 
+                        $conn->query($sql); 
+                        echo "aviso puesto"; 
                     }
                     echo "</td>";
                     echo "<div ";

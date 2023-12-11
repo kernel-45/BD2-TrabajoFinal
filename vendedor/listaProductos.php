@@ -6,6 +6,7 @@ $idVendedor = $_SESSION['idUser'] ?? '';
 <!DOCTYPE html>
 <html lang="es">
 <head>
+<script src="../funciones.js"></script>
     <link rel="stylesheet" type="text/css" href="../css/estilos.css">
     <meta charset="UTF-8">
     <title>Mis Productos - Estimazon</title>
@@ -15,6 +16,7 @@ $idVendedor = $_SESSION['idUser'] ?? '';
     <div class="titulo">
       ESTIMAZON
       <div class="botones">
+        <button class="boton" onclick=resetAllCookies()>Cerrar sesión</button>
         <button class="boton" id="perfilVendedor" onclick="window.location.href='perfilVendedor.php'"><img src="user.png" alt="User" class="icono-user" />Mi perfil </button>
       </div>
     </div>
