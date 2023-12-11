@@ -38,10 +38,10 @@ if ($conn->connect_error) {
                         SET idRepartidor = ( SELECT repartidor.idPersona 
                                                 FROM repartidor JOIN empresadistribuidora 
                                                 ON repartidor.idEmpresa = empresadistribuidora.idEmpresa
-                                                WHERE empresadistribuidora.nombreEmpresa = $idEmpresaSeleccionada
+                                                WHERE empresadistribuidora.nombreEmpresa = '$idEmpresaSeleccionada'
                                                 ORDER BY RAND()
                                                 LIMIT 1)
-                         WHERE idPedido = '$idPedido';";
+                         WHERE idPedido = $idPedido;";
 
         if ($conn->query($sqlInsert) === TRUE) {
             echo "Empresa asignada con éxito";
@@ -82,13 +82,13 @@ if ($conn->connect_error) {
                 $queryEmpresas = "SELECT nombreEmpresa FROM empresadistribuidora";
                 while ($row = mysqli_fetch_array($result)) {
                     $resultadoSelect = mysqli_query($conn, $queryEmpresas);
-                    // Acceder a los atributos individuales
                     $idPedido = $row["idPedido"];
                     $nombreZona = $row["nombreZona"];
                     echo "<tr>";
                     echo "<td> $idPedido</td>";
                     echo "<td> $nombreZona</td>";
                     echo "<td>";
+                    echo "<form method='post'>";  // Asegúrate de que el formulario use el método POST
                     echo "<select name='opcionSeleccionada' style='width: 200px;'>";
                     while ($fila = mysqli_fetch_assoc($resultadoSelect)) {
                         echo "<option value='" . $fila['nombreEmpresa'] . "'>" . $fila['nombreEmpresa'] . "</option>";
@@ -97,6 +97,7 @@ if ($conn->connect_error) {
                     echo "<input type='hidden' name='idPedido' value='" . $idPedido . "'>";
                     echo "<button type='submit' name='asignarEmpresa'>Asignar</button>";
                     echo "</form>";
+                    echo "</td>";
                     echo "</tr>";
                 }
         }
