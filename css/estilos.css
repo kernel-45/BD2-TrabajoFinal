@@ -120,14 +120,14 @@ body {
 .icono-user {
   vertical-align: middle; 
   margin-right: 5px;
-  width: 20px; /* Ajusta esto según el tamaño deseado */
-  height: 20px; /* Ajusta esto según el tamaño deseado */
+  width: 20px; 
+  height: 20px; 
 }
 .img-userAnon {
   vertical-align: middle; 
   margin-right: 5px;
-  width: 100px; /* Ajusta esto según el tamaño deseado */
-  height: 100px; /* Ajusta esto según el tamaño deseado */
+  width: 100px; 
+  height: 100px; 
 }
 .icono-carrito {
   vertical-align: middle; 
