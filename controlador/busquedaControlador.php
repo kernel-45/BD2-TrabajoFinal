@@ -105,23 +105,16 @@
                     echo "<td> $fechaConfirmacion</td>";
                     echo "<td> $nombreProducto</td>";
                     echo "<td>";
-                    $sql = "UPDATE vendedor SET numAvisos = numAvisos+1 WHERE idPersona = $idVendedor";
+                    $sql2= 'UPDATE vendedor SET numAvisos = numAvisos+1 WHERE idPersona = $idVendedor';
                     if ($fechaDeLlegada == null) {
-                        echo "<button onclick=ponerAviso($idVendedor);>Poner Aviso</button>";
+                        echo "<button onclick= mysqli_query('$sql2')>PonerAviso</button>";
                         //poner boton para marcar como recibido
                     } else {
                         echo "recibido";
                     }
-                    function ponerAviso($idVendedor) {
-                        // Código de la función
-                        $conn = new mysqli("localhost", "root", "", "Estimazon");
-                        $sql = "UPDATE vendedor SET numAvisos = numAvisos+1 WHERE idPersona = $idVendedor"; 
-                        $conn->query($sql); 
-                        echo "aviso puesto"; 
-                    }
                     echo "</td>";
-                    echo "<div ";
-                    echo "</div>";
+                    echo "</tr>";
+                    
                 }
                 ?>
             </table>
