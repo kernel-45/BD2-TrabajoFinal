@@ -26,25 +26,14 @@ if (empty($nombreProducto) || empty($descripcionProducto) || $precioProducto <= 
 $query = "SELECT idProducto, stock FROM producto WHERE idVendedor = $idVendedor AND nombre = '$nombreProducto'";
 $resultado = mysqli_query($conn, $query);
 
-if (mysqli_num_rows($resultado) > 0) {
-    // insertar producto existente
-    $fila = mysqli_fetch_assoc($resultado);
-    $nuevoStock = $fila['stock'] + $stockProducto;
-    $updateQuery = "UPDATE producto SET stock = $nuevoStock WHERE idProducto = ".$fila['idProducto'];
-    if (!mysqli_query($conn, $updateQuery)) {
-        echo json_encode(["success" => false, "message" => "Error al actualizar el stock: " . mysqli_error($conn)]);
-    } else {
-        echo json_encode(["success" => true, "message" => "Stock actualizado con éxito"]);
-    }
-} else {
-    // nuevo producto
+  
     $insertQuery = "INSERT INTO producto (nombre, precio, descripcion, stock, idVendedor, nombreCategoria) VALUES ('$nombreProducto', $precioProducto, '$descripcionProducto', $stockProducto, $idVendedor, '$nombreCategoria')";
     if (!mysqli_query($conn, $insertQuery)) {
         echo json_encode(["success" => false, "message" => "Error al insertar el producto: " . mysqli_error($conn)]);
     } else {
         echo json_encode(["success" => true, "message" => "Producto insertado con éxito"]);
     }
-}
+
 
 mysqli_close($conn);
 exit;
