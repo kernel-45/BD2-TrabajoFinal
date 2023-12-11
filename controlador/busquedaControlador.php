@@ -15,7 +15,21 @@
         // Manejar el caso en que los datos no estén presentes
         echo "Datos necesarios no recibidos.";
     }
-
+    if ($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_POST['ponerAviso'])) {
+        $idVendedor = $_POST['idVendedor'];
+        $sql2 = "UPDATE vendedor SET numAvisos = numAvisos + 1 WHERE idPersona = $idVendedor";
+    
+        // Aquí, ejecuta la consulta $sql2 usando mysqli_query o PDO
+        // Por ejemplo, con mysqli:
+        mysqli_query($conn, $sql2);
+        if ($conn->query($sql2) === TRUE) {
+            echo "Aviso actualizado correctamente.";
+            header('Location: interfaz_Controlador.php');
+            exit();
+        } else {
+            echo "Error al actualizar el aviso: " . $conn->error;
+        }
+    }
     
     ?>
    
@@ -105,9 +119,12 @@
                     echo "<td> $fechaConfirmacion</td>";
                     echo "<td> $nombreProducto</td>";
                     echo "<td>";
-                    $sql2= 'UPDATE vendedor SET numAvisos = numAvisos+1 WHERE idPersona = $idVendedor';
+                    $sql2= "UPDATE vendedor SET numAvisos = numAvisos+1 WHERE idPersona = $idVendedor";
                     if ($fechaDeLlegada == null) {
-                        echo "<button onclick= mysqli_query('$sql2')>PonerAviso</button>";
+                        echo "<form method='post'>";
+                        echo "<input type='hidden' name='idVendedor' value='" . $idVendedor . "'>";
+                        echo "<button type='submit' name='ponerAviso'>Poner Aviso</button>";
+                        echo "</form>";
                         //poner boton para marcar como recibido
                     } else {
                         echo "recibido";
