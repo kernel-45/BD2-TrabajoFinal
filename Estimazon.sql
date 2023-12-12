@@ -1,11 +1,11 @@
 -- phpMyAdmin SQL Dump
--- version 5.2.0
+-- version 5.2.1
 -- https://www.phpmyadmin.net/
 --
 -- Servidor: 127.0.0.1
--- Tiempo de generación: 11-12-2023 a las 19:34:13
--- Versión del servidor: 10.4.27-MariaDB
--- Versión de PHP: 8.2.0
+-- Tiempo de generación: 12-12-2023 a las 00:06:13
+-- Versión del servidor: 10.4.32-MariaDB
+-- Versión de PHP: 8.2.12
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 START TRANSACTION;
@@ -20,8 +20,6 @@ SET time_zone = "+00:00";
 --
 -- Base de datos: `estimazon`
 --
-
-
 
 -- --------------------------------------------------------
 
@@ -1112,7 +1110,9 @@ INSERT INTO `producto` (`idProducto`, `nombre`, `precio`, `descripcion`, `stock`
 (86, 'Marcadores Fluorescentes', 9, 'Set de 6 marcadores fluorescentes, duraderos y perfectos para resaltar texto.', 45, 52, 'Oficina y papelería'),
 (87, 'Pizarra Blanca Magnética', 20, 'Pizarra blanca magnética de tamaño mediano, incluye marcadores y borrador.', 25, 67, 'Oficina y papelería'),
 (88, 'Dispensador de Cinta Adhesiva', 7, 'Dispensador de cinta adhesiva práctico y resistente, incluye una cinta adhesiva.', 50, 78, 'Oficina y papelería'),
-(89, 'Archivador de Palanca', 10, 'Archivador de palanca en tamaño A4, con capacidad para 500 hojas, ideal para organizar documentos.', 35, 89, 'Oficina y papelería');
+(89, 'Archivador de Palanca', 10, 'Archivador de palanca en tamaño A4, con capacidad para 500 hojas, ideal para organizar documentos.', 35, 89, 'Oficina y papelería'),
+(91, 'Pepino Holandés', 2, 'Pepino holandés verde y fresco', 2, 13, 'Alimentos'),
+(92, 'Manzana Solar', 8, 'La Manzana Solar es una variedad única de manzana cultivada utilizando técnicas de agricultura sostenible y energía solar. Cada manzana es de un vibrante color rojo con toques de amarillo dorado, simbolizando la energía del sol. Con un sabor dulce y una textura crujiente, estas manzanas son perfectas tanto para comer solas como para incluirlas en recetas de postres. Cultivadas en un ambiente controlado que garantiza la ausencia de pesticidas y productos químicos, las Manzanas Solares no solo son deliciosas, sino también una elección saludable para el consumidor consciente del medio ambiente.', 10, 13, 'Alimentos');
 
 -- --------------------------------------------------------
 
@@ -1623,7 +1623,7 @@ ALTER TABLE `pedido`
 -- AUTO_INCREMENT de la tabla `producto`
 --
 ALTER TABLE `producto`
-  MODIFY `idProducto` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=90;
+  MODIFY `idProducto` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=93;
 
 --
 -- AUTO_INCREMENT de la tabla `repartidor`
