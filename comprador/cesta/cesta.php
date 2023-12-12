@@ -31,7 +31,7 @@ $costoTotal = 0;
 
 <body>
     <div class="titulo">
-    CESTA
+        CESTA
         <?php echo strtoupper($categoria); ?>
         <div class="botones">
             <button class="boton" onclick=resetAllCookies(1)>Cerrar sesión</button>
@@ -66,6 +66,12 @@ $costoTotal = 0;
                 // Sumar el precio de cada producto al costo total
                 $costoTotal += $producto['precio'] * $producto['qtt'];
                 ?>
+                <form action="eliminar_producto.php" method="post">
+                    <input type="hidden" name="idProducto" value="<?php echo $producto['idPedido']; ?>">
+                    <input type="hidden" name="qtt_actual" value="<?php echo $producto['qtt']; ?>">
+                    <input type="text" name="qtt" placeholder="Cantidad">
+                    <input type="submit" value="Eliminar producto">
+                </form>
             </li>
 
         <?php endforeach; ?>
@@ -87,20 +93,22 @@ $costoTotal = 0;
                 <select id="tarjeta" name="tarjeta">
                     <option value="visa">Visa</option>
                     <option value="mastercard">Mastercard</option>
-                    <!-- Agrega más opciones según sea necesario -->
                 </select>
 
                 <!-- Mostrar el costo total -->
             <p><strong>Costo Total:</strong> $
                 <?php echo $costoTotal; ?>
             </p>
-            <input type="submit" value="Finalizar compra">
-        </form>
-    </ul>
-    <?php
-    //DELETE FROM propiedadesproducto WHERE idPedido = 2; 
-    ?>
 
+            <input type="submit" value="Finalizar compra" class="boton_alargado">
+        </form>
+        <form action="finalizar_compra.php" method="post">
+            <!--   Valor oculto para indicar que se vacía la cesta -->
+            <input type="hidden" name="accion" value="vaciarCesta">
+            <input type="submit" value="Vaciar cesta">
+        </form>
+
+    </ul>
 
 
 </body>

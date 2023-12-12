@@ -236,4 +236,5 @@ li {
 }
 .resumen select {
   margin-bottom: 10px; 
+  width: 250px;
 }
