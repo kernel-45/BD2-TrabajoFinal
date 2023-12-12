@@ -1,8 +1,6 @@
 <?php
 session_start();
 $_SESSION['previous_page'] = $_SERVER['HTTP_REFERER'];
-error_reporting(E_ALL);
-ini_set('display_errors', '1');
 finaliza_compra();
 
 function finaliza_compra()

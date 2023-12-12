@@ -67,9 +67,9 @@ $costoTotal = 0;
                 $costoTotal += $producto['precio'] * $producto['qtt'];
                 ?>
                 <form action="eliminar_producto.php" method="post">
-                    <input type="hidden" name="idProducto" value="<?php echo $producto['idPedido']; ?>">
+                    <input type="hidden" name="idProducto" value="<?php echo $producto['idProducto']; ?>">
                     <input type="hidden" name="qtt_actual" value="<?php echo $producto['qtt']; ?>">
-                    <input type="text" name="qtt" placeholder="Cantidad">
+                    <input type="text" name="qtt_resta" placeholder="Cantidad">
                     <input type="submit" value="Eliminar producto">
                 </form>
             </li>

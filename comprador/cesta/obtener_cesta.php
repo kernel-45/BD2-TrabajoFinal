@@ -1,6 +1,6 @@
 <?php
 function obtenercesta($idPersona, $conn) {
-$sql = "SELECT pe.idPedido, p.nombre, p.descripcion, p.precio, pp.qtt
+$sql = "SELECT pe.idPedido, p.nombre, p.descripcion, p.precio, pp.qtt, p.idProducto
 FROM producto p
 JOIN propiedadesproducto pp
 ON p.idProducto = pp.idProducto 
