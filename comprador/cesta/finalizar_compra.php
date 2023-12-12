@@ -44,8 +44,8 @@ function finaliza_compra()
             $idPedido = $row['idPedido'];
 
             // ELIMINA PRODUCTOS ASOCIADOS AL PEDIDO
-            $sql = "DELETE FROM propiedadesproducto WHERE idPedido = $idPedido;";
-            mysqli_query($conn, $sql);
+            // $sql = "DELETE FROM propiedadesproducto WHERE idPedido = $idPedido;";
+            // mysqli_query($conn, $sql);
             //COLOCA LA FECHA DE CONFIRMACIÓN Y EL IDZona
             $sql = "UPDATE pedido SET fechaConfirmacion = CURRENT_DATE, estado = 'pagado' WHERE idPedido = $idPedido;";
             mysqli_query($conn, $sql);

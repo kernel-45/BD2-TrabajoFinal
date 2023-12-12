@@ -12,7 +12,9 @@ if ($conn->connect_error) {
 }
 include('obtener_cesta.php');
 session_start();
+$categoria = $_GET['categoria'];
 $id = $_SESSION['idUser'];
+$direccion = $_SESSION['direccion'];
 // Obtienes los productos de la cesta
 $productosEnCesta = obtenercesta($id, $conn);
 $costoTotal = 0;
@@ -29,22 +31,21 @@ $costoTotal = 0;
 
 <body>
     <div class="titulo">
-        CESTA
+    CESTA
+        <?php echo strtoupper($categoria); ?>
         <div class="botones">
-            <div id="botones-comprador" style="display: inline-block;">
-                <button class="boton" onclick=resetAllCookies(0)> Cerrar sesión</button>
-                <button class="boton" onclick="location.href='comprador/perfil.html'">Perfil</button>
-            </div>
-            <div class="botones" id="botones-usuario" style="margin-right: 100px;">
-                <button class="boton" onclick="location.href='inicio-sesion/iniciar_sesion.html'">Identifícate</button>
-            </div>
+            <button class="boton" onclick=resetAllCookies(1)>Cerrar sesión</button>
+            <button class="boton" onclick="location.href='../perfil.html'">Perfil</button>
             <button class="boton" onclick="location.href='cesta.php'">
                 <img src="../../carrito.png" alt="Carrito" class="icono-carrito" />Cesta
             </button>
         </div>
     </div>
-    </div>
-    <h1>Cesta</h1>
+    <h1 class="derecha">
+
+        <button class="boton-volver" onclick="location.href='../../estimazon.html'">Volver</button>
+
+    </h1>
     <ul class="cesta" id="listacarrito">
 
         <?php foreach ($productosEnCesta as $producto): ?>
@@ -72,20 +73,24 @@ $costoTotal = 0;
 
     <ul class="resumen" id="resumen">
         <form action="finalizar_compra.php" method="post">
-            <label for="zona">Zona:</label>
-            <select id="zona" name="zona">
-                <option value="zona1">Zona 1</option>
-                <option value="zona2">Zona 2</option>
-            </select>
 
-            <label for="tarjeta">Tarjeta:</label>
-            <select id="tarjeta" name="tarjeta">
-                <option value="visa">Visa</option>
-                <option value="mastercard">Mastercard</option>
-                <!-- Agrega más opciones según sea necesario -->
-            </select>
+            <p><strong>Dirección seleccionada:</strong>
+                <?php
+                if (!empty($direccion)) {
+                    echo "<p><strong>Dirección:</strong> $direccion</p>";
+                } else {
+                    echo "<p><strong>Aviso:</strong> Debes seleccionar una dirección en tu perfil.</p>";
+                }
+                ?>
 
-            <!-- Mostrar el costo total -->
+                <label for="tarjeta">Tarjeta:</label>
+                <select id="tarjeta" name="tarjeta">
+                    <option value="visa">Visa</option>
+                    <option value="mastercard">Mastercard</option>
+                    <!-- Agrega más opciones según sea necesario -->
+                </select>
+
+                <!-- Mostrar el costo total -->
             <p><strong>Costo Total:</strong> $
                 <?php echo $costoTotal; ?>
             </p>
