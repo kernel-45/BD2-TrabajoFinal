@@ -209,3 +209,17 @@ li {
   box-shadow: 0 0 5px rgba(0, 0, 0, 0.1);
   background-color:rgb(141, 112, 112);
 }
+
+.cesta {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+  text-align: left;
+  margin-left: 200px;
+  display: block;
+  margin-bottom: 20px;
+  padding: 10px;
+  width: 100%;
+  
+}
