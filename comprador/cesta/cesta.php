@@ -5,6 +5,8 @@ $password = "";
 $dbname = "estimazon";
 $conn = new mysqli($servername, $username, $password, $dbname);
 
+unset($_SESSION['mensaje']); // Limpiamos la variable de sesión
+
 // Verificar la conexión
 if ($conn->connect_error) {
     die("Conexión fallida: " . $conn->connect_error);
@@ -27,7 +29,6 @@ if (isset($_SESSION['tarjeta'])) {
 }
 if (isset($_SESSION['direccion'])) {
     $direccion = $_SESSION['direccion'];
-    // Resto del código que utiliza $direccion
 } else {
     // La clave 'direccion' no está definida en $_SESSION, le asignamos '' para poder gestionarlo
     $direccion = '';
