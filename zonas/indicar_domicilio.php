@@ -20,6 +20,7 @@
     <div class="producto">
         <label for="opciones" class="subtitulo">Selecciona un domicilio para la entrega:</label>
         <select class="boton" id="opciones" name="opciones">
+        <option class="boton" value="default">Dirección</option>;
         <?php
         /**
          * Gestiona el error de que un valor no sea encontrado
@@ -79,6 +80,9 @@
         select.addEventListener("change", function() {
             const selectedOption = this.options[this.selectedIndex];
             const idDireccionSeleccionada = selectedOption.getAttribute("value");
+            if (idDireccionSeleccionada == 'default') {
+                return;
+            }
             const direccionSeleccionada = selectedOption.text;
             // Enviar la dirección seleccionada al servidor mediante una petición AJAX
             const xhr = new XMLHttpRequest();
