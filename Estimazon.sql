@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Servidor: 127.0.0.1
--- Tiempo de generación: 12-12-2023 a las 00:06:13
+-- Tiempo de generación: 14-12-2023 a las 21:30:42
 -- Versión del servidor: 10.4.32-MariaDB
 -- Versión de PHP: 8.2.12
 
@@ -20,6 +20,29 @@ SET time_zone = "+00:00";
 --
 -- Base de datos: `estimazon`
 --
+
+DELIMITER $$
+--
+-- Funciones
+--
+CREATE DEFINER=`root`@`localhost` FUNCTION `obtener_estado` (`vendedor_id` INT) RETURNS VARCHAR(20) CHARSET utf8mb4 COLLATE utf8mb4_general_ci  BEGIN
+    DECLARE estado VARCHAR(20);
+    DECLARE numero INT;
+
+    SELECT numAvisos INTO numero FROM vendedor WHERE idPersona = vendedor_id;
+
+    IF numero >= 0 AND numero < 3 THEN
+        SET estado = 'inocent';
+    ELSEIF numero >= 3 AND numero < 6 THEN
+        SET estado = 'sospitos';
+    ELSE
+        SET estado = 'dolent';
+    END IF;
+
+    RETURN estado;
+END$$
+
+DELIMITER ;
 
 -- --------------------------------------------------------
 
@@ -1001,6 +1024,15 @@ CREATE TABLE `pedido` (
   `estado` varchar(50) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
+--
+-- Volcado de datos para la tabla `pedido`
+--
+
+INSERT INTO `pedido` (`idPedido`, `fechaConfirmacion`, `idZona`, `idComprador`, `idRepartidor`, `estado`) VALUES
+(1, NULL, NULL, 90, NULL, 'carrito'),
+(2, '2023-10-10', 4, 90, NULL, 'pagado'),
+(3, '2023-10-11', 4, 90, NULL, 'pagado');
+
 -- --------------------------------------------------------
 
 --
@@ -1126,6 +1158,14 @@ CREATE TABLE `propiedadesproducto` (
   `idProducto` int(11) NOT NULL,
   `qtt` int(11) DEFAULT 1
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Volcado de datos para la tabla `propiedadesproducto`
+--
+
+INSERT INTO `propiedadesproducto` (`fechaDeLlegada`, `idPedido`, `idProducto`, `qtt`) VALUES
+('2023-12-14', 2, 4, 3),
+(NULL, 3, 7, 2);
 
 -- --------------------------------------------------------
 
@@ -1282,6 +1322,13 @@ CREATE TABLE `r_tienedomicilioen` (
   `idComprador` int(11) NOT NULL,
   `idZona` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Volcado de datos para la tabla `r_tienedomicilioen`
+--
+
+INSERT INTO `r_tienedomicilioen` (`idComprador`, `idZona`) VALUES
+(90, 5);
 
 -- --------------------------------------------------------
 
@@ -1462,6 +1509,17 @@ CREATE TABLE `zona` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
+-- Volcado de datos para la tabla `zona`
+--
+
+INSERT INTO `zona` (`idZona`, `nombreZona`, `idZonaPadre`) VALUES
+(1, '07760', NULL),
+(2, 'Ciudadela de menorca', 1),
+(3, 'Vía', 2),
+(4, 'Via Manuel de falla', 3),
+(5, '25', 4);
+
+--
 -- Índices para tablas volcadas
 --
 
@@ -1617,7 +1675,7 @@ ALTER TABLE `incidencia`
 -- AUTO_INCREMENT de la tabla `pedido`
 --
 ALTER TABLE `pedido`
-  MODIFY `idPedido` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `idPedido` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
 
 --
 -- AUTO_INCREMENT de la tabla `producto`
@@ -1641,7 +1699,7 @@ ALTER TABLE `vendedor`
 -- AUTO_INCREMENT de la tabla `zona`
 --
 ALTER TABLE `zona`
-  MODIFY `idZona` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `idZona` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
 
 --
 -- Restricciones para tablas volcadas
