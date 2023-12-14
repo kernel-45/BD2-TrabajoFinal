@@ -61,9 +61,8 @@
     </div>
   </body>
   <script>
-    document.addEventListener('DOMContentLoaded', actualizarBotones);
-
-    function accederCategoria(param_categoria) {
+    document.addEventListener('DOMContentLoaded', actualizarBotones); // cuando se recarga la página se actualizan los botones
+    function accederCategoria(param_categoria) { // función que lleva a cada categoría
       window.location.href = 'comprador/catalogo.php?categoria=' + param_categoria;
     }
 </script>
