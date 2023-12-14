@@ -23,14 +23,14 @@ if (isset($_SESSION['tarjeta'])) {
     // Resto del código que utiliza $direccion
 } else {
     // La clave 'direccion' no está definida en $_SESSION, le asignamos '' para poder gestionarlo
-    $tarjeta = ''; 
+    $tarjeta = '';
 }
 if (isset($_SESSION['direccion'])) {
     $direccion = $_SESSION['direccion'];
     // Resto del código que utiliza $direccion
 } else {
     // La clave 'direccion' no está definida en $_SESSION, le asignamos '' para poder gestionarlo
-    $direccion = ''; 
+    $direccion = '';
 }
 // Obtienes los productos de la cesta
 $productosEnCesta = obtenercesta($id, $conn);
@@ -38,11 +38,11 @@ $costoTotal = 0;
 ?>
 <!DOCTYPE html>
 <html lang="es">
-<head>
-    <script src="funciones.js"></script>
+<head> 
     <link rel="stylesheet" type="text/css" href="../../css/estilos.css">
     <meta charset="UTF-8">
     <title>Estimazon</title>
+    <script src="../../funciones.js"></script>
 </head>
 
 <body>
@@ -50,13 +50,21 @@ $costoTotal = 0;
         CESTA
         <?php echo strtoupper($categoria); ?>
         <div class="botones">
-            <button class="boton" onclick=resetAllCookies(1)>Cerrar sesión</button>
+            <button class="boton" onclick="resetCookiesAndRedirect()">Cerrar sesión</button>
             <button class="boton" onclick="location.href='../perfil.html'">Perfil</button>
             <button class="boton" onclick="location.href='cesta.php'">
                 <img src="../../carrito.png" alt="Carrito" class="icono-carrito" />Cesta
             </button>
         </div>
     </div>
+    <script>
+        function resetCookiesAndRedirect() {
+            resetAllCookies(1);
+
+            // Redirección a la página deseada
+            location.href = '../../estimazon.html';
+        }
+    </script>
     <h1 class="derecha">
 
         <button class="boton-volver" onclick="location.href='../../estimazon.html'">Volver</button>
@@ -104,7 +112,7 @@ $costoTotal = 0;
                     echo "<p><strong>Aviso:</strong> Debes seleccionar una dirección en tu perfil.</p>";
                 }
                 ?>
-                <p><strong>Tarjeta seleccionada:</strong>
+            <p><strong>Tarjeta seleccionada:</strong>
                 <?php
                 if (!$tarjeta == '') {
                     echo "<p><strong>Tarjeta:</strong> $tarjeta</p>";
