@@ -13,6 +13,7 @@ function eliminar_producto()
     $username = "root";
     $password = "";
     $dbname = "estimazon";
+    //CALCULO DEL PRECIO FINAL AL ELIMINAR EL PRODUCTO
     $qtt_final = $qtt_actual - $qtt_resta;
     $conn = new mysqli($servername, $username, $password, $dbname);
     // Verificar la conexión
@@ -33,11 +34,9 @@ function eliminar_producto()
                 $sql = "DELETE FROM propiedadesproducto WHERE idPedido = $idPedido AND idProducto = $idProducto AND qtt = $qtt_actual;";
                 $result = mysqli_query($conn, $sql);
             } else {
+                //Si hay más de un producto simplemente cambiamos la cantidad del producto
                 $sql = "UPDATE propiedadesproducto SET qtt = $qtt_final WHERE idProducto = $idProducto AND idPedido = $idPedido;";
-                $result = mysqli_query($conn, $sql);
-            
-            //CREA UN NUEVO CARRITO PARA EL USUARIO
-            
+                $result = mysqli_query($conn, $sql);      
         }
         } else {
             // No se encontraron resultados

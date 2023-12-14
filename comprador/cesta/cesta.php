@@ -59,6 +59,7 @@ $costoTotal = 0;
             </button>
         </div>
     </div>
+    <!-- Si el usuario cierra sesión en la cesta se le redigirá a la página principal -->
     <script>
         function resetCookiesAndRedirect() {
             resetAllCookies(1);
@@ -73,7 +74,9 @@ $costoTotal = 0;
 
     </h1>
     <ul class="cesta" id="listacarrito">
-
+        <!--------------------------------------------
+                    CREACION DE LA CESTA 
+        ----------------------------------------------->
         <?php foreach ($productosEnCesta as $producto): ?>
             <li class="productoc">
                 <p><strong>Nombre:</strong>
@@ -92,6 +95,7 @@ $costoTotal = 0;
                 // Sumar el precio de cada producto al costo total
                 $costoTotal += $producto['precio'] * $producto['qtt'];
                 ?>
+                <!--FORM PARA ELIMINAR PRODUCTOS CON HIDE ITEMS PARA UTILIZAR EN LA FUNCION-->
                 <form action="eliminar_producto.php" method="post">
                     <input type="hidden" name="idProducto" value="<?php echo $producto['idProducto']; ?>">
                     <input type="hidden" name="qtt_actual" value="<?php echo $producto['qtt']; ?>">

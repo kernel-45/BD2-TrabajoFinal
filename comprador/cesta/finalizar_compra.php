@@ -18,6 +18,7 @@ function finaliza_compra()
         exit();
     }
 
+    //CONEXION
     $id = $_SESSION['idUser'];
     $servername = "localhost";
     $username = "root";
@@ -79,7 +80,7 @@ function finaliza_compra()
         // Error en la consulta SQL
         echo "Error al ejecutar la consulta SQL: " . mysqli_error($conn);
     }
-
+    //Volvemos al carrito
     header("Location: {$_SESSION['previous_page']}");
     exit();
 }

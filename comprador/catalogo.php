@@ -20,8 +20,8 @@ if ($conn->connect_error) {
     die("Conexión fallida: " . $conn->connect_error);
 }
 
-// Seleccionas los productos
-if ($categoria == "Catálogo") {
+// Seleccion de los productos
+if ($categoria == "Catálogo") {//Si hemos seleccionado mostrar todos pasaremos la condición, sino haremos un display de la categoría seleccionado cambiando al consulta
     $sql = "SELECT p.nombre as nprod, p.descripcion, p.precio, p.stock, v.nombre, v.apellido1, p.idProducto FROM producto p JOIN vendedor v ON v.idPersona = p.idVendedor";
 } else {
     $sql = "SELECT p.nombre as nprod, p.descripcion, p.precio, p.stock, v.nombre, v.apellido1, p.idProducto FROM producto p JOIN vendedor v ON v.idPersona = p.idVendedor AND nombreCategoria = '" . $categoria . "'";
@@ -69,6 +69,9 @@ if ($result->num_rows > 0) {
 
     </h1>
 
+    <!------------------------------------------------
+                DISPLAY DE LOS PRODUCTOS 
+    -------------------------------------------------->
     <ul>
         <?php
         foreach ($productos as $producto): ?>
@@ -91,6 +94,7 @@ if ($result->num_rows > 0) {
                 </p>
                 </p>
                 <?php $idtemporal = $producto['idProducto']; ?>
+                <!-- Form para añadir al carrito y seleccionar cantidad -->
                 <form action="anadir_carrito.php" method="post">
                     <input type="text" name="qtt" placeholder="Cantidad" pattern="\d+" title="Ingresa solo números" required>
                     <input type="hidden" name="idtemporal" value="<?php echo $idtemporal; ?>">
