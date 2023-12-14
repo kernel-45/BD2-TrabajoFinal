@@ -94,7 +94,7 @@ if ($conn->connect_error) {
                     echo "<td> $idPedido</td>";
                     echo "<td> $nombreZona</td>";
                     echo "<td>";
-                    echo "<form method='post'>";  // Asegúrate de que el formulario use el método POST
+                    echo "<form method='post'>";  
                     echo "<select name='opcionSeleccionada' style='width: 200px;'>";
                     while ($fila = mysqli_fetch_assoc($resultadoSelect)) {
                         echo "<option value='" . $fila['nombreEmpresa'] . "'>" . $fila['nombreEmpresa'] . "</option>";

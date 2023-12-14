@@ -49,7 +49,7 @@ if ($conn->connect_error) {
         </p>
         <p>
           <input type="submit" value="Realizar búsqueda">
-          <!-- <button onclick="window.location.href='busquedaControlador.php';">Realizar búsqueda</button> -->
+
 
         </p>
       </form>

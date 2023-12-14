@@ -4,13 +4,11 @@
     <link rel="stylesheet" type="text/css" href="../css/estilosControlador.css">
     <?php
     // Conectar a la base de datos
-// Asegúrate de reemplazar con tus propios detalles de conexión
     $conn = new mysqli("localhost", "root", "", "Estimazon");
     // Verificar la conexión
     if (isset($_POST['idUser']) && isset($_POST['tipoBusqueda'])) {
         $idUser = $_POST['idUser'];
         $tipoBusqueda = $_POST['tipoBusqueda'];
-        // Aquí puedes continuar con el procesamiento de estos datos
     } else {
         // Manejar el caso en que los datos no estén presentes
         echo "Datos necesarios no recibidos.";
@@ -18,9 +16,7 @@
     if ($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_POST['ponerAviso'])) {
         $idVendedor = $_POST['idVendedor'];
         $sql2 = "UPDATE vendedor SET numAvisos = numAvisos + 1 WHERE idPersona = $idVendedor";
-        // Aquí, ejecuta la consulta $sql2 usando mysqli_query o PDO
-        // Por ejemplo, con mysqli:
-        mysqli_query($conn, $sql2);
+
         if ($conn->query($sql2) === TRUE) {
             echo "Aviso actualizado correctamente.";
             header('Location: interfaz_Controlador.php');
@@ -32,8 +28,7 @@
     if ($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_POST['marcarRecibido'])) {
         $idPedido = $_POST['idPedido'];
         $sql3 = "UPDATE propiedadesProducto SET fechaDeLlegada = CURDATE() WHERE propiedadesProducto.idPedido = $idPedido";
-        // Aquí, ejecuta la consulta $sql2 usando mysqli_query o PDO
-        // Por ejemplo, con mysqli:
+
         mysqli_query($conn, $sql3);
         if ($conn->query($sql3) === TRUE) {
             echo "Aviso actualizado correctamente.";
@@ -89,7 +84,7 @@
                 ON pedido.idPedido = propiedadesproducto.idPedido)
             ON propiedadesproducto.idProducto = producto.idProducto)
         ON vendedor.idPersona = producto.idVendedor)
-    WHERE (DATEDIFF(CURDATE(), pedido.fechaConfirmacion) >= 5 AND propiedadesproducto.fechaDeLlegada IS NULL);";
+    WHERE (DATEDIFF(CURDATE(), pedido.fechaConfirmacion) >= 5 AND propiedadesproducto.fechaDeLlegada IS NULL AND pedido.fechaConfirmacion IS NOT NULL);";
 
         } elseif ($tipoBusqueda == "siempre") {
             $sql = "SELECT pedido.idPedido, vendedor.idPersona, pedido.fechaConfirmacion, producto.nombre, propiedadesproducto.fechaDeLlegada FROM 
@@ -101,7 +96,8 @@
                         AND pedido.idComprador = $idUser)
                     ON pedido.idPedido = propiedadesproducto.idPedido)
                 ON propiedadesproducto.idProducto = producto.idProducto)
-            ON vendedor.idPersona = producto.idVendedor;";
+            ON vendedor.idPersona = producto.idVendedor
+            WHERE pedido.fechaConfirmacion IS NOT NULL";
         }
         $result = mysqli_query($conn, $sql);
         if ($result->num_rows > 0) {
@@ -114,6 +110,7 @@
                     <td>ID vendedor </td>
                     <td>Fecha confirmacion pedido </td>
                     <td>Nombre producto </td>
+                    <td>Estado vendedor </td>
                     <td>Opciones</td>
                 </tr>
                 <!-- vuelve a abrir php -->
@@ -126,14 +123,20 @@
                     $fechaConfirmacion = $row["fechaConfirmacion"];
                     $nombreProducto = $row["nombre"];
                     $fechaDeLlegada = $row["fechaDeLlegada"];
+                    $sql_estado_vendedor = "SELECT obtener_estado($idVendedor)"; 
+                    $estado = mysqli_query($conn, $sql_estado_vendedor);
+                    if($col = mysqli_fetch_array($estado)){
+                        $estadoV = $col["obtener_estado($idVendedor)"]; 
+                    }
                     // Hacer algo con estos datos
                     echo "<tr>";
                     echo "<td> $idPedido</td>";
                     echo "<td> $idVendedor</td>";
                     echo "<td> $fechaConfirmacion</td>";
                     echo "<td> $nombreProducto</td>";
+                    echo "<td> $estadoV</td>"; 
                     echo "<td>";
-                    $sql2= "UPDATE vendedor SET numAvisos = numAvisos+1 WHERE idPersona = $idVendedor";
+
                     if ($fechaDeLlegada == null) {
                         echo "<form method='post'>";
                         echo "<input type='hidden' name='idVendedor' value='" . $idVendedor . "'>";
