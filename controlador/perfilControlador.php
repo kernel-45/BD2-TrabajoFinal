@@ -26,7 +26,7 @@
     </div>
     <h1 class="subtitulo">Mi perfil</h1>
     <div class="centrar">
-        <div class="perfil-vendedor" id="perfilVendedor"></div>
+        <div class="perfil" id="perfilVendedor"></div>
     </div>
     <script>
     document.addEventListener('DOMContentLoaded', () => {

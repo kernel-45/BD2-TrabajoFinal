@@ -54,7 +54,7 @@ body {
   
 
 }
-.perfil-vendedor {
+.perfil {
   border: 1px solid #ddd;
   box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
   padding: 20px;
@@ -569,5 +569,21 @@ li {
 .resumen select {
   margin-bottom: 10px; 
   width: 250px;
+}
+
+.boton-perfil {
+  background-color: grey;
+  color: black;
+  border: white;
+  padding: 10px 20px;
+  cursor: pointer;
+  transition: background-color 0.3s;
+  width: 200px;
+  height: 200px;
+  font-size: 16px;
+}
+
+.boton-perfil:hover {
+  background-color: rgb(80, 80, 80);
 }
 
