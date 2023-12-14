@@ -5,7 +5,18 @@ finaliza_compra();
 
 function finaliza_compra()
 {
+    if (isset($_SESSION['idZona'])) {
     $iddir = $_SESSION['idZona'];
+} else {
+    $_SESSION['mensaje'] = 'No tienes dirección seleccionada';
+    echo "<script>
+            alert('{$_SESSION['mensaje']}');
+            window.location.href = '{$_SESSION['previous_page']}';
+            
+          </script>";
+    
+    exit(); // Asegúrate de salir del script después de la redirección
+}
     $id = $_SESSION['idUser'];
     $servername = "localhost";
     $username = "root";
@@ -13,8 +24,6 @@ function finaliza_compra()
     $dbname = "estimazon";
 
     $conn = new mysqli($servername, $username, $password, $dbname);
-    $idproducto = $_POST['idtemporal'];
-    $qtt = $_POST['qtt'];
     // Verificar la conexión
     if ($conn->connect_error) {
         die("Conexión fallida: " . $conn->connect_error);
