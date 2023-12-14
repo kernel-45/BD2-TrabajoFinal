@@ -105,6 +105,118 @@ body {
   ); 
 }
 
+/******************************** 
+SECCION DE BOTONES DEL CATALOGO 
+*********************************/
+.botonAlimentos {
+  position: relative;
+  overflow: hidden;
+  width: 210px;
+  height: 210px;
+  font-family: 'Arial', sans-serif;
+  background-color: #E2D9CB;
+  display: inline-block;
+}
+
+.botonAlimentos .imagen-fondo {
+  background: url('../comprador/imagenesCatalogo/urban-20230508082604533519.jpg') center/cover no-repeat;
+  opacity: 0.7;
+  width: 100%;
+  height: 100%;
+  transition: opacity 0.3s;
+  
+}
+
+.botonAlimentos:hover .imagen-fondo {
+  opacity: 0.3;
+}
+
+.botonAlimentos .contenido {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  color: black;
+  border: none;
+  padding: 10px 20px;
+  text-align: center;
+  cursor: pointer;
+  font-weight: bold;
+  font-size: 25px;
+}
+.botonArte {
+  position: relative;
+  overflow: hidden;
+  width: 210px;
+  height: 210px;
+  background-color: #E2D9CB;
+  font-family: 'Arial', sans-serif;
+  display: inline-block;
+}
+
+.botonArte .imagen-fondo {
+  background: url('../comprador/imagenesCatalogo/3339074.png') center/cover no-repeat;
+  opacity: 0.7;
+  width: 100%;
+  height: 100%;
+  transition: opacity 0.3s;
+}
+
+.botonArte:hover .imagen-fondo {
+  opacity: 0.3;
+}
+
+.botonArte .contenido {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  color: black;
+  border: none;
+  padding: 10px 20px;
+  text-align: center;
+  cursor: pointer;
+  font-weight: bold;
+  font-size: 25px;
+}
+.botonHogar {
+  position: relative;
+  overflow: hidden;
+  width: 210px;
+  height: 210px;
+  font-family: 'Arial', sans-serif;
+  background-color: #E2D9CB;
+  display: inline-block;
+}
+
+.botonHogar .imagen-fondo {
+  background: url('../comprador/imagenesCatalogo/articulos_hogar.jpg') center/cover no-repeat;
+  opacity: 0.7;
+  width: 100%;
+  height: 100%;
+  transition: opacity 0.3s;
+  
+}
+
+.botonHogar:hover .imagen-fondo {
+  opacity: 0.3;
+}
+
+.botonHogar .contenido {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  color: black;
+  border: none;
+  padding: 10px 20px;
+  text-align: center;
+  cursor: pointer;
+  font-weight: bold;
+  font-size: 25px;
+}
+
+
 .boton {
   background-color: rgb(
     141,
@@ -150,6 +262,7 @@ body {
 .boton:hover {
   background-color: rgb(161, 132, 132);
 }
+
 .icono-user {
   vertical-align: middle; 
   margin-right: 5px;
@@ -238,3 +351,4 @@ li {
   margin-bottom: 10px; 
   width: 250px;
 }
+

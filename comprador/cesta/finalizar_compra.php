@@ -40,6 +40,7 @@ function finaliza_compra()
             //CREA UN NUEVO CARRITO PARA EL USUARIO
             $sql = "INSERT INTO pedido(fechaConfirmacion, idZona, idComprador, idRepartidor, estado) VALUES (NULL, NULL, $id, NULL, 'Carrito');";
             mysqli_query($conn, $sql);
+            echo json_encode(["status" => "success", "message" => "Compra realizada!"]);
         }
         } else {
             // No se encontraron resultados

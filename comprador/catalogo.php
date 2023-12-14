@@ -1,7 +1,11 @@
 <?php
 
 session_start();
-$id = $_SESSION['idUser'];
+if (empty($_SESSION['idUser'])) {
+    header('Location: ../inicio-sesion/iniciar_sesion.html');
+} else {
+    $id = $_SESSION['idUser'];
+}
 $categoria = $_GET['categoria'];
 $servername = "localhost";
 $username = "root";

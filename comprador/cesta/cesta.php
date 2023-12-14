@@ -3,7 +3,6 @@ $servername = "localhost";
 $username = "root";
 $password = "";
 $dbname = "estimazon";
-
 $conn = new mysqli($servername, $username, $password, $dbname);
 
 // Verificar la conexión
@@ -13,17 +12,34 @@ if ($conn->connect_error) {
 include('obtener_cesta.php');
 session_start();
 $categoria = $_GET['categoria'];
-$id = $_SESSION['idUser'];
-$direccion = $_SESSION['direccion'];
+if (empty($_SESSION['idUser'])) {
+    header('Location: ../../inicio-sesion/iniciar_sesion.html');
+} else {
+    $id = $_SESSION['idUser'];
+}
+
+if (isset($_SESSION['tarjeta'])) {
+    $tarjeta = $_SESSION['tarjeta'];
+    // Resto del código que utiliza $direccion
+} else {
+    // La clave 'direccion' no está definida en $_SESSION, le asignamos '' para poder gestionarlo
+    $tarjeta = ''; 
+}
+if (isset($_SESSION['direccion'])) {
+    $direccion = $_SESSION['direccion'];
+    // Resto del código que utiliza $direccion
+} else {
+    // La clave 'direccion' no está definida en $_SESSION, le asignamos '' para poder gestionarlo
+    $direccion = ''; 
+}
 // Obtienes los productos de la cesta
 $productosEnCesta = obtenercesta($id, $conn);
 $costoTotal = 0;
 ?>
 <!DOCTYPE html>
 <html lang="es">
-
 <head>
-
+    <script src="funciones.js"></script>
     <link rel="stylesheet" type="text/css" href="../../css/estilos.css">
     <meta charset="UTF-8">
     <title>Estimazon</title>
@@ -82,19 +98,20 @@ $costoTotal = 0;
 
             <p><strong>Dirección seleccionada:</strong>
                 <?php
-                if (!empty($direccion)) {
+                if (!$direccion == '') {
                     echo "<p><strong>Dirección:</strong> $direccion</p>";
                 } else {
                     echo "<p><strong>Aviso:</strong> Debes seleccionar una dirección en tu perfil.</p>";
                 }
                 ?>
-
-                <label for="tarjeta">Tarjeta:</label>
-                <select id="tarjeta" name="tarjeta">
-                    <option value="visa">Visa</option>
-                    <option value="mastercard">Mastercard</option>
-                </select>
-
+                <p><strong>Tarjeta seleccionada:</strong>
+                <?php
+                if (!$tarjeta == '') {
+                    echo "<p><strong>Tarjeta:</strong> $tarjeta</p>";
+                } else {
+                    echo "<p><strong>Aviso:</strong> Debes seleccionar una tarjeta en tu perfil.</p>";
+                }
+                ?>
                 <!-- Mostrar el costo total -->
             <p><strong>Costo Total:</strong> $
                 <?php echo $costoTotal; ?>
