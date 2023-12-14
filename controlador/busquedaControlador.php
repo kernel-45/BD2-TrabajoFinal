@@ -16,8 +16,7 @@
     if ($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_POST['ponerAviso'])) {
         $idVendedor = $_POST['idVendedor'];
         $sql2 = "UPDATE vendedor SET numAvisos = numAvisos + 1 WHERE idPersona = $idVendedor";
-        // Aquí, ejecuta la consulta $sql2 usando mysqli_query o PDO
-        // Por ejemplo, con mysqli:
+
         mysqli_query($conn, $sql2);
         if ($conn->query($sql2) === TRUE) {
             echo "Aviso actualizado correctamente.";
@@ -30,8 +29,7 @@
     if ($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_POST['marcarRecibido'])) {
         $idPedido = $_POST['idPedido'];
         $sql3 = "UPDATE propiedadesProducto SET fechaDeLlegada = CURDATE() WHERE propiedadesProducto.idPedido = $idPedido";
-        // Aquí, ejecuta la consulta $sql2 usando mysqli_query o PDO
-        // Por ejemplo, con mysqli:
+
         mysqli_query($conn, $sql3);
         if ($conn->query($sql3) === TRUE) {
             echo "Aviso actualizado correctamente.";
