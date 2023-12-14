@@ -92,7 +92,7 @@ if ($result->num_rows > 0) {
                 </p>
                 <?php $idtemporal = $producto['idProducto']; ?>
                 <form action="anadir_carrito.php" method="post">
-                    <input type="text" name="qtt" placeholder="Cantidad">
+                    <input type="text" name="qtt" placeholder="Cantidad" pattern="\d+" title="Ingresa solo números" required>
                     <input type="hidden" name="idtemporal" value="<?php echo $idtemporal; ?>">
                     <input type="submit" value="Añadir a la cesta">
                 </form>
