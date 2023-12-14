@@ -17,8 +17,11 @@
   </div>
 
   <script>
-    let tipoSeleccionado = '';
+    let tipoSeleccionado = ''; // empieza sin tipo
 
+    /**
+     * destaca el botón del tipo seleccionado
+    */
     function seleccionarTipo(boton, tipo) {
         tipoSeleccionado = tipo;
         // Eliminar la clase "seleccionado" de todos los botones
@@ -27,6 +30,9 @@
         boton.classList.add('seleccionado');
       }
 
+    /**
+     * muestra las opciones de inicio de sesión o registro dependiendo de lo seleccionado
+    */
     function mostrarFormulario(tipoFormulario) {
       const contenedorInicioSesion = document.getElementById('contenedorInicioSesion');
       const camposInicioSesion = contenedorInicioSesion.querySelector('.campos-inicio-sesion');
@@ -51,6 +57,9 @@
       tipoSeleccionado = tipoFormulario;
     }
 
+    /**
+     * procesa los datos introducidos 
+    */
     function enviarFormulario() {
       // Obtener los valores del formulario
       let nombre = document.getElementById('nombre') ? document.getElementById('nombre').value : '';
@@ -72,7 +81,7 @@
         headers: {
           'Content-Type': 'application/json',
         },
-        body: JSON.stringify({
+        body: JSON.stringify({ // se codifica a JSON
           nombre: nombre,
           apellido1: apellido1,
           apellido2: apellido2,
@@ -88,17 +97,14 @@
           return response.json();
         })
         .then(data => {
-          // Manejar la respuesta del servidor aquí
           if (data.success) {
-            //alert('Inicio de sesión exitoso.');
-            // Redirigir o realizar otras acciones según sea necesario
+            alert('Inicio de sesión exitoso.');
             if (tipoUsuario === 'vendedor' || tipoUsuario === 'controlador') {
               window.location.href = `../${tipoUsuario}/interfaz_${tipoUsuario}.php`;
-            } else {
-              // comprador
+            } else { // comprador
               window.location.href = '../estimazon.html';
             }
-          } else {
+          } else { // si error
             alert('Error al iniciar sesión: ' + data.message);
           }
         })

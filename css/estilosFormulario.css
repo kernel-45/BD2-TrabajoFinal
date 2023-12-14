@@ -12,6 +12,20 @@
     font-family: Arial, Helvetica, sans-serif;
 }
 
+/* Estilo para el título */
+#miTitulo {
+    text-align: center;
+    font-family: Arial, Helvetica, sans-serif;
+    font-size: 24px;
+    color: black;
+    background: rgb(141, 112, 112); /* Fondo para el título */
+    padding: 10px; /* Ajusta el espacio interno del título */
+    border-radius: 10px; /* Puntas redondeadas */
+    max-width: 400px; /* Ajusta el ancho del título igual al formulario */
+    margin: auto;
+    margin-top: 100px;
+}
+
 #miFormulario label {
     display: block;
     margin-bottom: 5px;

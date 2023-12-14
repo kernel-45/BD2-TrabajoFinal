@@ -6,8 +6,19 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Perfil de Usuario</title>
 </head>
-<body> 
+<body>
+  <div class="titulo">
+    ESTIMAZON
+    <div class="botones">
+        <button class="boton" onclick=resetAllCookies(1)>Cerrar sesión</button>
+        <button class="boton" id="perfil" onclick="window.location.href='../estimazon.html'">
+            Volver
+        </button>
+    </div>
+  </div>
   <div class="centrar">
+    <div id="contenedor-perfil">
+    </div>
     <div class="contenedor-central">
       <div class="boton" onclick="location.href='../zonas/anyadir_domicilio.html'">
         Añadir domicilio
@@ -24,4 +35,34 @@
     </div>
   </div>
 </body>
+<script>
+  mostrarPerfil();
+
+  /**
+   * muestra los datos del perfil del usuario
+  */
+  function mostrarPerfil(){
+    document.addEventListener('DOMContentLoaded', () => {
+        fetch('get_datos_comprador.php')
+            .then(response => {
+              if (!response.ok) { // si error de conexión
+                  throw new Error('Network response was not ok');
+              }
+              return response.json(); // si no sigue
+            })
+            .then(usuario => {
+              const contenedor = document.getElementById('contenedor-perfil');
+              contenedor.innerHTML = `
+              <img src="../usuarioAnon.jpeg" alt="User" class="img-userAnon"/>
+              <p>Nombre: ${usuario.nombre}</p>
+              <p>Apellidos: ${usuario.apellido1} ${usuario.apellido2}</p>
+              <p>Correo: ${usuario.correo}</p>`;
+            })
+            .catch(error => { // si error
+                console.error('Error:', error);
+                alert('Hubo un problema al obtener los datos del usuario: ' + error.message);
+            });
+    });
+  }
+</script>
 </html>

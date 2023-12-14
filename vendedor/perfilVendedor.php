@@ -46,7 +46,7 @@
             const contenedor = document.getElementById('perfilVendedor');
             contenedor.innerHTML = `
 
-            <img src="usuarioAnon.jpeg" alt="User" class="img-userAnon"\n />
+            <img src="../usuarioAnon.jpeg" alt="User" class="img-userAnon"\n />
             <p>Nombre: ${vendedor.nombre}\n</p>
             <p>Apellido1: ${vendedor.apellido1}\n</p>
             <p>Apellido2: ${vendedor.apellido2}\n</p>
