@@ -17,7 +17,6 @@
         $idVendedor = $_POST['idVendedor'];
         $sql2 = "UPDATE vendedor SET numAvisos = numAvisos + 1 WHERE idPersona = $idVendedor";
 
-        mysqli_query($conn, $sql2);
         if ($conn->query($sql2) === TRUE) {
             echo "Aviso actualizado correctamente.";
             header('Location: interfaz_Controlador.php');
@@ -137,7 +136,7 @@
                     echo "<td> $nombreProducto</td>";
                     echo "<td> $estadoV</td>"; 
                     echo "<td>";
-                    $sql2= "UPDATE vendedor SET numAvisos = numAvisos+1 WHERE idPersona = $idVendedor";
+
                     if ($fechaDeLlegada == null) {
                         echo "<form method='post'>";
                         echo "<input type='hidden' name='idVendedor' value='" . $idVendedor . "'>";
