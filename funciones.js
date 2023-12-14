@@ -1,3 +1,8 @@
+/**
+ * Elimina todas las cookies guardadas (cierra sesión) y lleva a la pantalla principal con la sesión cerrada.
+ * 
+ * @param {number} profundidad - La cantidad de carpetas en las que está el fichero que llama la función. La página principal tiene profundidad 0.
+ */
 function resetAllCookies(profundidad) {
   var cookies = document.cookie.split(";");
   for (var i = 0; i < cookies.length; i++) {
@@ -14,15 +19,23 @@ function resetAllCookies(profundidad) {
   }
 }
 
+/**
+ * Lleva a la pantalla principal indicando cuántas carpetas hay entre el fichero que lo llama y la página principal.
+ * 
+ * @param {number} profundidad - La cantidad de carpetas en las que está el fichero que llama la función.
+ */
 function goPantallaPrincipal(profundidad) {
   window.location.href = "../".repeat(profundidad) + "estimazon.html";
 }
 
+/**
+ * Actualiza los botones de la pantalla principal dependiendo de si se ha iniciado sesión como comprador o no
+ */
 function actualizarBotones() {
   // Realizar una solicitud Ajax al servidor para obtener el tipo de usuario
   var xhr = new XMLHttpRequest();
   xhr.onreadystatechange = function() {
-      if (xhr.readyState === 4 && xhr.status === 200) {console.log("maiu");
+      if (xhr.readyState === 4 && xhr.status === 200) {
           var tipoUsuario = xhr.responseText;
           // Verificar y ajustar la visibilidad de los elementos según el tipo de usuario
           if (tipoUsuario == 'comprador') {
@@ -35,7 +48,7 @@ function actualizarBotones() {
       }
   };
   // Realizar la solicitud al archivo PHP que obtiene el tipo de usuario
-  xhr.open('GET', 'get_tipoUser.php', true);
+  xhr.open('GET', 'inicio-sesion/get_tipoUser.php', true);
   xhr.send();
 };
 
