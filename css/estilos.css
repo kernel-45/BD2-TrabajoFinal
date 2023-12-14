@@ -95,6 +95,19 @@ body {
   font-family: Arial, Helvetica, sans-serif;
 
 }
+.boton {
+  background-color: rgb(
+    141,
+    112,
+    112
+  ); 
+  color: black;
+  border: white;
+  padding: 10px 20px; 
+  margin-left: 10px; 
+  cursor: pointer; 
+  transition: background-color 0.3s;
+}
 
 .botones {
   position: absolute; 
@@ -217,19 +230,6 @@ SECCION DE BOTONES DEL CATALOGO
 }
 
 
-.boton {
-  background-color: rgb(
-    141,
-    112,
-    112
-  ); 
-  color: black;
-  border: white;
-  padding: 10px 20px; 
-  margin-left: 10px; 
-  cursor: pointer; 
-  transition: background-color 0.3s;
-}
 .boton-volver {
   background-color: grey;
   color: black;
