@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Servidor: 127.0.0.1
--- Tiempo de generación: 14-12-2023 a las 21:30:42
+-- Tiempo de generación: 14-12-2023 a las 23:10:14
 -- Versión del servidor: 10.4.32-MariaDB
 -- Versión de PHP: 8.2.12
 
@@ -43,6 +43,160 @@ CREATE DEFINER=`root`@`localhost` FUNCTION `obtener_estado` (`vendedor_id` INT) 
 END$$
 
 DELIMITER ;
+
+-- --------------------------------------------------------
+
+--
+-- Estructura de tabla para la tabla `backup_pedido`
+--
+
+CREATE TABLE `backup_pedido` (
+  `idPedido` int(11) NOT NULL,
+  `fechaConfirmacion` date DEFAULT NULL,
+  `idZona` int(11) DEFAULT NULL,
+  `idComprador` int(11) NOT NULL,
+  `idRepartidor` int(11) DEFAULT NULL,
+  `estado` varchar(50) DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Volcado de datos para la tabla `backup_pedido`
+--
+
+INSERT INTO `backup_pedido` (`idPedido`, `fechaConfirmacion`, `idZona`, `idComprador`, `idRepartidor`, `estado`) VALUES
+(1, '2023-12-14', NULL, 90, NULL, 'carrito'),
+(1, '2023-12-14', NULL, 90, NULL, 'carrito'),
+(2, '2023-12-14', 4, 90, NULL, 'pagado'),
+(2, '2023-12-14', 4, 90, NULL, 'pagado'),
+(3, '2023-12-14', 4, 90, NULL, 'pagado'),
+(3, '2023-12-14', 4, 90, NULL, 'pagado'),
+(1, '2023-12-14', NULL, 90, NULL, 'carrito'),
+(2, '2023-12-14', 4, 90, NULL, 'pagado'),
+(3, '2023-12-14', 4, 90, NULL, 'pagado'),
+(1, '2023-12-14', NULL, 90, NULL, 'carrito'),
+(2, '2023-12-14', 4, 90, NULL, 'pagado'),
+(3, '2023-12-14', 4, 90, NULL, 'pagado'),
+(1, '2023-12-14', NULL, 90, NULL, 'carrito'),
+(1, '2023-12-14', NULL, 90, NULL, 'carrito'),
+(2, '2023-12-14', 4, 90, NULL, 'pagado'),
+(2, '2023-12-14', 4, 90, NULL, 'pagado'),
+(3, '2023-12-14', 4, 90, NULL, 'pagado'),
+(3, '2023-12-14', 4, 90, NULL, 'pagado'),
+(1, '2023-12-14', NULL, 90, NULL, 'carrito'),
+(1, '2023-12-14', NULL, 90, NULL, 'carrito'),
+(2, '2023-12-14', 4, 90, NULL, 'pagado'),
+(2, '2023-12-14', 4, 90, NULL, 'pagado'),
+(3, '2023-12-14', 4, 90, NULL, 'pagado'),
+(3, '2023-12-14', 4, 90, NULL, 'pagado'),
+(1, '2023-12-14', NULL, 90, NULL, 'carrito'),
+(1, '2023-12-14', NULL, 90, NULL, 'carrito'),
+(2, '2023-12-14', 4, 90, NULL, 'pagado'),
+(3, '2023-12-14', 4, 90, NULL, 'pagado'),
+(2, '2023-12-14', 4, 90, NULL, 'pagado'),
+(3, '2023-12-14', 4, 90, NULL, 'pagado'),
+(1, '2023-12-14', NULL, 90, NULL, 'carrito'),
+(1, '2023-12-14', NULL, 90, NULL, 'carrito'),
+(2, '2023-12-14', 4, 90, NULL, 'pagado'),
+(3, '2023-12-14', 4, 90, NULL, 'pagado'),
+(2, '2023-12-14', 4, 90, NULL, 'pagado'),
+(3, '2023-12-14', 4, 90, NULL, 'pagado'),
+(1, '2023-12-14', NULL, 90, NULL, 'carrito'),
+(2, '2023-12-14', 4, 90, NULL, 'pagado'),
+(3, '2023-12-14', 4, 90, NULL, 'pagado'),
+(1, '2023-12-14', NULL, 90, NULL, 'carrito'),
+(2, '2023-12-14', 4, 90, NULL, 'pagado'),
+(3, '2023-12-14', 4, 90, NULL, 'pagado'),
+(1, '2023-12-14', NULL, 90, NULL, 'carrito'),
+(2, '2023-12-14', 4, 90, NULL, 'pagado'),
+(3, '2023-12-14', 4, 90, NULL, 'pagado'),
+(1, '2023-12-14', NULL, 90, NULL, 'carrito'),
+(2, '2023-12-14', 4, 90, NULL, 'pagado'),
+(3, '2023-12-14', 4, 90, NULL, 'pagado'),
+(1, '2023-12-14', NULL, 90, NULL, 'carrito'),
+(1, '2023-12-14', NULL, 90, NULL, 'carrito'),
+(2, '2023-12-14', 4, 90, NULL, 'pagado'),
+(2, '2023-12-14', 4, 90, NULL, 'pagado'),
+(3, '2023-12-14', 4, 90, NULL, 'pagado'),
+(3, '2023-12-14', 4, 90, NULL, 'pagado'),
+(1, '2023-12-14', NULL, 90, NULL, 'carrito'),
+(1, '2023-12-14', NULL, 90, NULL, 'carrito'),
+(2, '2023-12-14', 4, 90, NULL, 'pagado'),
+(2, '2023-12-14', 4, 90, NULL, 'pagado'),
+(3, '2023-12-14', 4, 90, NULL, 'pagado'),
+(3, '2023-12-14', 4, 90, NULL, 'pagado'),
+(1, '2023-12-14', NULL, 90, NULL, 'carrito'),
+(1, '2023-12-14', NULL, 90, NULL, 'carrito'),
+(2, '2023-12-14', 4, 90, NULL, 'pagado'),
+(2, '2023-12-14', 4, 90, NULL, 'pagado'),
+(3, '2023-12-14', 4, 90, NULL, 'pagado'),
+(3, '2023-12-14', 4, 90, NULL, 'pagado'),
+(1, '2023-12-14', NULL, 90, NULL, 'carrito'),
+(1, '2023-12-14', NULL, 90, NULL, 'carrito'),
+(2, '2023-12-14', 4, 90, NULL, 'pagado'),
+(3, '2023-12-14', 4, 90, NULL, 'pagado'),
+(2, '2023-12-14', 4, 90, NULL, 'pagado'),
+(3, '2023-12-14', 4, 90, NULL, 'pagado'),
+(1, '2023-12-14', NULL, 90, NULL, 'carrito'),
+(1, '2023-12-14', NULL, 90, NULL, 'carrito'),
+(2, '2023-12-14', 4, 90, NULL, 'pagado'),
+(2, '2023-12-14', 4, 90, NULL, 'pagado'),
+(3, '2023-12-14', 4, 90, NULL, 'pagado'),
+(3, '2023-12-14', 4, 90, NULL, 'pagado'),
+(1, '2023-12-14', NULL, 90, NULL, 'carrito'),
+(1, '2023-12-14', NULL, 90, NULL, 'carrito'),
+(2, '2023-12-14', 4, 90, NULL, 'pagado'),
+(3, '2023-12-14', 4, 90, NULL, 'pagado'),
+(2, '2023-12-14', 4, 90, NULL, 'pagado'),
+(3, '2023-12-14', 4, 90, NULL, 'pagado'),
+(1, '2023-12-14', NULL, 90, NULL, 'carrito'),
+(1, '2023-12-14', NULL, 90, NULL, 'carrito'),
+(2, '2023-12-14', 4, 90, NULL, 'pagado'),
+(3, '2023-12-14', 4, 90, NULL, 'pagado'),
+(2, '2023-12-14', 4, 90, NULL, 'pagado'),
+(3, '2023-12-14', 4, 90, NULL, 'pagado'),
+(1, '2023-12-14', NULL, 90, NULL, 'carrito'),
+(1, '2023-12-14', NULL, 90, NULL, 'carrito'),
+(2, '2023-12-14', 4, 90, NULL, 'pagado'),
+(2, '2023-12-14', 4, 90, NULL, 'pagado'),
+(3, '2023-12-14', 4, 90, NULL, 'pagado'),
+(3, '2023-12-14', 4, 90, NULL, 'pagado'),
+(1, '2023-12-14', NULL, 90, NULL, 'carrito'),
+(1, '2023-12-14', NULL, 90, NULL, 'carrito'),
+(2, '2023-12-14', 4, 90, NULL, 'pagado'),
+(2, '2023-12-14', 4, 90, NULL, 'pagado'),
+(3, '2023-12-14', 4, 90, NULL, 'pagado'),
+(3, '2023-12-14', 4, 90, NULL, 'pagado'),
+(1, '2023-12-14', NULL, 90, NULL, 'carrito'),
+(1, '2023-12-14', NULL, 90, NULL, 'carrito'),
+(2, '2023-12-14', 4, 90, NULL, 'pagado'),
+(3, '2023-12-14', 4, 90, NULL, 'pagado'),
+(2, '2023-12-14', 4, 90, NULL, 'pagado'),
+(3, '2023-12-14', 4, 90, NULL, 'pagado'),
+(1, '2023-12-14', NULL, 90, NULL, 'carrito'),
+(1, '2023-12-14', NULL, 90, NULL, 'carrito'),
+(2, '2023-12-14', 4, 90, NULL, 'pagado'),
+(2, '2023-12-14', 4, 90, NULL, 'pagado'),
+(3, '2023-12-14', 4, 90, NULL, 'pagado'),
+(3, '2023-12-14', 4, 90, NULL, 'pagado'),
+(1, '2023-12-14', NULL, 90, NULL, 'carrito'),
+(1, '2023-12-14', NULL, 90, NULL, 'carrito'),
+(2, '2023-12-14', 4, 90, NULL, 'pagado'),
+(2, '2023-12-14', 4, 90, NULL, 'pagado'),
+(3, '2023-12-14', 4, 90, NULL, 'pagado'),
+(3, '2023-12-14', 4, 90, NULL, 'pagado');
+
+-- --------------------------------------------------------
+
+--
+-- Estructura de tabla para la tabla `backup_propiedadesproducto`
+--
+
+CREATE TABLE `backup_propiedadesproducto` (
+  `fechaDeLlegada` date DEFAULT NULL,
+  `idPedido` int(11) NOT NULL,
+  `idProducto` int(11) NOT NULL,
+  `qtt` int(11) DEFAULT 1
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 -- --------------------------------------------------------
 
@@ -1029,9 +1183,9 @@ CREATE TABLE `pedido` (
 --
 
 INSERT INTO `pedido` (`idPedido`, `fechaConfirmacion`, `idZona`, `idComprador`, `idRepartidor`, `estado`) VALUES
-(1, NULL, NULL, 90, NULL, 'carrito'),
-(2, '2023-10-10', 4, 90, NULL, 'pagado'),
-(3, '2023-10-11', 4, 90, NULL, 'pagado');
+(1, '2023-12-14', NULL, 90, NULL, 'carrito'),
+(2, '2023-12-14', 4, 90, NULL, 'pagado'),
+(3, '2023-12-14', 4, 90, NULL, 'pagado');
 
 -- --------------------------------------------------------
 
@@ -1773,6 +1927,25 @@ ALTER TABLE `r_tieneedificiosen`
 --
 ALTER TABLE `zona`
   ADD CONSTRAINT `zona_ibfk_1` FOREIGN KEY (`idZonaPadre`) REFERENCES `zona` (`idZona`);
+
+DELIMITER $$
+--
+-- Eventos
+--
+CREATE DEFINER=`root`@`localhost` EVENT `backup` ON SCHEDULE EVERY 1 DAY STARTS '2023-12-14 00:00:01' ON COMPLETION NOT PRESERVE ENABLE DO BEGIN
+    START TRANSACTION;
+
+    INSERT INTO backup_pedido
+    SELECT * FROM pedido WHERE pedido.fechaConfirmacion = CURDATE();
+    
+    INSERT INTO backup_propiedadesproducto
+    SELECT * FROM propiedadesproducto JOIN pedido ON propiedadesproducto.idPedido = pedido.idPedido
+    WHERE pedido.fechaConfirmacion = CURDATE();
+
+    COMMIT;
+END$$
+
+DELIMITER ;
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;

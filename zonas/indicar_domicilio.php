@@ -86,7 +86,7 @@
             const direccionSeleccionada = selectedOption.text;
             // Enviar la dirección seleccionada al servidor mediante una petición AJAX
             const xhr = new XMLHttpRequest();
-            const url = "guardar_domicilio.php"; // Ajusta la URL según tu estructura de archivos
+            const url = "domicilio_indicado.php"; // Ajusta la URL según tu estructura de archivos
             const data = "direccion=" + encodeURIComponent(direccionSeleccionada) + "&idZona=" + encodeURIComponent(idDireccionSeleccionada);
 
             xhr.open("POST", url, true);
