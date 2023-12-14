@@ -26,7 +26,7 @@
     </div>
     <h1 class="subtitulo">Mi perfil</h1>
     <div class="centrar">
-        <div class="perfil-vendedor" id="perfilVendedor"></div>
+        <div class="perfil" id="perfilVendedor"></div>
     </div>
     <script>
     document.addEventListener('DOMContentLoaded', () => {
@@ -46,7 +46,7 @@
             const contenedor = document.getElementById('perfilVendedor');
             contenedor.innerHTML = `
 
-            <img src="../vendedor/usuarioAnon.jpeg" alt="User" class="img-userAnon"\n />
+            <img src="../usuarioAnon.jpeg" alt="User" class="img-userAnon"\n />
             <p>Nombre: ${vendedor.nombre}\n</p>
             <p>Apellido1: ${vendedor.apellido1}\n</p>
             <p>Apellido2: ${vendedor.apellido2}\n</p>

@@ -2,12 +2,23 @@
 <html lang="es">
 <head>
     <link rel="stylesheet" type="text/css" href="../css/estilosFormulario.css">
+    <link rel="stylesheet" type="text/css" href="../css/estilos.css">
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Formulario de Datos</title>
     <script src="../funciones.js"></script>
 </head>
 <body>
+    <div class="titulo">
+        ESTIMAZON
+        <div class="botones">
+            <button class="boton" onclick=resetAllCookies(1)>Cerrar sesión</button>
+            <button class="boton" id="perfil" onclick="window.location.href='../comprador/perfil.html'">
+                Volver
+            </button>
+        </div>
+    </div>
+    <h2 id="miTitulo"> Añadir tarjeta de crédito </h2>
     <form id="miFormulario" method="post" action="tarjeta_credito_anyadida.php">
         Número de tarjeta: <input type="text" name="tjc" required pattern="[0-9]{16}" placeholder="Escriba un número de 16 dígitos"><br>
         Fecha de caducidad: <input type="date" name="fcad" required><br>
@@ -15,7 +26,7 @@
         <button class="boton-enviar">Enviar</button>
     </form> 
 <script>
-    procesarFormulario(1);
+    procesarFormulario(1); // procesa el formulario en tarjeta_credito_anyadida.php
 </script>
 </body>
 </html>

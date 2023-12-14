@@ -50,14 +50,14 @@ function get_direccion($conn, $datos) {
         }
         if ($anterior == null) { // si es una raíz encuentra el id con su nombre
             $consulta =
-            "SELECT zona.idZona
-                FROM zona
-                    WHERE zona.idZonaPadre IS NULL
+            "SELECT zona.idZona 
+                FROM zona 
+                    WHERE zona.idZonaPadre IS NULL 
                     AND zona.nombreZona = '".$value."'";
         } else { // si es un nodo intermedio u hoja busca el hijo del anterior nodo zona
             $consulta =
-            "SELECT zona.idZona
-                FROM zona
+            "SELECT zona.idZona 
+                FROM zona 
                     WHERE zona.idZonaPadre = ".$anterior.
                     " AND zona.nombreZona = '".$value."'";
         }
@@ -85,11 +85,11 @@ function get_direccion($conn, $datos) {
         } else { // si tiene padre lo añade junto al nombre de la zona, en ambos casos el idZona se genera de forma autoincremental
             $insert = "INSERT INTO zona (nombreZona, idZonaPadre) VALUES ('".$value."', ".$anterior.")";
         }
-        if (!mysqli_query($conn, $insert)) {
+        if (!mysqli_query($conn, $insert)) { // si error
             echo "Error al insertar datos: ".mysqli_error($conn);
         }
-        $anterior = mysqli_insert_id($conn);
+        $anterior = mysqli_insert_id($conn); // capta el valor del identificador de la zona insertada
     }
-    return $anterior;
+    return $anterior; // al final devuelve el idZona de la zona hoja, que a partir de ella y su atributo idZonaPadre se podrá conseguir toda la dirección
 }
 ?>

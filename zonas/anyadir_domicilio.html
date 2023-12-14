@@ -2,12 +2,23 @@
 <html lang="es">
 <head>
     <link rel="stylesheet" type="text/css" href="../css/estilosFormulario.css">
+    <link rel="stylesheet" type="text/css" href="../css/estilos.css">
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Formulario de Datos</title>
     <script src="../funciones.js"></script>
 </head>
 <body>
+<div class="titulo">
+    ESTIMAZON
+    <div class="botones">
+        <button class="boton" onclick=resetAllCookies(1)>Cerrar sesión</button>
+        <button class="boton" id="perfil" onclick="window.location.href='../comprador/perfil.html'">
+            Volver
+        </button>
+    </div>
+</div>
+<h2 id="miTitulo"> Añadir domicilio </h2>
 <form id="miFormulario" method="post" action="domicilio_anyadido.php">
     CP: <input type="text" name="cp" required pattern="[0-9]{5}" placeholder="Escriba un número de 5 dígitos"><br>
     Localidad: <input type="text" name="localidad" required><br>

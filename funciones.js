@@ -52,53 +52,56 @@ function actualizarBotones() {
   xhr.send();
 };
 
+/**
+ * Añade un listener que una vez se pulse el botón 'enviar' procesa los datos del formulario, los envía
+ * al fichero que tenga asociado el formulario y si no ha habido error redirige a la pantalla principal.
+ * 
+ * @param {number} profundidad - La cantidad de carpetas en las que está el fichero que llama la función.
+ */
 function procesarFormulario(profundidad){
-  document.body.addEventListener('click', function(event) {
-    // Delegación de eventos para manejar clics en botones de envío
-    if (!event.target.classList.contains('boton-enviar')) {
-        return;
-    }
-    event.preventDefault();
-    if (!event.target.form.checkValidity()) {
-        event.target.form.classList.add('invalid-form');
-        alert('Por favor, completa todos los campos requeridos.');
-    } else {
+    document.body.addEventListener('click', function(event) {
+        // Delegación de eventos para manejar clics en botones de envío
+        if (!event.target.classList.contains('boton-enviar')) {
+            return;
+        } // si se ha pulsado el botón enviar sigue
+        event.preventDefault();
+        if (!event.target.form.checkValidity()) { // si no es válido
+            event.target.form.classList.add('invalid-form');
+            alert('Por favor, completa todos los campos requeridos.');
+            return;
+        }// si se han completado correctamente envía el formulario
         event.target.form.classList.remove('invalid-form');
-        enviarFormulario(profundidad, event.target.form);
-    }
-});
+        let formulario = event.target.form
+        // Obtener los valores del formulario
+        const formData = new FormData(formulario);
 
-function enviarFormulario(profundidad, formulario) {
-    // Obtener los valores del formulario
-    const formData = new FormData(formulario);
-
-    // Realizar la solicitud AJAX
-    fetch(formulario.action, {
-        method: 'POST',
-        headers: {
-            'Content-Type': 'application/json',
-        },
-        body: JSON.stringify(Object.fromEntries(formData)),
-    })
-    .then(response => {
-        if (!response.ok) {
-            throw new Error('Network response was not ok');
-        }
-        return response.json();
-    })
-    .then(data => {
-        // Manejar la respuesta del servidor aquí
-        if (data.success) {
-            // Redirigir o realizar otras acciones según sea necesario
-            alert('Operación exitosa');
-            goPantallaPrincipal(profundidad);
-        } else {
-            alert('Error al enviar el formulario: ' + data.message);
-        }
-    })
-    .catch(error => {
-        console.error('Error:', error);
-        alert('Hubo un problema al procesar la solicitud. Por favor, inténtalo de nuevo más tarde.');
+        // Realizar la solicitud AJAX
+        fetch(formulario.action, {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+            },
+            body: JSON.stringify(Object.fromEntries(formData)),
+        })
+        .then(response => {
+            if (!response.ok) { // si error de conexión
+                throw new Error('Network response was not ok');
+            }
+            return response.json(); // si no sigue
+        })
+        .then(data => {
+            // si ha ido bien
+            if (data.success) {
+                // redirige a la pantalla principal
+                alert('Operación exitosa');
+                goPantallaPrincipal(profundidad);
+            } else { // si ha ido mal lo avisa
+                alert('Error al enviar el formulario: ' + data.message);
+            }
+        })
+        .catch(error => {
+            console.error('Error:', error); // si ha ocurrido un error inesperado
+            alert('Hubo un problema al procesar la solicitud. Por favor, inténtalo de nuevo más tarde.');
+        });
     });
-}
 }
