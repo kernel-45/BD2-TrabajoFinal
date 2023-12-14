@@ -47,9 +47,8 @@ function actualizarBotones() {
  * Añade un listener que una vez se pulse el botón 'enviar' procesa los datos del formulario, los envía
  * al fichero que tenga asociado el formulario y si no ha habido error redirige a la pantalla principal.
  * 
- * @param {number} profundidad - La cantidad de carpetas en las que está el fichero que llama la función.
  */
-function procesarFormulario(profundidad){
+function procesarFormulario(){
     document.body.addEventListener('click', function(event) {
         // Delegación de eventos para manejar clics en botones de envío
         if (!event.target.classList.contains('boton-enviar')) {

@@ -32,7 +32,7 @@ try { // si error salta excepción
     if ($e->getCode() != 1062) {
         echo json_encode(['success' => false, 'message' => 'Error al actualizar datos: ' . $e->getMessage()]);
     } else {
-        echo json_encode(['success' => false, 'message' => 'El domicilio que se ha intentado añadir ya está en la base de datos.']);
+        echo json_encode(['success' => false, 'message' => 'El domicilio que se ha intentado añadir ya está asignado a usted.']);
     }
 }
 // Cerrar la conexión a la base de datos

@@ -28,12 +28,21 @@ try {
 session_start(); // si no ha habido error coge el didentificador del usuario y añade la tarjeta
 $id_comprador = $_SESSION['idUser'];
 $insert =
-"INSERT INTO r_comprador_tarjetadecredito (idComprador, numTarjeta)
+"INSERT INTO r_comprador_tarjetadecredito (idComprador, numTarjeta) 
     VALUES (".$id_comprador.", ".$datos['tarjeta'].")";
-if (!mysqli_query($conn, $insert)) { // si error
-    echo json_encode(['success' => false, 'message' => 'Error al insertar datos: ' . mysqli_error($conn)]);
-} else {
-    echo json_encode(['success' => true]);
+try { // si error salta excepción
+    if (!mysqli_query($conn, $insert)) {
+        throw new mysqli_sql_exception(mysqli_error($conn));
+    } else {
+        echo json_encode(['success' => true]); // si todo ha ido bien se lo manda al cliente
+    }
+} catch (mysqli_sql_exception $e) {
+    // Verificar si el código de error es específico de llave duplicada
+    if ($e->getCode() != 1062) {
+        echo json_encode(['success' => false, 'message' => 'Error al actualizar datos: ' . $e->getMessage()]);
+    } else {
+        echo json_encode(['success' => false, 'message' => 'La tarjeta de crédito que se ha intentado añadir ya está asignada a usted.']);
+    }
 }
 // Cerrar la conexión a la base de datos
 mysqli_close($conn);
