@@ -15,17 +15,8 @@ function resetAllCookies(profundidad) {
   if (profundidad == 0) {
       actualizarBotones();
   } else {
-      goPantallaPrincipal(profundidad);
+    window.location.href = "../".repeat(profundidad) + "estimazon.html";
   }
-}
-
-/**
- * Lleva a la pantalla principal indicando cuántas carpetas hay entre el fichero que lo llama y la página principal.
- * 
- * @param {number} profundidad - La cantidad de carpetas en las que está el fichero que llama la función.
- */
-function goPantallaPrincipal(profundidad) {
-  window.location.href = "../".repeat(profundidad) + "estimazon.html";
 }
 
 /**
@@ -94,7 +85,7 @@ function procesarFormulario(profundidad){
             if (data.success) {
                 // redirige a la pantalla principal
                 alert('Operación exitosa');
-                goPantallaPrincipal(profundidad);
+                window.location.href = "../comprador/perfil.html";
             } else { // si ha ido mal lo avisa
                 alert('Error al enviar el formulario: ' + data.message);
             }

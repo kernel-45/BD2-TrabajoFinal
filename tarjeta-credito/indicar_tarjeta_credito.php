@@ -28,7 +28,7 @@
         function error_valor_null($valor) {
             if (!$valor) { ?> <script>
                 alert("Ha habido un error accediendo a las tarjetas de crédito");
-                goPantallaPrincipal(1); </script> <?php
+                window.location.href = "../estimazon.html"; </script> <?php
                 exit;
             } 
         }
@@ -75,7 +75,7 @@
                     if (xhr.status == 200) {
                         const response = JSON.parse(xhr.responseText);
                         alert(response.message);
-                        goPantallaPrincipal(1);
+                        window.location.href = "../comprador/perfil.html";
                     } else { // si error
                         alert("Error en la solicitud al servidor");
                     }
