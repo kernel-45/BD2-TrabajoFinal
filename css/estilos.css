@@ -580,7 +580,11 @@ li {
   transition: background-color 0.3s;
   width: 200px;
   height: 200px;
-  font-size: 16px;
+  font-size: 24px;
+  display: flex; /* Agrega esta línea */
+  flex-direction: column; /* Si el contenido es texto, este estilo funciona mejor en columna */
+  justify-content: center; /* Agrega esta línea */
+  text-align: center; /* Agrega esta línea para centrar horizontalmente el texto */
 }
 
 .boton-perfil:hover {
