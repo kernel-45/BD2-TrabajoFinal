@@ -134,10 +134,10 @@ $costoTotal = 0;
 
             <button type="button" onclick="FinalizarCompra()">Finalizar compra</button>
         </form>
-        <form action="finalizar_compra.php" method="post">
+        <form id="vaciarCarrito" action="finalizar_compra.php" method="post">
             <!--   Valor oculto para indicar que se vacía la cesta -->
             <input type="hidden" name="accion" value="vaciarCesta">
-            <input type="submit" value="Vaciar cesta">
+            <button type="button" onclick="VaciarCarrito()">Vaciar Cesta</button>
         </form>
 
     </ul>
@@ -156,6 +156,17 @@ $costoTotal = 0;
         }
     </script>
 
+<script>
+        function VaciarCarrito() {
+            var confirmacion = confirm("¿Estás seguro de que quieres vaciar el carrito?");
+            if (confirmacion) {
+                // Si el usuario confirma, enviar el formulario
+                document.getElementById("vaciarCarrito").submit();
+            } else {
+                // Si el usuario cancela, no hacer nada
+            }
+        }
+    </script>
 </body>
 
 </html>
