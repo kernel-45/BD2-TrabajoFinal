@@ -6,6 +6,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Formulario de Datos</title>
     <script src="formulario.js"></script>
+    <script src="../funciones.js"></script>
 </head>
 <body class="contenedor-estimazon">
     <div class="titulo"> Estimazon </div>
@@ -70,6 +71,7 @@
                     if (xhr.status == 200) {
                         const response = JSON.parse(xhr.responseText);
                         alert(response.message);
+                        goPantallaPrincipal(1);
                     } else {
                         alert("Error en la solicitud al servidor");
                     }
