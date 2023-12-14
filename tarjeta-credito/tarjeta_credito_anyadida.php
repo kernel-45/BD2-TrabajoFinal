@@ -33,7 +33,7 @@ $insert =
 if (!mysqli_query($conn, $insert)) { // si error
     echo json_encode(['success' => false, 'message' => 'Error al insertar datos: ' . mysqli_error($conn)]);
 } else {
-    $_SESSION['tarjeta'] = $datos['tarjeta']
+    $_SESSION['tarjeta'] = $datos['tarjeta'];
     echo json_encode(['success' => true]);
 }
 // Cerrar la conexión a la base de datos

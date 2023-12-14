@@ -39,7 +39,8 @@ $costoTotal = 0;
 ?>
 <!DOCTYPE html>
 <html lang="es">
-<head> 
+
+<head>
     <link rel="stylesheet" type="text/css" href="../../css/estilos.css">
     <meta charset="UTF-8">
     <title>Estimazon</title>
@@ -94,7 +95,7 @@ $costoTotal = 0;
                 <form action="eliminar_producto.php" method="post">
                     <input type="hidden" name="idProducto" value="<?php echo $producto['idProducto']; ?>">
                     <input type="hidden" name="qtt_actual" value="<?php echo $producto['qtt']; ?>">
-                    <input type="text" name="qtt_resta" placeholder="Cantidad">
+                    <input type="text" name="qtt_resta" placeholder="Cantidad" pattern="\d+" title="Ingresa solo números" required>
                     <input type="submit" value="Eliminar producto">
                 </form>
             </li>
@@ -102,9 +103,13 @@ $costoTotal = 0;
         <?php endforeach; ?>
     </ul>
 
-    <ul class="resumen" id="resumen">
-        <form action="finalizar_compra.php" method="post">
 
+    <!-------------------------------------------- 
+        CREACION DEL RESUMEN DE LA CESTA
+ ------------------------------------------------>
+    <ul class="resumen" id="resumen">
+        <form id="finalizar_compra" action="finalizar_compra.php" method="post">
+            <!-- MOSTRAR DIRECCION -->
             <p><strong>Dirección seleccionada:</strong>
                 <?php
                 if (!$direccion == '') {
@@ -113,6 +118,7 @@ $costoTotal = 0;
                     echo "<p><strong>Aviso:</strong> Debes seleccionar una dirección en tu perfil.</p>";
                 }
                 ?>
+            <!-- MOSTRAR TARJETA -->
             <p><strong>Tarjeta seleccionada:</strong>
                 <?php
                 if (!$tarjeta == '') {
@@ -126,7 +132,7 @@ $costoTotal = 0;
                 <?php echo $costoTotal; ?>
             </p>
 
-            <input type="submit" value="Finalizar compra" class="boton_alargado">
+            <button type="button" onclick="FinalizarCompra()">Finalizar compra</button>
         </form>
         <form action="finalizar_compra.php" method="post">
             <!--   Valor oculto para indicar que se vacía la cesta -->
@@ -135,7 +141,20 @@ $costoTotal = 0;
         </form>
 
     </ul>
-
+    <!--------------------------------------------------------------------
+        SCRIPTS PARA LOS FORMS DE FINALIZAR COMPRA Y VACIAR CARRITO 
+    ----------------------------------------------------------------------->
+    <script>
+        function FinalizarCompra() {
+            var confirmacion = confirm("¿Estás seguro de que quieres finalizar la compra?");
+            if (confirmacion) {
+                // Si el usuario confirma, enviar el formulario
+                document.getElementById("finalizar_compra").submit();
+            } else {
+                // Si el usuario cancela, no hacer nada
+            }
+        }
+    </script>
 
 </body>
 
