@@ -31,38 +31,35 @@ function finaliza_compra()
     if ($conn->connect_error) {
         die("Conexión fallida: " . $conn->connect_error);
     }
-
-
-
-
     // Saco el ID del pedido carrito
     $sql = "SELECT p.idPedido FROM pedido p WHERE p.idComprador = $id AND p.fechaConfirmacion IS NULL";
     $result = mysqli_query($conn, $sql);
 
-    //COMPROBAMOS QUE EL USUARIO TENGA ITEMS EN EL CARRITO
-    $sql = "SELECT idProducto FROM propiedadesproducto JOIN pedido ON pedido.idPedido = 8 AND propiedadesproducto.idPedido = pedido.idPedido;";
-    $result_carrovacio = mysqli_query($conn, $sql);
-    if ($result_carrovacio && mysqli_num_rows($result_carrovacio) < 1) {
-        // Si no hay filas le decimos que debe tener productos en el carrito
-        $_SESSION['mensaje'] = 'Debes añadir productos a la cesta';
-        echo "<script>
-            alert('{$_SESSION['mensaje']}');
-            window.location.href = '{$_SESSION['previous_page']}';          
-          </script>";
 
-        exit();
-    } 
     // Verificar si hay resultados (sabemos que solo almacena un ID)
     if ($result) {
         // Verificar si hay filas devueltas por la consulta
         if ($row = mysqli_fetch_assoc($result)) {
             $idPedido = $row['idPedido'];
+            //COMPROBAMOS QUE EL USUARIO TENGA ITEMS EN EL CARRITO
+            $sql = "SELECT idProducto FROM propiedadesproducto JOIN pedido ON pedido.idPedido = $idPedido AND propiedadesproducto.idPedido = pedido.idPedido;";
+            $result_carrovacio = mysqli_query($conn, $sql);
+            if ($result_carrovacio && mysqli_num_rows($result_carrovacio) < 1) {
+                // Si no hay filas le decimos que debe tener productos en el carrito
+                $_SESSION['mensaje'] = 'Debes añadir productos a la cesta';
+                echo "<script>
+            alert('{$_SESSION['mensaje']}');
+            window.location.href = '{$_SESSION['previous_page']}';          
+          </script>";
+
+                exit();
+            }
             //OPCION VACIAR CESTA
             if (isset($_POST['accion']) && $_POST['accion'] == 'vaciarCesta') {
                 //ELIMINA PRODUCTOS ASOCIADOS AL PEDIDO
                 $sql = "DELETE FROM propiedadesproducto WHERE idPedido = $idPedido;";
                 mysqli_query($conn, $sql);
-            //OPCION FINALIZAR COMPRA
+                //OPCION FINALIZAR COMPRA
             } else {
                 //COLOCA LA FECHA DE CONFIRMACIÓN, EL IDZona Y EL ESTADO
                 $sql = "UPDATE pedido SET fechaConfirmacion = CURRENT_DATE, idZona = $iddir, estado = 'pagado' WHERE idPedido = $idPedido;";
@@ -71,6 +68,8 @@ function finaliza_compra()
                 $sql = "INSERT INTO pedido(fechaConfirmacion, idZona, idComprador, idRepartidor, estado) VALUES (NULL, NULL, $id, NULL, 'Carrito');";
                 mysqli_query($conn, $sql);
                 echo json_encode(["status" => "success", "message" => "Compra realizada!"]);
+                //Prepara el mensaje de compra realizada
+                $_SESSION['mensaje'] = '¡Compra realizada!';
             }
         } else {
             // No se encontraron resultados

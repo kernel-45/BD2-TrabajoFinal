@@ -1,10 +1,15 @@
 <?php
+session_start();
 $servername = "localhost";
 $username = "root";
 $password = "";
 $dbname = "estimazon";
 $conn = new mysqli($servername, $username, $password, $dbname);
-
+if($_SESSION['mensaje'] == '¡Compra realizada!'){
+    echo "<script>
+            alert('{$_SESSION['mensaje']}');      
+          </script>";
+}
 unset($_SESSION['mensaje']); // Limpiamos la variable de sesión
 
 // Verificar la conexión
@@ -12,7 +17,7 @@ if ($conn->connect_error) {
     die("Conexión fallida: " . $conn->connect_error);
 }
 include('obtener_cesta.php');
-session_start();
+
 $categoria = $_GET['categoria'];
 if (empty($_SESSION['idUser'])) {
     header('Location: ../../inicio-sesion/iniciar_sesion.html');
