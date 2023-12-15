@@ -3,9 +3,9 @@
 -- https://www.phpmyadmin.net/
 --
 -- Servidor: 127.0.0.1
--- Tiempo de generación: 14-12-2023 a las 21:30:42
--- Versión del servidor: 10.4.32-MariaDB
--- Versión de PHP: 8.2.12
+-- Tiempo de generación: 15-12-2023 a las 19:37:16
+-- Versión del servidor: 10.4.28-MariaDB
+-- Versión de PHP: 8.2.4
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 START TRANSACTION;
@@ -43,6 +43,34 @@ CREATE DEFINER=`root`@`localhost` FUNCTION `obtener_estado` (`vendedor_id` INT) 
 END$$
 
 DELIMITER ;
+
+-- --------------------------------------------------------
+
+--
+-- Estructura de tabla para la tabla `backup_pedido`
+--
+
+CREATE TABLE `backup_pedido` (
+  `idPedido` int(11) NOT NULL,
+  `fechaConfirmacion` date DEFAULT NULL,
+  `idZona` int(11) DEFAULT NULL,
+  `idComprador` int(11) NOT NULL,
+  `idRepartidor` int(11) DEFAULT NULL,
+  `estado` varchar(50) DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+-- --------------------------------------------------------
+
+--
+-- Estructura de tabla para la tabla `backup_propiedadesproducto`
+--
+
+CREATE TABLE `backup_propiedadesproducto` (
+  `fechaDeLlegada` date DEFAULT NULL,
+  `idPedido` int(11) NOT NULL,
+  `idProducto` int(11) NOT NULL,
+  `qtt` int(11) DEFAULT 1
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 -- --------------------------------------------------------
 
@@ -1029,9 +1057,13 @@ CREATE TABLE `pedido` (
 --
 
 INSERT INTO `pedido` (`idPedido`, `fechaConfirmacion`, `idZona`, `idComprador`, `idRepartidor`, `estado`) VALUES
-(1, NULL, NULL, 90, NULL, 'carrito'),
-(2, '2023-10-10', 4, 90, NULL, 'pagado'),
-(3, '2023-10-11', 4, 90, NULL, 'pagado');
+(1, '2023-12-15', 5, 90, NULL, 'pagado'),
+(2, '2023-12-14', 4, 90, NULL, 'pagado'),
+(3, '2023-12-14', 4, 90, NULL, 'pagado'),
+(4, NULL, NULL, 90, NULL, 'Carrito'),
+(5, '2023-12-15', 10, 98, NULL, 'pagado'),
+(6, '2023-12-15', 10, 98, NULL, 'pagado'),
+(7, NULL, NULL, 98, NULL, 'Carrito');
 
 -- --------------------------------------------------------
 
@@ -1165,7 +1197,14 @@ CREATE TABLE `propiedadesproducto` (
 
 INSERT INTO `propiedadesproducto` (`fechaDeLlegada`, `idPedido`, `idProducto`, `qtt`) VALUES
 ('2023-12-14', 2, 4, 3),
-(NULL, 3, 7, 2);
+(NULL, 3, 7, 2),
+(NULL, 1, 71, 1),
+(NULL, 1, 20, 1),
+(NULL, 5, 62, 4),
+(NULL, 5, 65, 2),
+(NULL, 5, 84, 1),
+(NULL, 6, 5, 1),
+(NULL, 6, 55, 2);
 
 -- --------------------------------------------------------
 
@@ -1301,6 +1340,14 @@ CREATE TABLE `r_comprador_tarjetadecredito` (
   `numTarjeta` varchar(16) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
+--
+-- Volcado de datos para la tabla `r_comprador_tarjetadecredito`
+--
+
+INSERT INTO `r_comprador_tarjetadecredito` (`idComprador`, `numTarjeta`) VALUES
+(90, '1234567890123456'),
+(98, '1234567890123456');
+
 -- --------------------------------------------------------
 
 --
@@ -1328,7 +1375,8 @@ CREATE TABLE `r_tienedomicilioen` (
 --
 
 INSERT INTO `r_tienedomicilioen` (`idComprador`, `idZona`) VALUES
-(90, 5);
+(90, 5),
+(98, 10);
 
 -- --------------------------------------------------------
 
@@ -1352,6 +1400,13 @@ CREATE TABLE `tarjetacredito` (
   `CVC` varchar(4) NOT NULL,
   `fechaCad` date NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Volcado de datos para la tabla `tarjetacredito`
+--
+
+INSERT INTO `tarjetacredito` (`numTarjeta`, `CVC`, `fechaCad`) VALUES
+('1234567890123456', '123', '2023-12-26');
 
 -- --------------------------------------------------------
 
@@ -1517,11 +1572,32 @@ INSERT INTO `zona` (`idZona`, `nombreZona`, `idZonaPadre`) VALUES
 (2, 'Ciudadela de menorca', 1),
 (3, 'Vía', 2),
 (4, 'Via Manuel de falla', 3),
-(5, '25', 4);
+(5, '25', 4),
+(6, '07009', NULL),
+(7, 'Palma', 6),
+(8, 'Calle', 7),
+(9, 'Libertad', 8),
+(10, '5', 9);
 
 --
 -- Índices para tablas volcadas
 --
+
+--
+-- Indices de la tabla `backup_pedido`
+--
+ALTER TABLE `backup_pedido`
+  ADD PRIMARY KEY (`idPedido`),
+  ADD KEY `idZona` (`idZona`),
+  ADD KEY `idComprador` (`idComprador`),
+  ADD KEY `idRepartidor` (`idRepartidor`);
+
+--
+-- Indices de la tabla `backup_propiedadesproducto`
+--
+ALTER TABLE `backup_propiedadesproducto`
+  ADD KEY `idPedido` (`idPedido`),
+  ADD KEY `idProducto` (`idProducto`);
 
 --
 -- Indices de la tabla `categoria`
@@ -1675,7 +1751,7 @@ ALTER TABLE `incidencia`
 -- AUTO_INCREMENT de la tabla `pedido`
 --
 ALTER TABLE `pedido`
-  MODIFY `idPedido` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+  MODIFY `idPedido` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
 
 --
 -- AUTO_INCREMENT de la tabla `producto`
@@ -1699,11 +1775,26 @@ ALTER TABLE `vendedor`
 -- AUTO_INCREMENT de la tabla `zona`
 --
 ALTER TABLE `zona`
-  MODIFY `idZona` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
+  MODIFY `idZona` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=11;
 
 --
 -- Restricciones para tablas volcadas
 --
+
+--
+-- Filtros para la tabla `backup_pedido`
+--
+ALTER TABLE `backup_pedido`
+  ADD CONSTRAINT `backup_pedido_ibfk_1` FOREIGN KEY (`idZona`) REFERENCES `zona` (`idZona`),
+  ADD CONSTRAINT `backup_pedido_ibfk_2` FOREIGN KEY (`idComprador`) REFERENCES `comprador` (`idPersona`),
+  ADD CONSTRAINT `backup_pedido_ibfk_3` FOREIGN KEY (`idRepartidor`) REFERENCES `repartidor` (`idPersona`);
+
+--
+-- Filtros para la tabla `backup_propiedadesproducto`
+--
+ALTER TABLE `backup_propiedadesproducto`
+  ADD CONSTRAINT `backup_propiedadesproducto_ibfk_1` FOREIGN KEY (`idPedido`) REFERENCES `pedido` (`idPedido`),
+  ADD CONSTRAINT `backup_propiedadesproducto_ibfk_2` FOREIGN KEY (`idProducto`) REFERENCES `producto` (`idProducto`);
 
 --
 -- Filtros para la tabla `incidencia`
@@ -1773,6 +1864,31 @@ ALTER TABLE `r_tieneedificiosen`
 --
 ALTER TABLE `zona`
   ADD CONSTRAINT `zona_ibfk_1` FOREIGN KEY (`idZonaPadre`) REFERENCES `zona` (`idZona`);
+
+DELIMITER $$
+--
+-- Eventos
+--
+CREATE DEFINER=`root`@`localhost` EVENT `backup_pedidos` ON SCHEDULE EVERY 1 DAY STARTS '2023-12-14 00:00:01' ON COMPLETION PRESERVE ENABLE DO BEGIN
+    DECLARE EXIT HANDLER FOR SQLEXCEPTION
+    BEGIN
+        ROLLBACK;
+    END;
+    
+    START TRANSACTION;
+
+    INSERT INTO backup_pedido
+    SELECT * FROM pedido WHERE pedido.fechaConfirmacion = CURDATE();
+    
+    INSERT INTO backup_propiedadesproducto
+    SELECT propiedadesproducto.fechaDeLlegada, propiedadesproducto.idPedido, propiedadesproducto.idProducto, propiedadesproducto.qtt
+    FROM propiedadesproducto JOIN pedido ON propiedadesproducto.idPedido = pedido.idPedido
+    WHERE pedido.fechaConfirmacion = CURDATE();
+
+    COMMIT;
+END$$
+
+DELIMITER ;
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
