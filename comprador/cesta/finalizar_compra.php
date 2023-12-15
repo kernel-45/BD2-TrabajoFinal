@@ -41,8 +41,8 @@ function finaliza_compra()
 
     //COMPROBAMOS QUE EL USUARIO TENGA ITEMS EN EL CARRITO
     $sql = "SELECT idProducto FROM propiedadesproducto JOIN pedido ON pedido.idPedido = 8 AND propiedadesproducto.idPedido = pedido.idPedido;";
-    $result = mysqli_query($conn, $sql);
-    if ($result && mysqli_num_rows($result) < 1) {
+    $result_carrovacio = mysqli_query($conn, $sql);
+    if ($result_carrovacio && mysqli_num_rows($result_carrovacio) < 1) {
         // Si no hay filas le decimos que debe tener productos en el carrito
         $_SESSION['mensaje'] = 'Debes añadir productos a la cesta';
         echo "<script>
