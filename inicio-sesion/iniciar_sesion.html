@@ -75,6 +75,13 @@
         return;
       }
 
+      // Verificar que el correo electrónico tenga un formato válido
+      const expresionRegularCorreo = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+      if (!expresionRegularCorreo.test(correoUsuario)) {
+        alert('Por favor, ingresa un correo electrónico válido.');
+        return;
+      }
+
       // Realizar la solicitud AJAX
       fetch('guardar_sesion.php', {
         method: 'POST',
