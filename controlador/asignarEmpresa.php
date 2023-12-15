@@ -1,5 +1,12 @@
 <!DOCTYPE html>
 <?php
+function error_valor_null($valor) {
+    if (!$valor) { ?> <script>
+        alert("Ha habido un error accediendo a los domicilios");
+        window.location.href = "../estimazon.html"; </script> <?php
+        exit;
+    } 
+}
 // Crear conexión
 $conn = new mysqli("localhost", "root", "", "Estimazon");
 session_start();
@@ -69,30 +76,51 @@ if ($conn->connect_error) {
         </div>
         <div class="subtitulo">Aquí están todos los pedidos que no tienen empresa distribuidora asignada</div>
         <?php
-        $sql = "SELECT idPedido, nombreZona FROM 
-		                pedido JOIN zona 
-                        ON idRepartidor IS NULL 
-                        AND pedido.idZona = zona.idZona";
+        $sql = "SELECT idPedido, idZona FROM 
+		                pedido WHERE idRepartidor IS NULL 
+                        AND fechaConfirmacion IS NOT NULL";
         $result = mysqli_query($conn, $sql);
         if ($result->num_rows > 0) {
             ?>
             <table>
                 <tr>
                     <td>ID pedido </td>
-                    <td>Nombre de la zona </td>
+                    <td>Dirección </td>
                     <td>Asignar empresa</td>
                 </tr>
                 <!-- vuelve a abrir php -->
                 <?php
+                
                 // Procesar cada fila de resultado
                 $queryEmpresas = "SELECT nombreEmpresa FROM empresadistribuidora";
                 while ($row = mysqli_fetch_array($result)) {
                     $resultadoSelect = mysqli_query($conn, $queryEmpresas);
                     $idPedido = $row["idPedido"];
-                    $nombreZona = $row["nombreZona"];
                     echo "<tr>";
                     echo "<td> $idPedido</td>";
-                    echo "<td> $nombreZona</td>";
+                    
+                    $consulta_zonas = // consulta que consigue el id del padre y el nombre del actual
+                    "SELECT zona.idZonaPadre, zona.nombreZona 
+                        FROM zona 
+                        WHERE zona.idZona = ".$row['idZona'];
+                    $zonas = mysqli_query($conn, $consulta_zonas);
+                    error_valor_null($zonas); // si error
+                    $zona = mysqli_fetch_array($zonas); // selecciono la fila
+                    error_valor_null($zona); // si error
+                    $direccion = $zona['nombreZona']; // nombre de la dirección comienza con el valor de la hoja
+                    while ($zona['idZonaPadre']) { // mientras haya una zona por procesar en la dirección
+                        $consulta_zonas = // misma consulta con la zona actual
+                        "SELECT zona.idZonaPadre, zona.nombreZona 
+                            FROM zona 
+                            WHERE zona.idZona = ".$zona['idZonaPadre'];
+                        $zonas = mysqli_query($conn, $consulta_zonas); // ejecuto query
+                        error_valor_null($zonas); // si error
+                        $zona = mysqli_fetch_array($zonas); // selecciono la fila
+                        error_valor_null($zona); // si error
+                        $direccion = $zona['nombreZona']." ".$direccion; // concateno el nombre de la zona actual a la dirección
+                    }
+                    // una vez llega aquí ha procesado todas las zonas de la dirección e imprime la opción para elegirs
+                    echo "<td> $direccion</td>";
                     echo "<td>";
                     echo "<form method='post'>";  
                     echo "<select name='opcionSeleccionada' style='width: 200px;'>";
