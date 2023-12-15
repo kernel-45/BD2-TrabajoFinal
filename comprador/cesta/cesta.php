@@ -27,10 +27,9 @@ if (empty($_SESSION['idUser'])) {
 
 if (isset($_SESSION['tarjeta'])) {
     $tarjeta = $_SESSION['tarjeta'];
-    // Resto del código que utiliza $direccion
 } else {
-    // La clave 'direccion' no está definida en $_SESSION, le asignamos '' para poder gestionarlo
-    $tarjeta = '';
+    // La clave 'tarjeta' no está definida en $_SESSION, le asignamos '' para poder gestionarlo
+    $tarjeta = '__';
 }
 if (isset($_SESSION['direccion'])) {
     $direccion = $_SESSION['direccion'];
@@ -130,7 +129,7 @@ $costoTotal = 0;
             <!-- MOSTRAR TARJETA -->
             <p><strong>Tarjeta seleccionada:</strong>
                 <?php
-                if (!$tarjeta == '') {
+                if (!$tarjeta == '__') {
                     echo "<p><strong>Tarjeta:</strong> $tarjeta</p>";
                 } else {
                     echo "<p><strong>Aviso:</strong> Debes seleccionar una tarjeta en tu perfil.</p>";
