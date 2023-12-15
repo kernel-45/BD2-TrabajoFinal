@@ -6,13 +6,14 @@ $datos = array( // crea un array
     "cvc" => $data["cvc"]
 );
 
+        
 // Conexión a la base de datos
 $conn = mysqli_connect("localhost","root","") or die("error a conexió amb servidor");
 $db = mysqli_select_db($conn, "estimazon") or die("error a conexió amb bd");
 
 $insert = // crea el insert
 "INSERT INTO tarjetacredito (numTarjeta, CVC, fechaCad) VALUES
-    (".$datos['tarjeta'].", ".$datos['cvc'].", ".$datos['fecha'].")";
+    (".$datos['tarjeta'].", ".$datos['cvc'].", '".$datos['fecha']."')";
 try {
     if (!mysqli_query($conn, $insert)) { // si error
         throw new mysqli_sql_exception(mysqli_error($conn));
